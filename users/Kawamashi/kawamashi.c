@@ -30,11 +30,10 @@ bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
   if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
   if (get_mods() | get_oneshot_mods()) { return false; }
+  
+  // Enable speculative holding for these keys.
+  if (keycode == I(PG_N)) { return true; }
 
-  switch (keycode) {  // Enable speculative holding for these keys.
-    case I(PG_N):
-      return true;
-  }
   return false;  // Disable otherwise.
 }
 

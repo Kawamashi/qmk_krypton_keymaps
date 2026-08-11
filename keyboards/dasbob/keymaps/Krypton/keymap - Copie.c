@@ -19,4 +19,3 @@
 
 #include "layout.h"
 #include "krypton.c"
-#include "essai.c"
