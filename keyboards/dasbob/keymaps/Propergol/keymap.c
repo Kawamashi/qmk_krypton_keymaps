@@ -14,30 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
 
-#include "quantum.h"
-#include "krypton.h"
+#include QMK_KEYBOARD_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-// Returns true if `pos` on the left hand of the keyboard, false if right.
-bool on_left_hand(keypos_t pos);
-
-// Handles the tap function of tap-hold keys using non-basic keycodes
-bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record);
-
-
-void housekeeping_task_tap_flow(void);
-
-// Checks if the event is on a home-row MT with a valid matrix position.
-bool is_tap_hold_event(uint16_t keycode, keyrecord_t* record, keypos_t pos);
-
-// Disables the hold behaviour of HRM during typing.
-void process_flow_tap(uint16_t keycode, keyrecord_t* record);
-
-#ifdef __cplusplus
-}
-#endif
+#include "layout.h"
+#include "propergol.c"
+#include "essai.c"

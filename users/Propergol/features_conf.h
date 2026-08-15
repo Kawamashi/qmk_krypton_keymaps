@@ -17,7 +17,7 @@
 #pragma once
 
 #include "quantum.h"
-#include "krypton.h"
+#include "propergol.h"
 
 // Returns whether typographic apostrophe is to be replaced by typewritten apostrophe
 bool replace_apos(void);

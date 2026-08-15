@@ -13,7 +13,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
 
 #pragma once
 
-#include "config_krypton.h"
+#include "quantum.h"
+#include "propergol.h"
+
+// Returns whether a keycode is a letter or not
+bool is_letter(uint16_t keycode);
+
+// Returns true for macros used to type sequence of letters
+bool is_send_string_macro(uint16_t keycode);
+
+// Returns true for letters that can be followed by an apostrophe (in french)
+bool is_followed_by_apos(uint16_t keycode, uint16_t prev_keycode);

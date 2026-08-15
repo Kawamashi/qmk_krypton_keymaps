@@ -1,7 +1,7 @@
 #pragma once
 
 #include QMK_KEYBOARD_H
-#include "krypton.h"
+#include "propergol.h"
 
 // Custom one-shot key structure. The `keycode` field is the keycode as it appears in
 // your keymap. The `modifier` field must use the KC_* prefix.

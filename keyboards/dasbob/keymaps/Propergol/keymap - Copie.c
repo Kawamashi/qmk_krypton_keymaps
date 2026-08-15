@@ -18,5 +18,4 @@
 #include QMK_KEYBOARD_H
 
 #include "layout.h"
-#include "krypton.c"
-#include "essai.c"
+#include "propergol.c"

@@ -15,7 +15,7 @@
  */
 
 
-#include "krypton.h"
+#include "propergol.h"
 
 
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =

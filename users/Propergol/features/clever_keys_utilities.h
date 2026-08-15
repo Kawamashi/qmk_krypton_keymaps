@@ -17,7 +17,7 @@
 #pragma once
 
 #include "quantum.h"
-#include "krypton.h"
+#include "propergol.h"
 
 
 #ifdef __cplusplus

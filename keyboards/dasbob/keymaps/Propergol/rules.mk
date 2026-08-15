@@ -8,4 +8,4 @@ USERS_DIR := $(shell \
         dir=$$(dirname "$$dir"); \
     done \
 )
-include $(USERS_DIR)/Krypton/rules.mk
+include $(USERS_DIR)/Propergol/rules.mk

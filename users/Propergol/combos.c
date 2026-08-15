@@ -16,7 +16,7 @@
 
 #include QMK_KEYBOARD_H
 
-#include "krypton.h"
+#include "propergol.h"
 
 enum combos {
   R_BKSPC, 
