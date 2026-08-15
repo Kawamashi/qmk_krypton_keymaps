@@ -34,7 +34,7 @@
 #endif
 
 // combo
-#define COMBO_TERM 40
+#define COMBO_TERM 50
 //#define COMBO_TERM_PER_COMBO
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
