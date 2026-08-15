@@ -27,7 +27,12 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
     );
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
-  switch (keycode) {  // Enable speculative holding for these keys.
+
+  if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
+  if (get_mods() | get_oneshot_mods()) { return false; }
+
+  // Enable speculative holding for these keys.
+  switch (keycode) {
     case M(PG_I):
     case I(PG_N):
       return true;
@@ -35,14 +40,27 @@ bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
   return false;  // Disable otherwise.
 }
 
+bool is_tapping_sequence(uint16_t keycode) {
+  // To trigger Tap Flow, the last input must be a character,
+  // the time between the keypresses must be lower than FLOW_TAP_INTERVAL
+  // and the ongoing keypress must be on a layer used for characters with mod-tap keys on it
+  if (get_recent_keycode(-1) == KC_NO) { return false; }
+  if (get_idle_time() > FLOW_TAP_INTERVAL) { return false; }
+  
+  switch (get_highest_layer(layer_state)) {
+    case _BASE:
+    case _NUMROW:
+    case _NUMPAD:
+        return true;
+    default:
+        return false;
+  }
+}
+
 // Housekeeping
 
 void housekeeping_task_user(void) {
-  housekeeping_task_tap_flow();
-  recent_keys_task();
   modword_task();
-  layerword_task();
-  oneshot_task();
 }
 
 
@@ -50,25 +68,15 @@ void housekeeping_task_user(void) {
 
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-  process_flow_tap(keycode, record);
-  pre_process_speculative_hold(keycode, record);
+
 
   return true;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-  // Speculative Hold
-  if (!process_record_speculative_hold(keycode, record)) { return false; }
-
   // LT Repeat and Magic keys
   if (!process_macros_I(keycode, record)) { return false; }
-
-  // 
-  if (!process_custom_oneshot(keycode, record)) { return false; }
-
-  // Layer word
-  if (!process_layerword(keycode, record)) { return false; }
 
   // Prefixed layers
   if (!process_prefixing_layers(keycode, record)) { return false; }
@@ -85,7 +93,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // Process all other keycodes normally
   return true;
 }
-
-
-// Keymap
-

@@ -59,7 +59,6 @@ enum custom_keycodes {
   SYMBOL_1DK,
   PG_DEG,
   OS_RAS,
-  //OS_CTRL
 };
 
   // Layer changers

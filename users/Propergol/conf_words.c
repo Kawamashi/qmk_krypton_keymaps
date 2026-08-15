@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "word_conf.h"
+#include "propergol.h"
 
 bool is_letter(uint16_t keycode) {
 
@@ -53,6 +53,8 @@ bool is_letter(uint16_t keycode) {
     case PG_AGRV:
     case PG_EGRV:
     case PG_ECIR:
+    case A_CIRC:
+    case U_CIRC:
     case LETTER_1DK:
       return true;
 
@@ -63,7 +65,6 @@ bool is_letter(uint16_t keycode) {
 
 bool is_send_string_macro(uint16_t keycode) {
   switch (keycode) {
-    case OU_GRV:
     case N_TILD:
     case MAGIC:
     //case PG_AROB:   // because of Clever Keys
@@ -125,6 +126,7 @@ bool caps_word_press_user(uint16_t keycode) {
     case PG_TIRE:
     case PG_SLSH:
     case KC_1 ... KC_0:
+    case KC_P1 ... KC_P0:
     case KC_BSPC:
     case LCTL(KC_BSPC):
     case KC_DEL:
@@ -178,14 +180,24 @@ bool list_separator(void) {
 void word_selection_press_user(uint16_t keycode) {
 
   switch (keycode) {
-    case KC_LEFT:
     case C(KC_LEFT):
+        set_nb_word_selected(1);
+        tap_code(KC_LEFT);
+        add_weak_mods(MOD_BIT_LSHIFT);
+        break;
+
+    case C(KC_RGHT):
+        set_nb_word_selected(1);
+        tap_code(KC_RGHT);
+        add_weak_mods(MOD_BIT_LSHIFT);
+        break;
+
+    case KC_LEFT:
         select_word(-1);
         set_weak_mods(MOD_BIT_LCTRL | MOD_BIT_LSHIFT);
         break;
 
     case KC_RIGHT:
-    case C(KC_RGHT):
         select_word(1);
         set_weak_mods(MOD_BIT_LCTRL | MOD_BIT_LSHIFT);
         break;
@@ -228,10 +240,10 @@ uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
         set_numpad(true);
         return _NUMPAD;
 
-    case NUMWORD:
-        return replace_numpad() ? _NUMPAD : _NUMROW;
+    case MT_NUMW:
+        return _NUMROW;
+        //return replace_numpad() ? _NUMPAD : _NUMROW;
 
-    //case LT_NUMW: return _NUMROW;
     case NAVWORD: return _SHORTNAV;
     case FUNWORD: return _FUNCTIONS;
     default: return 0;
@@ -281,7 +293,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
 
         // Misc
         case KC_BSPC:
-        case OS_LSFT:
+        //case OS_LSFT:
             return true; 
         default:
             return false;

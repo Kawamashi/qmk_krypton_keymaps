@@ -4,30 +4,37 @@ modword_state_t modword_state = idle;
 
 static bool caps_word_active = false;
 
-static signed char capslist_counter = 1;
-static unsigned char counter_limit = 6;
+static int8_t capslist_counter = 1;
+static uint8_t counter_limit = 6;
 
-static signed char nb_word_selected = 0;
-static signed char nb_line_selected = 0;
+static int8_t nb_word_selected = 0;
+static int8_t nb_line_selected = 0;
 
-static uint16_t idle_timer = 0;
+static uint16_t modword_start_time = 0;
 
-
-void modword_task(void) {
-  if (modword_state != idle) {
-    if (timer_expired(timer_read(), idle_timer)) { disable_modword(modword_state); }
+#ifdef MODWORD_TIMEOUT
+  void modword_task(void) {
+    if (modword_state != idle) {
+      if (timer_elapsed(modword_start_time) > MODWORD_TIMEOUT){
+        disable_modword(modword_state);
+      }
+    }
   }
-}
+#endif  // MODWORD_TIMEOUT
 
 uint8_t get_modword(void) {
   return (modword_state);
 }
 
 void caps_word_on(void) {
-  //clear_oneshot();
+
+#ifdef OS_STEROIDS_COUNT
+  clear_oneshot_mods_on_steroids();
+#endif  // OS_STEROIDS_COUNT
+  clear_mods();
+#ifndef NO_ACTION_ONESHOT
   clear_oneshot_mods();
-/*   clear_mods();
-  clear_oneshot_mods(); */
+#endif  // NO_ACTION_ONESHOT
 
   caps_word_active = true;
 }
@@ -70,7 +77,9 @@ void enable_modword(modword_state_t modword, uint16_t keycode) {
         break;
   }
   modword_state = modword;
-  idle_timer = timer_read() + CAPS_WORD_IDLE_TIMEOUT;
+#ifdef MODWORD_TIMEOUT
+  modword_start_time = timer_read();
+#endif  // MODWORD_TIMEOUT
 }
   
 void disable_modword(modword_state_t modword) {
@@ -97,6 +106,15 @@ void disable_modword(modword_state_t modword) {
 }
 
 bool toggle_modword(modword_state_t modword_target, uint16_t keycode, keyrecord_t* record) {
+
+#ifndef NO_ACTION_TAPPING
+  // Normal processing when hold
+  if (IS_QK_MOD_TAP(keycode) || IS_QK_LAYER_TAP(keycode)) {
+      if (record->tap.count == 0) { return true; }
+  }
+#endif  // NO_ACTION_TAPPING
+
+    // Tap action
   if (record->event.pressed) {
     if (modword_state != modword_target) {
         // Activate layerword layer
@@ -105,9 +123,8 @@ bool toggle_modword(modword_state_t modword_target, uint16_t keycode, keyrecord_
         // Press again an layerword key to exit the layerword layer
         disable_modword(modword_target);
     }
-    return false;
   }
-  return true;
+  return false;
 }
 
 
@@ -124,8 +141,6 @@ bool process_modword(uint16_t keycode, keyrecord_t* record) {
         return toggle_modword(capslock, keycode, record);
 
     case SEL_WORD:
-        return toggle_modword(selectword, keycode, record);
-    
     case SEL_LINE:
         return toggle_modword(selectword, keycode, record);
   }
@@ -133,15 +148,22 @@ bool process_modword(uint16_t keycode, keyrecord_t* record) {
 
   if (modword_state == idle) { return true; }
 
-  if (modword_state == capslock) { 
-    idle_timer = record->event.time + CAPS_WORD_IDLE_TIMEOUT;
+  if (modword_state == capslock) {
+  #ifdef MODWORD_TIMEOUT
+    modword_start_time = record->event.time;
+  #endif  // MODWORD_TIMEOUT
     return true;
   }
 
   // Caps word or caps list is active //
 
+  // à passer dans post_process_record_user quand je le transformerai en module ?
+  // ça permettrait de ne faire clear_weak_mods qu’à la fin du traitement d’une touche
+  // et non pas au début de la suivante (cas d’un roulement)
   if (caps_word_active || modword_state == selectword) { clear_weak_mods(); }
 
+  // à passer dans post_process_record_user quand je le transformerai en module ?
+  // ce serait sans doute plus robuste (par rapport à la gestion des couches)
   if (modword_state == selectword) {
     if (IS_LAYER_OFF(_SHORTNAV)) { disable_modword(selectword); }
   }
@@ -172,7 +194,9 @@ bool process_modword(uint16_t keycode, keyrecord_t* record) {
     }
   }
 
-  idle_timer = record->event.time + CAPS_WORD_IDLE_TIMEOUT;
+#ifdef MODWORD_TIMEOUT
+  modword_start_time = record->event.time;
+#endif  // MODWORD_TIMEOUT
 
   if (caps_word_active) { update_caps_word(keycode, record); }
   if (modword_state == capslist && !caps_word_active) { update_caps_list(keycode, record); }     // Do not merge into a single 'if' block !
@@ -187,8 +211,9 @@ void update_caps_word(uint16_t keycode, keyrecord_t* record) {
 
   if (caps_word_press_user(keycode)) {
       // Invert on shift
-      if (get_oneshot_mods() & MOD_MASK_SHIFT) {
+      if ((get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT) {
         set_weak_mods(get_weak_mods() ^ MOD_BIT(KC_LSFT));
+        //unregister_code(KC_LSFT);
         del_oneshot_mods(MOD_MASK_SHIFT);
       }
       send_keyboard_report();
@@ -215,12 +240,12 @@ void update_caps_list(uint16_t keycode, keyrecord_t* record) {
   disable_modword(capslist);
 }
 
-bool update_capslist_counter(signed char i) {
+bool update_capslist_counter(int8_t i) {
   capslist_counter = capslist_counter + i;
   return true;
 }
 
-bool word_check(uint16_t keycodes[], uint8_t num_keycodes, unsigned char new_counter_limit) {
+bool word_check(uint16_t keycodes[], uint8_t num_keycodes, uint8_t new_counter_limit) {
   for (int i = 0; i < num_keycodes; ++i) {
     if (get_recent_keycode(- 2 - i) != keycodes[num_keycodes - 1 - i]) { return false; }
   }
@@ -231,7 +256,7 @@ bool word_check(uint16_t keycodes[], uint8_t num_keycodes, unsigned char new_cou
 
 // Word selection utilities //
 
-void select_word(signed char nb_word) {
+void select_word(int8_t nb_word) {
 
   if (nb_line_selected == 0) {
     nb_word_selected = nb_word_selected + nb_word;
@@ -249,7 +274,7 @@ void select_word(signed char nb_word) {
   }
 }
 
-void select_line(signed char nb_line) {
+void select_line(int8_t nb_line) {
   nb_line_selected = nb_line_selected + nb_line;
 
   if (nb_line_selected == 0) {
@@ -264,4 +289,8 @@ void select_line(signed char nb_line) {
     }
     nb_line_selected = 2*nb_line;
   }
+}
+
+void set_nb_word_selected(int8_t nb_word) {
+  nb_word_selected = nb_word;
 }

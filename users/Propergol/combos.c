@@ -22,7 +22,7 @@ enum combos {
   R_BKSPC, 
   DELETE, 
   BK_WORD,
-  DEL_WORD, 
+  //DEL_WORD, 
   L_BKSPC, 
   HOME, 
   END, 
@@ -39,7 +39,7 @@ enum combos {
 
 const uint16_t PROGMEM del_combo_d[] = {I(PG_T), M(PG_S), COMBO_END};
 const uint16_t PROGMEM bkspc_combo_d[] = {M(PG_S), R(PG_R), COMBO_END};
-const uint16_t PROGMEM del_word_combo[] = {PG_M, PG_C, COMBO_END};
+//const uint16_t PROGMEM del_word_combo[] = {PG_M, PG_C, COMBO_END};
 const uint16_t PROGMEM bk_word_combo[] = {PG_C, PG_J, COMBO_END};
 const uint16_t PROGMEM enter_combo[] = {PG_P, PG_U, COMBO_END};
 const uint16_t PROGMEM tab_combo[] = {I(PG_N), M(PG_I), COMBO_END};
@@ -57,7 +57,7 @@ combo_t key_combos[] = {
     [R_BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
     [DELETE] = COMBO(del_combo_d, KC_DEL),
     [BK_WORD] = COMBO(bk_word_combo, LCTL(KC_BSPC)), 
-    [DEL_WORD] = COMBO(del_word_combo, LCTL(KC_DEL)), 
+    //[DEL_WORD] = COMBO(del_word_combo, LCTL(KC_DEL)), 
     [L_BKSPC] = COMBO(bkspc_combo_g, KC_BSPC),
     [HOME] = COMBO(home_combo, KC_HOME),
     [END] = COMBO(end_combo, KC_END),
@@ -86,7 +86,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 
         default:
           //return enough_time_before_combo();    // takes more space
-          if (get_idle_time() < TAP_INTERVAL) { return false; }
+          if (get_idle_time() < IDLE_TIME_BEFORE_COMBO) { return false; }
     }
     return true;
 }
@@ -112,8 +112,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
           if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
           layer_clear();
           set_numpad(false);
-          clear_oneshot();
-          //clear_oneshot_mods();
+          clear_oneshots_on_steroids();
           unregister_code(KC_LCTL);
           unregister_code(KC_LSFT);
           unregister_code(KC_LALT);

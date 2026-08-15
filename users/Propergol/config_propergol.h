@@ -33,21 +33,19 @@
 #    define RGBLIGHT_LIMIT_VAL 150
 #endif
 
-//#define TAPPING_TOGGLE 1
-
 // combo
-#define COMBO_TERM 40
+#define COMBO_TERM 50
 //#define COMBO_TERM_PER_COMBO
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
 #define COMBO_PROCESS_KEY_REPRESS
-#define TAP_INTERVAL 300
+#define IDLE_TIME_BEFORE_COMBO 210
 
 // mod tap
 #define TAPPING_TERM 250
 #define PERMISSIVE_HOLD
-//#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define CHORDAL_HOLD
+#define FLOW_TAP_INTERVAL 210
 
 // EC11K encoders have a different resolution than other EC11 encodeisrs.
 // When using the default resolution of 4, if you notice your encoder skipping
@@ -58,14 +56,25 @@
 #endif */
 
 // One shot modifiers
-#define OS_COUNT 1
+#define OS_STEROIDS_COUNT 6
+#define OS_STEROIDS_SPLIT_TRIGGER_HOLD
+#define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_F18
+#define OS_STEROIDS_ABSORB_MODS
+#define OS_STEROIDS_FREE_LAYER_STACK
+//#define OS_MOD_SHOULD_LEAVE_OS_LAYER
+
+// Clever Keys
+# define CK_BUFFER_SIZE 8
+# define CK_EXPLICIT_HOOK
 
 // Timeouts in milliseconds.
-#define RECENT_KEYS_TIMEOUT 5000
-#define CAPS_WORD_IDLE_TIMEOUT 3000
+#define CLEVER_KEYS_TIMEOUT 5000
+#define MODWORD_TIMEOUT 3000
 #define ONESHOT_TIMEOUT 3000
+#define OS_STEROIDS_TIMEOUT 3000
 
 #define KRYPTON_ENABLE_HRM
+#define ONE_DEAD_KEY_DEFFERED_SHIFT
 
 
 //Faire de la place !

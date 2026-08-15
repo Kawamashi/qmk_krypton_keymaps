@@ -108,10 +108,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SYMBOLS] = KAWA_LAYOUT(
-      PG_ACIR,    PG_LCBR, PG_RCBR, PG_DLR,  PG_PERC,                  PG_HASH, PG_DQUO, PG_EGAL,    ALGR(PG_J), PG_GRV,
-      ALGR(PG_O), PG_LPRN, PG_RPRN, PG_PVIR, PG_2PTS,                  PG_BSLS, PG_SLSH, M(PG_MOIN), PG_PLUS,    PG_ASTX,
-      PG_INF,     PG_LSBR, PG_RSBR, PG_SUP,  _______,                  _______, PG_APOD, PG_ESPR,    PG_PIPE,    PG_TILD,
-                                    OS_RAS,  KC_SPC,  OS_NUMR,  OS_NUMR, _______, OS_NUMR
+      PG_ACIR,    PG_LCBR, PG_RCBR, PG_DLR,  PG_PERC,                   PG_HASH, PG_DQUO, PG_EGAL,    ALGR(PG_J), PG_GRV,
+      ALGR(PG_O), PG_LPRN, PG_RPRN, PG_PVIR, PG_2PTS,                   PG_BSLS, PG_SLSH, M(PG_MOIN), PG_PLUS,    PG_ASTX,
+      PG_INF,     PG_LSBR, PG_RSBR, PG_SUP,  _______,                   _______, PG_APOD, PG_ESPR,    PG_PIPE,    PG_TILD,
+                                    OS_RAS,  KC_SPC,  OS_NUMR, OS_NUMR, _______, OS_NUMR
     ),
 
 

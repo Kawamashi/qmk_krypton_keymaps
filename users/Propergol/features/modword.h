@@ -13,10 +13,11 @@ typedef enum {
 } modword_state_t;
 
 
-// Idle timout:
-// Modword can be configured to deactivate if the keyboard is idle
-// for some time. This is useful to prevent unexpected behaviours.
-// To be called from `housekeeping_task_user`.
+/* Idle timout:
+ * Modword can be configured to deactivate if the keyboard is idle
+ * for some time. This is useful to prevent unexpected behaviors.
+ * To be called from `housekeeping_task_user`.
+ */
 void modword_task(void);
 
 // Returns the active Modword
@@ -68,31 +69,36 @@ void update_caps_list(uint16_t keycode, keyrecord_t* record);
 // If the key should continue Caps List, the caps list counter must be updated.
 bool should_continue_caps_list(uint16_t keycode, keyrecord_t* record);
 
-// When caps list is active and caps word has been deactivated, a counter starts.
-// If a character is not list-breaking, it increase the counter.
-// Backspace decrease the counter.
-// When the counter reach the limit, Caps List is deactivated
-// This function updates the counter on each non-list-breaking keypress.
-bool update_capslist_counter(signed char i);
+/* When caps list is active and caps word has been deactivated, a counter starts.
+ * If a character is not list-breaking, it increase the counter.
+ * Backspace decrease the counter.
+ * When the counter reach the limit, Caps List is deactivated
+ * This function updates the counter on each non-list-breaking keypress.
+ */
+bool update_capslist_counter(int8_t i);
 
 // Caps List reactivates Caps Word after list separators (e.g. `, `, `and`, `or`).
 // List separators must be defined in this function.
 bool list_separator(void);
 
 // Determines whether the last keys form a list separator.
-bool word_check(uint16_t keycodes[], uint8_t num_keycodes, unsigned char new_counter_limit);
+bool word_check(uint16_t keycodes[], uint8_t num_keycodes, uint8_t new_counter_limit);
 
 
-// Handler function for Word Selection
-// Checks whether the key should continue Word Selection.
-// Navigation keys should continue Word Selection,
-// and weak mods should be added to select words and lines.
+/* Handler function for Word Selection
+ * Checks whether the key should continue Word Selection.
+ * Navigation keys should continue Word Selection,
+ * and weak mods should be added to select words and lines.
+ */
 void word_selection_press_user(uint16_t keycode);
 
 // Function to select a word, forward or backward.
 // Updates the number of words selected.
-void select_word(signed char nb_word);
+void select_word(int8_t nb_word);
 
 // Function to select a line, downward or upward.
 // Updates the number of lines selected.
-void select_line(signed char nb_line);
+void select_line(int8_t nb_line);
+
+// Set the number of words selected.
+void set_nb_word_selected(int8_t nb_word);

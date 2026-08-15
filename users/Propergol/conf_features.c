@@ -14,14 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "features_conf.h"
+#include "propergol.h"
 
-static bool is_apos_dr = false;
-static bool is_numpad = false;
-
-bool replace_apos(void) {
-  return is_apos_dr;
+bool on_left_hand(keypos_t pos) {
+#ifdef SPLIT_KEYBOARD
+  return pos.row < MATRIX_ROWS / 2;
+#else
+  return (MATRIX_COLS > MATRIX_ROWS) ? pos.col < MATRIX_COLS / 2
+                                     : pos.row < MATRIX_ROWS / 2;
+#endif
 }
+
+static bool is_numpad = false;
 
 void set_numpad(bool target) {
   is_numpad = target;
@@ -35,7 +39,13 @@ bool replace_numpad(void) {
 uint16_t tap_hold_extractor(uint16_t keycode) {
 
   switch (keycode) {
-    case M(C(PG_V)) :
+    case P(C(PG_A)):
+      return C(PG_A);
+    case R(C(PG_X)):
+      return C(PG_X);
+    case M(C(PG_C)) :
+      return C(PG_C);
+    case I(C(PG_V)):
       return C(PG_V);
 
     default:
@@ -43,6 +53,13 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
   }
 }
 
+bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {    // On press
+      tap_code16(keycode);
+      return false;
+  }
+  return true;
+}
 
 bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
@@ -74,28 +91,20 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
       case SFT_T(COPY):
       case LT_NUMW:
         return process_custom_tap_hold(tap_hold_extractor(keycode), record); */
-
-      case M(C(PG_V)) :
+      case P(C(PG_A)):
+        return process_custom_tap_hold(C(PG_A), record);
+      case R(C(PG_X)):
+        return process_custom_tap_hold(C(PG_X), record);
+      case M(C(PG_C)) :
+        return process_custom_tap_hold(C(PG_C), record);
+      case I(C(PG_V)):
         return process_custom_tap_hold(C(PG_V), record);
-
-      case OS_1DK:
-        // Custom behaviour when alt-gr
-        const uint8_t mods = get_mods() | get_weak_mods() | get_oneshot_mods();
-        if (mods & MOD_BIT(KC_ALGR)) {
-            tap_code16(ALGR(PG_1DK));
-            return false;
-        }
-        return true;
     }
   }
 
   if (record->event.pressed) {
     // Other macros (on press).
     switch (keycode) {
-      case TG_APOS:
-        is_apos_dr = !is_apos_dr;
-        return false;
-
       case PG_DEG:
         tap_code(PG_1DK);
         tap_code(KC_0);
@@ -137,6 +146,10 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
 
         case PG_POIN:
           return PG_3PTS;
+        case PG_U:
+          return U_CIRC;
+        case PG_A:
+          return A_CIRC;
 
         default:
           if (is_letter(keycode)) { return LETTER_1DK; }
@@ -146,6 +159,7 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
     // There are no symbols on _SHORTNAV or _FUNCAPPS
     case _SHORTNAV:
     case _FUNCAPPS:
+    case _FUNCTIONS:
       clear_recent_keys();
       return KC_NO;
   }
@@ -173,6 +187,10 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
 // Repeat and Magic keys
 
 bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* remembered_mods) {
+
+  // Custom oneshots don't type anything on their own. They mustn't be remembered.
+  if (is_oneshot_on_steroids(keycode)) { return false; }
+
   if (is_letter(tap_hold_extractor(keycode))) {
     // Forget Shift on letter keys when Shift or AltGr are the only mods.
     if ((*remembered_mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_RALT))) == 0) {
@@ -180,10 +198,12 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
       return true;
     }
   }
+
   switch (keycode) {
     case KC_BSPC:
     case LT_REPT:
     case LT_MGC:
+
       return false;
     
     default:
@@ -219,48 +239,106 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
         return KC_TRNS;
   }
   return MAGIC;
-
-/*   if (get_recent_keycode(-1) != KC_NO) { return MAGIC; }
-  if (get_last_keycode() == KC_NO) { return MAGIC; }
-  
-  return KC_TRNS;  // Defer to default definitions. */
 }
 
 
 // One-shot mods
 
-const oneshot_key_t oneshot_keys[] = {
-  {OS_SHFT, KC_LSFT},
+const oneshot_on_steroids_t oneshot_os[] = {
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                    _BASE    )},
+  {OS(OS_WINM, LT_MGC,  0,                                   _FUNCAPPS)},
+  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI),                    _NUMROW  )},
+  {OS(OS_1DK,  OS_1DK,  0,                                   _1DK     )},
+  {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )},
+  {OS(OS_RAS,  OS_RAS,  MOD_BIT(KC_RSFT) | MOD_BIT(KC_ALGR), _BASE    )}
 };
 
-bool is_oneshot_cancel_key(uint16_t keycode) {
-  return false;
-  switch (keycode) {
+bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
-    default:
-      return false;
+  if (record->event.pressed) {
+    switch (keycode) {
+
+      case OS_NUMR:
+        //if (get_oneshot_layer_on_steroids() == _1DK) { insert_1dk(keycode); }
+        if (IS_LAYER_ON(_1DK)) {
+          insert_1dk(keycode);
+        } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+          // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
+          // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
+          return toggle_modword(capsword, CAPSWORD, record);
+        }
+        break;
+
+      case OS_1DK:
+        // Custom behavior when alt-gr
+        const uint8_t mods = get_mods() | get_oneshot_mods();
+        if (mods & MOD_BIT(KC_ALGR)) {
+            tap_code16(ALGR(PG_1DK));
+            return false;
+        }
+        break;
+    }
+  }
+  return true;
+}
+
+bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
+
+  const uint8_t mods = get_mods() | get_oneshot_mods();
+  if (keycode == OS_1DK && (mods & MOD_BIT(KC_ALGR))) { return false; }
+
+  bool is_mod_key = is_oneshot_mod_on_steroids(keycode);
+  bool is_layer_key = is_oneshot_layer_on_steroids(keycode);
+  
+  if (!record->tap.count) {
+    if (IS_QK_MOD_TAP(keycode)) { is_mod_key = true; }
+    if (IS_QK_LAYER_TAP(keycode)) { is_layer_key = true; }
+  }
+
+  if (!is_mod_key && !is_layer_key) { return false; }
+
+  // Mod or layer-change key pressed after an OSoS key
+  if (is_oneshot_layer_on_steroids(oneshot)) {
+    // If a layer-change key is pressed after a OSL, the OSL must be reset.
+    if (is_layer_key) { return false; }
+    // keycode is not a layer key, it’s a mod key.
+#     ifdef OS_MOD_SHOULD_LEAVE_OS_LAYER
+    // When using OSM as Callum mods, an OSL tapped before must be reset.
+    if (is_oneshot_mod_on_steroids(keycode)) { return false; }
+#     endif  // OS_MOD_SHOULD_LEAVE_OS_LAYER
+    // Standard behavior, like any mod key after an OSL
+    return true;
+  } else {
+    // one-shot is OSM on steroids
+#     ifdef OS_STEROIDS_ABSORB_MODS
+    if (is_oneshot_layer_on_steroids(keycode)) {
+        if (should_oneshot_on_steroids_absorb_mods(keycode)) { return false; }
+    }
+#     endif  // OS_STEROIDS_ABSORB_MODS
+    // OSM on steroids should stay pressed
+    // whether keycode is a mod or a layer-change key.
+    return true;
   }
 }
 
-bool should_oneshot_stay_pressed(uint16_t keycode) {
-
-  switch (keycode) {
-    case OS_1DK:
-      // On veut que les one-shot mods soient transmis aux touches de la couche 1DK, par ex pour faire Ctrl + K.
-      // Il faut donc que cette fonction appliquée à OS_1DK renvoie true pour la plupart des mods.
-      // Par contre, pour faire la touche morte "~", il faut taper shift + alt-gr + OS_1DK.
-      // Alt-gr doit être relâché après appui sur OS_1DK.
-      // Cette fonction appliquée à OS_1DK ne doit donc renvoyer false que quand Alt-gr est utilisé.
-      const uint8_t mods = get_mods() | get_weak_mods() | get_oneshot_mods();
-      if (mods & MOD_BIT(KC_ALGR)) { return false; }
-      return true;
-
-    case FUNWORD:
-    case NUMWORD:     // to combine numbers with mods
-    //case NUM_1DK:   // NUM_1DK sends PG_1DK when pressed. When shifted, PG_1DK sends one-shot shift.
+bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer) {
+/*   switch (keycode) {
+    case OS_NUMR:
+    case OS_WNUM:
       return true;
 
     default:
       return false;
-  }
+  } */
+  return true;
+}
+
+bool should_osl_on_steroids_absorb_mods(uint16_t keycode) {
+    switch (keycode) {
+/*       case OS_1DK:
+        return false; */
+
+      default:
+        return true;
+    }
 }
