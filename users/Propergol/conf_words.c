@@ -24,19 +24,20 @@ bool is_letter(uint16_t keycode) {
 
       case PG_VIRG:
         return true;
-  
-      case PG_EGRV:    // arrobe
+
       case PG_V:
       case PG_M:
       case PG_C:
-      case PG_J:
-      case PG_X:
+      case PG_J:    // arrobe
+      case PG_X:    // non-breaking hyphen
       case PG_G:    // greek dead key
-      case PG_T:
-      case PG_R:
-      case PG_L:
-      case PG_D:    // pour le tréma
-      case PG_W:    // pour le trait d’union insécable
+      case PG_T:    // slash
+      case PG_R:    // €
+      case PG_L:    // £
+      case PG_D:    // umlaut
+      case PG_W:    // en dash
+      case PG_B:    // parenthesis
+      case PG_K:
         return false;
     }
   }
@@ -65,9 +66,7 @@ bool is_letter(uint16_t keycode) {
 
 bool is_send_string_macro(uint16_t keycode) {
   switch (keycode) {
-    case N_TILD:
     case MAGIC:
-    //case PG_AROB:   // because of Clever Keys
       return true;
     
     default:
@@ -105,15 +104,13 @@ bool caps_word_press_user(uint16_t keycode) {
 
   if (IS_LAYER_ON(_1DK)) {
     switch (keycode) {  
-      case PG_D:    // pour le tréma
-      case PG_R:    // pour le trait d’union insécable
-      //case PG_APOS:
+      case PG_D:    // umlaut
+      case PG_X:    // non-breaking hyphen
         return true;
     }
   }
 
   // Keycodes that continue Caps Word, with shift applied.
-  // @ must be shifted, bc of CleverKeys using it.
   if (is_letter(keycode) || is_send_string_macro(keycode)) {
     add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
     return true;
@@ -171,8 +168,6 @@ bool list_separator(void) {
         if (word_check((uint16_t[]) {KC_SPC, PG_E, PG_T}, 3, 2)) { return true; }
 
         if (word_check((uint16_t[]) {KC_SPC, PG_O, PG_U}, 3, 2)) { return true; }
-
-        if (word_check((uint16_t[]) {PG_X, PG_C, PG_G}, 3, 2)) { return true; }
     }
     return false;
 }
@@ -257,7 +252,7 @@ uint16_t layerword_exit_timeout(uint8_t layer) {
     case _NUMPAD:
     case _SHORTNAV:
         return 3000;
-    case _FUNCAPPS:
+    case _FUNCTIONS:
         return 30000;
     default:
         return 0;
@@ -289,11 +284,8 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case PG_POIN:
         case PG_VIRG:
 
-        //case TG_NUM:
-
         // Misc
         case KC_BSPC:
-        //case OS_LSFT:
             return true; 
         default:
             return false;

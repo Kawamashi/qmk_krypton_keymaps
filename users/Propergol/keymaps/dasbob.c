@@ -23,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_split_3x5_3(
       PG_VIRG, PG_EACU, PG_U,    PG_P,    PG_TIRE,                 PG_V,   PG_M,    PG_C,    PG_J,    PG_X,   
       P(PG_O), R(PG_A), M(PG_I), I(PG_N), PG_POIN,                 PG_G,   I(PG_T), M(PG_S), R(PG_R), P(PG_L),
-      PG_Q,    PG_EGRV, PG_Y,    PG_H,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
+      PG_Q,    PG_EGRV, PG_Y,    PG_H,    PG_B,                    PG_K,   PG_D,    PG_F,    PG_W,    OS_1DK,
                                  OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_NUMR
     ),
 
@@ -55,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_1DK] = LAYOUT_split_3x5_3(
-       _______, PG_J   , _______, N_TILD,  PG_X,                      PG_W,    _______, _______, _______, _______,
-       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_Y,    PG_EACU, _______,
-       _______, PG_LPRN, PG_RPRN, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
+       _______, _______, _______, _______, PG_X,                      _______, _______, _______, _______, _______,
+       _______, _______, _______, PG_Z,    _______,                   _______, _______, _______, _______, _______,
+       _______, PG_J,    _______, _______, _______,                   _______, _______, _______, _______, OS_1DK,
                                   _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUMR
      ),
 

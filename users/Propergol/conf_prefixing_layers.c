@@ -40,20 +40,14 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
         if (IS_QK_MOD_TAP(keycode) && !record->tap.count) { return true; }
 
         switch (keycode) {
-            case PG_K:
-            case PG_B:
-            case PG_H:
             case PG_Z:
             case PG_Q:
             case PG_UNDS:
             case PG_APOS:
             case PG_AGRV:
             case PG_ECIR:
-            case PG_LPRN:
-            case PG_RPRN:
-            //case KC_SPC:    // When space is added by Clever Keys
               return true;
-            // to handle `quê`
+            // handle `quê`
             case PG_U:
                 if (get_recent_keycode(-1) == PG_Q) { return true; }
                 
