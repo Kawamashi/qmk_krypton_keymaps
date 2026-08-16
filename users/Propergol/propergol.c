@@ -33,7 +33,7 @@ bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
   // Enable speculative holding for these keys.
   switch (keycode) {
-    case M(PG_I):
+    case I(PG_T):
     case I(PG_N):
       return true;
   }

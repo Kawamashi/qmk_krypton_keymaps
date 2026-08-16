@@ -88,9 +88,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
     case PG_P:
       switch (*ongoing_keycode) {
-/*         case PG_C:
+        case PG_C:
           // "pas"
-          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record); */
+          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record);
         
         case PG_J:
           // "pour"
@@ -113,24 +113,6 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "cj" -> "ck"
           update_bkspc_countdown(0);
           return replace_ongoing_key(PG_K, ongoing_keycode, record);
-      }
-      break;
-    
-
-    case PG_M:
-    case PG_R:
-    case PG_A:
-    case PG_E:
-    case PG_EACU:
-    case PG_I:
-    case PG_O:
-    case PG_U:
-    case PG_Y:
-    case PG_EGRV:
-    case A_CIRC:
-      if (*ongoing_keycode == PG_H && IS_LAYER_OFF(_1DK)) {
-          update_bkspc_countdown(0);
-          return replace_ongoing_key(PG_B, ongoing_keycode, record);
       }
       break;
   }
@@ -177,15 +159,11 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           return replace_ongoing_key(PG_EACU, ongoing_keycode, record);
 
         case PG_Y:
-          // "you" bad redirection
-          invoke_key(PG_O,record);
-          return replace_ongoing_key(PG_U, ongoing_keycode, record);
+          return replace_ongoing_key(PG_I, ongoing_keycode, record);
 
         case PG_T:
           // "tion"
           invoke_key(PG_I,record);
-          //return replace_ongoing_key(PG_N, ongoing_keycode, record);
-
         case PG_I:
           // "ion"
           invoke_key(PG_O,record);
@@ -222,16 +200,21 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       }
       break;
 
-    case U_CIRC:
+    case PG_EGRV:
+      if (prev_keycode == PG_Y) {
+          // "you" bad redirection
+          invoke_key(PG_O,record);
+          return replace_ongoing_key(PG_U, ongoing_keycode, record);
+      }
+      break;
+
+/*     case U_CIRC:
       layer_off(_1DK);  //Otherwise, is_letter can't evaluate recents keycodes correctly
       if (prev_keycode == PG_O && !is_letter(get_recent_keycode(-2))) {
         update_bkspc_countdown(0);
         return replace_ongoing_key(PG_P, ongoing_keycode, record);
       }
-      break;
-
-    case N_TILD:
-      return replace_ongoing_key(PG_H, ongoing_keycode, record);
+      break; */
   }
 
 }

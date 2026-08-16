@@ -53,7 +53,6 @@ enum custom_keycodes {
   OS_WNUM,
   A_CIRC,
   U_CIRC,
-  N_TILD,
   MAGIC,
   LETTER_1DK,
   SYMBOL_1DK,
