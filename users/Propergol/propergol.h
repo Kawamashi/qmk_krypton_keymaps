@@ -57,7 +57,6 @@ enum custom_keycodes {
   LETTER_1DK,
   SYMBOL_1DK,
   PG_DEG,
-  OS_RAS,
   HOME,
   END
 };
@@ -70,6 +69,7 @@ enum custom_keycodes {
 #define LT_PDOT LT(_SYMBOLS, KC_PDOT)
 #define LT_0 LT(_SHORTNAV, KC_0)
 #define LT_P0 LT(_SHORTNAV, KC_P0)
+#define LT_BSPC LT(_SYMBOLS, KC_BSPC)
 
 
   // Modifiers

@@ -57,8 +57,7 @@ enum custom_keycodes {
   MAGIC,
   LETTER_1DK,
   SYMBOL_1DK,
-  PG_DEG,
-  OS_RAS,
+  PG_DEG
 };
 
   // Layer changers

@@ -33,8 +33,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // S(KC_4), S(KC_3) and S(PG_EGAL) are here to give easy access to ⅔, ¾ and ≠.
       PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, S(PG_EGAL), NUMPAD, 
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8),    P(KC_9),
-      S(KC_4), S(KC_3), PG_H,    KC_5,    _______,                   _______, PG_SLSH, PG_MOIN, PG_PLUS,    PG_ASTX,
-                                 MT_NUMW, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUMR
+      S(KC_4), S(KC_3), PG_H,    KC_5,    KC_PDOT,                   _______, PG_SLSH, PG_MOIN, PG_PLUS,    PG_ASTX,
+                                 MT_NUMW, LT_0   , LT_BSPC, NNB_SPC, LT_SPC,  OS_NUMR
      ),
 
 
@@ -42,15 +42,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_ACIR,    PG_LCBR, PG_RCBR, PG_DLR,  PG_PERC,                   PG_HASH, PG_DQUO, PG_EGAL,    ALGR(PG_J), PG_GRV, 
       ALGR(PG_O), PG_LPRN, PG_RPRN, PG_PVIR, PG_2PTS,                   PG_BSLS, PG_SLSH, M(PG_MOIN), PG_PLUS,    PG_ASTX,
       PG_INF,     PG_LSBR, PG_RSBR, PG_SUP,  PG_AROB,                   KC_NO,   PG_APOD, PG_ESPR,    PG_PIPE,    PG_TILD,
-                                    OS_RAS,  KC_SPC,  OS_NUMR, OS_NUMR, _______, OS_NUMR
+                                    OS_NUMR, KC_SPC,  KC_BSPC, _______, _______, OS_NUMR
     ),
 
 
     [_NUMPAD] = LAYOUT_split_3x5_3(
       PG_VIRG,  PG_MOIN,  PG_PLUS,  PG_EURO,  PG_PERC,                   PG_EXP,  PG_DEG,   PG_EGAL,  _______,  NUMROW,
       P(KC_P4), R(KC_P3), M(KC_P2), I(KC_P1), PG_POIN,                   PG_IND,  I(KC_P6), M(KC_P7), R(KC_P8), P(KC_P9),
-      _______,  _______,  PG_H,     KC_P5,    _______,                   _______, PG_SLSH,  PG_MOIN,  PG_PLUS,  PG_ASTX,
-                                    MT_NUMW,  LT_P0  , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUMR
+      _______,  _______,  PG_H,     KC_P5,    KC_PDOT,                   _______, PG_SLSH,  PG_MOIN,  PG_PLUS,  PG_ASTX,
+                                    MT_NUMW,  LT_P0  , LT_BSPC, NNB_SPC, LT_SPC,  OS_NUMR
      ),
 
 
@@ -64,10 +64,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SHORTNAV] = LAYOUT_split_3x5_3(
-      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                  CAPSLOCK, KC_DEL,     C(KC_DEL),  _______,   _______,
-      SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                  CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
-      UNDO,    CUT,     COPY,    PASTE,   REDO,                     CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
-                                          _______, LT_SPC, KC_BSPC, NAVWORD,  KC_BSPC,    _______
+      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, KC_DEL,     C(KC_DEL),  _______,   _______,
+      SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
+      UNDO,    CUT,     COPY,    PASTE,   REDO,                      CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
+                                 _______, KC_SPC,  KC_BSPC, NAVWORD, KC_BSPC,  _______
     ),
 
 
@@ -80,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_FUNCTIONS] = LAYOUT_split_3x5_3(
-       _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   QK_BOOT, KC_SLEP,  KC_BRID,  KC_BRIU,  _______, 
-       P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
-       _______,  _______,  _______,  KC_F5,    KC_MUTE,                   KC_SCRL, KC_MPLY,  KC_MPRV,  KC_MNXT,  _______, 
+       _______,  _______,  KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, _______,  _______,  _______,  _______, 
+       P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_BRIU,                   KC_MUTE, I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
+       QK_BOOT,  KC_NUM,   KC_SCRL,  KC_F5,    KC_BRID,                   KC_VOLD, KC_MPLY,  KC_MPRV,  KC_MNXT,  KC_SLEP, 
                                      _______,  KC_F10,  _______, FUNWORD, _______, _______
      ),
 

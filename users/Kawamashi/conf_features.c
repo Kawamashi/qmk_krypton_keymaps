@@ -76,6 +76,21 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
         alt_repeat_key_invoke(&record->event);
         return false;
     }
+  } else {
+    if (keycode == LT_SPC) {
+      if (record->event.pressed) {
+        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+          cancel_oneshot_on_steroids(OS_SHFT);
+          register_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
+          return false;
+        }
+      } else {
+        if (get_mods() & MOD_BIT(KC_ALGR)) {
+          unregister_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
+          return false;
+        }
+      }
+    }
   }
   return true; // Process all other keycodes normally
 }
@@ -246,8 +261,7 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_WINM, LT_MGC,  0,                                   _FUNCAPPS)},
   {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI),                    _NUMROW  )},
   {OS(OS_1DK,  OS_1DK,  0,                                   _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )},
-  {OS(OS_RAS,  OS_RAS,  MOD_BIT(KC_RSFT) | MOD_BIT(KC_ALGR), _BASE    )}
+  {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
