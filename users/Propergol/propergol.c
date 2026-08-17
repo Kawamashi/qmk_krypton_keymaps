@@ -28,7 +28,9 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
+  // Disable speculative hold during tapping sequences
   if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
+  // Disable speculative hold when any mods are already active
   if (get_mods() | get_oneshot_mods()) { return false; }
 
   // Enable speculative holding for these keys.

@@ -156,7 +156,7 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
           return SYMBOL_1DK;
       }
     
-    // There are no symbols on _SHORTNAV or _FUNCAPPS
+    // There are no symbols on _SHORTNAV, _FUNCAPPS or _FUNCTIONS
     case _SHORTNAV:
     case _FUNCAPPS:
     case _FUNCTIONS:
@@ -203,7 +203,6 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
     case KC_BSPC:
     case LT_REPT:
     case LT_MGC:
-
       return false;
     
     default:
@@ -223,11 +222,14 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   }
 
   if (mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_ALGR))) {
+    // regular behaviour of the alt-repeat key when a modifier
+    // other than shift or alt-gr is registered
     return KC_TRNS;
   }
 
   keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
   switch (keycode) {
+    // regular behaviour of the alt-repeat key for these keycodes
     case KC_LEFT:
     case KC_RIGHT:
     case KC_DOWN:
@@ -236,7 +238,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     case KC_PGDN:
     case KC_HOME:
     case KC_END:
-        return KC_TRNS;
+      return KC_TRNS;
   }
   return MAGIC;
 }

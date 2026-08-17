@@ -67,8 +67,6 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     // Special tap-hold keys (on tap).
     switch (keycode) {
       case LT_REPT:
-        const uint8_t mods = get_mods() | get_oneshot_mods();
-        if (mods & MOD_MASK_SHIFT) { return toggle_modword(capsword, CAPSWORD, record); }
         repeat_key_invoke(&record->event);
         return false;
 
@@ -136,9 +134,6 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
 
     case _1DK:
       switch (keycode) {
-        case PG_K:
-        case PG_B:
-        case PG_H:
         case PG_Z:
         case PG_ECIR:
         //case KC_SPC:  // When space is added by clever keys, for ex. in order to uppercase K after '?' for ex.
@@ -156,7 +151,7 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
           return SYMBOL_1DK;
       }
     
-    // There are no symbols on _SHORTNAV or _FUNCAPPS
+    // There are no symbols on _SHORTNAV, _FUNCAPPS or _FUNCTIONS
     case _SHORTNAV:
     case _FUNCAPPS:
     case _FUNCTIONS:
@@ -203,7 +198,6 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
     case KC_BSPC:
     case LT_REPT:
     case LT_MGC:
-
       return false;
     
     default:
@@ -223,11 +217,14 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   }
 
   if (mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_ALGR))) {
+    // regular behaviour of the alt-repeat key when a modifier
+    // other than shift or alt-gr is registered
     return KC_TRNS;
   }
 
   keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
   switch (keycode) {
+    // regular behaviour of the alt-repeat key for these keycodes
     case KC_LEFT:
     case KC_RIGHT:
     case KC_DOWN:
@@ -236,7 +233,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     case KC_PGDN:
     case KC_HOME:
     case KC_END:
-        return KC_TRNS;
+      return KC_TRNS;
   }
   return MAGIC;
 }
@@ -245,12 +242,12 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                    _BASE    )},
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                    0        )},
   {OS(OS_WINM, LT_MGC,  0,                                   _FUNCAPPS)},
   {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI),                    _NUMROW  )},
   {OS(OS_1DK,  OS_1DK,  0,                                   _1DK     )},
   {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )},
-  {OS(OS_RAS,  OS_RAS,  MOD_BIT(KC_RSFT) | MOD_BIT(KC_ALGR), _BASE    )}
+  {OS(OS_RAS,  OS_RAS,  MOD_BIT(KC_RSFT) | MOD_BIT(KC_ALGR), 0        )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -331,14 +328,4 @@ bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer
       return false;
   } */
   return true;
-}
-
-bool should_osl_on_steroids_absorb_mods(uint16_t keycode) {
-    switch (keycode) {
-/*       case OS_1DK:
-        return false; */
-
-      default:
-        return true;
-    }
 }
