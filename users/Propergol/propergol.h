@@ -110,9 +110,11 @@ enum custom_keycodes {
 #ifdef KRYPTON_MAC_MODIFIERS
   #define UNDO LCMD(PG_Z)
   #define REDO LSG(PG_Z)
+  #define BACKWRD LOPT(KC_BSPC)
 #else
   #define UNDO C(PG_Z)
   #define REDO C(PG_Y)
+  #define BACKWRD LCTL(KC_BSPC)
 #endif
 
 

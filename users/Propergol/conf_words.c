@@ -125,7 +125,7 @@ bool caps_word_press_user(uint16_t keycode) {
     case KC_1 ... KC_0:
     case KC_P1 ... KC_P0:
     case KC_BSPC:
-    case LCTL(KC_BSPC):
+    case BACKWRD:
     case KC_DEL:
     case PG_APOS:
       return true;
