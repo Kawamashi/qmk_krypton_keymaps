@@ -39,14 +39,10 @@ bool replace_numpad(void) {
 uint16_t tap_hold_extractor(uint16_t keycode) {
 
   switch (keycode) {
-    case P(C(PG_A)):
-      return C(PG_A);
-    case R(C(PG_X)):
-      return C(PG_X);
-    case M(C(PG_C)) :
-      return C(PG_C);
-    case I(C(PG_V)):
-      return C(PG_V);
+/*     case MOD_STB:
+      return S(KC_TAB); */
+    case M(BACKWRD):
+      return BACKWRD;
 
     default:
       return keycode &= 0xff;
@@ -74,6 +70,15 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
         alt_repeat_key_invoke(&record->event);
         return false;
     }
+  } else {
+    if (record->event.pressed) {
+      if (keycode == LT_REPT) {
+        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+          add_oneshot_mods(MOD_BIT(KC_ALGR));
+          return false;
+        }
+      }
+    }
   }
   return true; // Process all other keycodes normally
 }
@@ -84,19 +89,10 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
   if (record->tap.count) {
     // Special tap-hold keys (on tap).
     switch (keycode) {
-/*       case SFT_T(FEN_G):
-      case RCTL_T(FEN_B):
-      case SFT_T(COPY):
-      case LT_NUMW:
-        return process_custom_tap_hold(tap_hold_extractor(keycode), record); */
-      case P(C(PG_A)):
-        return process_custom_tap_hold(C(PG_A), record);
-      case R(C(PG_X)):
-        return process_custom_tap_hold(C(PG_X), record);
-      case M(C(PG_C)) :
-        return process_custom_tap_hold(C(PG_C), record);
-      case I(C(PG_V)):
-        return process_custom_tap_hold(C(PG_V), record);
+/*       case MOD_STB:
+        return process_custom_tap_hold(S(KC_TAB), record); */
+      case M(BACKWRD):
+        return process_custom_tap_hold(BACKWRD, record);
     }
   }
 
@@ -106,6 +102,20 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
       case PG_DEG:
         tap_code(PG_1DK);
         tap_code(KC_0);
+        return false;
+      case HOME:
+          #ifdef KRYPTON_MAC_MODIFIERS
+        tap_code16(LCMD(KC_LEFT));
+          #else
+        tap_code(KC_HOME);
+          #endif
+        return false;
+      case END:
+          #ifdef KRYPTON_MAC_MODIFIERS
+        tap_code16(LCMD(KC_RIGHT));
+          #else
+        tap_code(KC_END);
+          #endif
         return false;
     }
   }

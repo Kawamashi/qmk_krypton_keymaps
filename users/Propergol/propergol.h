@@ -58,16 +58,18 @@ enum custom_keycodes {
   SYMBOL_1DK,
   PG_DEG,
   OS_RAS,
+  HOME,
+  END
 };
 
   // Layer changers
-#define LT_SPC LT(_SYMBOLS, KC_SPC)
-#define LT_E LT(_SYMBOLS, PG_E)
-#define LT_REPT LT(_FUNCTIONS, KC_1)
-#define LT_MGC LT(_SHORTNAV, KC_1)
-#define LT_PDOT LT(_SHORTNAV, KC_PDOT)
-#define LT_0 LT(_SYMBOLS, KC_0)
-#define LT_P0 LT(_SYMBOLS, KC_P0)
+#define LT_SPC LT(_SHORTNAV, KC_SPC)
+#define LT_E LT(_SHORTNAV, PG_E)
+#define LT_REPT LT(_SYMBOLS, KC_1)
+#define LT_MGC LT(_FUNCTIONS, KC_1)
+#define LT_PDOT LT(_SYMBOLS, KC_PDOT)
+#define LT_0 LT(_SHORTNAV, KC_0)
+#define LT_P0 LT(_SHORTNAV, KC_P0)
 
 
   // Modifiers
@@ -108,15 +110,22 @@ enum custom_keycodes {
 
 // Hotkeys
 #ifdef KRYPTON_MAC_MODIFIERS
-  #define UNDO LCMD(PG_Z)
-  #define REDO LSG(PG_Z)
+  #define UNDO    LCMD(PG_Z)
+  #define REDO    LSG(PG_Z)
   #define BACKWRD LOPT(KC_BSPC)
+  #define SEL_ALL LCMD(PG_A)
+  #define CUT     LCMD(PG_X)
+  #define COPY    LCMD(PG_C)
+  #define PASTE   LCMD(PG_V)
 #else
-  #define UNDO C(PG_Z)
-  #define REDO C(PG_Y)
+  #define UNDO    LCTL(PG_Z)
+  #define REDO    LCTL(PG_Y)
   #define BACKWRD LCTL(KC_BSPC)
+  #define SEL_ALL LCTL(PG_A)
+  #define CUT     LCTL(PG_X)
+  #define COPY    LCTL(PG_C)
+  #define PASTE   LCTL(PG_V)
 #endif
-
 
 // conf_words
 

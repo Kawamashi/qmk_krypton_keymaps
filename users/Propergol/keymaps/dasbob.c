@@ -64,10 +64,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SHORTNAV] = LAYOUT_split_3x5_3(
-      SEL_WORD,   SEL_LINE,   OS_WINM,    LGUI(PG_V), KC_VOLU,                   KC_PGUP, C(KC_LEFT), KC_UP,      C(KC_RGHT), CAPSLOCK,
-      P(C(PG_A)), R(C(PG_X)), M(C(PG_C)), I(C(PG_V)), KC_VOLD,                   KC_PGDN, KC_LEFT,    KC_DOWN,    KC_RIGHT,   CAPSWORD,
-      KC_MUTE,    KC_MUTE,    KC_F2,      UNDO,       _______,                   _______, C(KC_PGUP), C(KC_PGDN), C(PG_W),    CAPSLIST,
-                                          _______,    _______, _______, NAVWORD, _______, OS_WNUM
+      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                  CAPSLOCK, KC_DEL,     C(KC_DEL),  _______,   _______,
+      SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                  CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
+      UNDO,    CUT,     COPY,    PASTE,   REDO,                     CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
+                                          _______, LT_SPC, KC_BSPC, NAVWORD,  KC_BSPC,    _______
     ),
 
 
@@ -80,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_FUNCTIONS] = LAYOUT_split_3x5_3(
-       _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   QK_BOOT, _______,  OS_WNUM,  _______,  _______, 
+       _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   QK_BOOT, KC_SLEP,  KC_BRID,  KC_BRIU,  _______, 
        P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
-       KC_MUTE,  KC_MUTE,  _______,  KC_F5,    _______,                   _______, _______,  _______,  _______,  _______, 
-                                     _______,  KC_F10,  FUNWORD, _______, _______, _______
+       _______,  _______,  _______,  KC_F5,    KC_MUTE,                   KC_SCRL, KC_MPLY,  KC_MPRV,  KC_MNXT,  _______, 
+                                     _______,  KC_F10,  _______, FUNWORD, _______, _______
      ),
 
 };

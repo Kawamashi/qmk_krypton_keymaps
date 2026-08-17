@@ -86,11 +86,6 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
   if (record->tap.count) {
     // Special tap-hold keys (on tap).
     switch (keycode) {
-/*       case SFT_T(FEN_G):
-      case RCTL_T(FEN_B):
-      case SFT_T(COPY):
-      case LT_NUMW:
-        return process_custom_tap_hold(tap_hold_extractor(keycode), record); */
       case P(C(PG_A)):
         return process_custom_tap_hold(C(PG_A), record);
       case R(C(PG_X)):
