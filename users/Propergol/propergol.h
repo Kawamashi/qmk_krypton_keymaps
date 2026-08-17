@@ -69,15 +69,21 @@ enum custom_keycodes {
 #define LT_0 LT(_SYMBOLS, KC_0)
 #define LT_P0 LT(_SYMBOLS, KC_P0)
 
-#define OS_NUM OSL(_NUMROW)
 
+  // Mods
 
-  // HRM
 #ifdef KRYPTON_ENABLE_HRM
-  #define P(k) SFT_T(k)
+  #ifdef KRYPTON_MAC_MODIFIERS
+    #define P(k) LSFT_T(k)
+    #define R(k) LCTL_T(k)
+    #define M(k) LOPT_T(k)
+    #define I(k) LCMD_T(k)
+  #else
+  #define P(k) LSFT_T(k)
   #define R(k) LALT_T(k)
   #define M(k) LGUI_T(k)
   #define I(k) LCTL_T(k)
+  #endif
 #else
   #define P(k) k
   #define R(k) k
@@ -87,10 +93,17 @@ enum custom_keycodes {
 
 #define MT_NUMW LSFT_T(KC_PDOT)
 
-#define P_MOD KC_LSFT
-#define R_MOD KC_LALT
-#define M_MOD KC_LGUI
-#define I_MOD KC_LCTL
+#ifdef KRYPTON_MAC_MODIFIERS
+  #define P_MOD KC_LSFT
+  #define R_MOD KC_LCTL
+  #define M_MOD KC_LOPT
+  #define I_MOD KC_LCMD
+#else
+  #define P_MOD KC_LSFT
+  #define R_MOD KC_LALT
+  #define M_MOD KC_LGUI
+  #define I_MOD KC_LCTL
+#endif
 
 
 // conf_words

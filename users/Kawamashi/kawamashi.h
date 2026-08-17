@@ -70,12 +70,10 @@ enum custom_keycodes {
 #define LT_0 LT(_SYMBOLS, KC_0)
 #define LT_P0 LT(_SYMBOLS, KC_P0)
 
-#define OS_NUM OSL(_NUMROW)
-
 
   // HRM
 #ifdef KRYPTON_ENABLE_HRM
-  #define P(k) SFT_T(k)
+  #define P(k) LSFT_T(k)
   #define R(k) LALT_T(k)
   #define M(k) LGUI_T(k)
   #define I(k) LCTL_T(k)
