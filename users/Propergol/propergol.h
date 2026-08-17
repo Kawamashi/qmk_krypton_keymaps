@@ -70,7 +70,7 @@ enum custom_keycodes {
 #define LT_P0 LT(_SYMBOLS, KC_P0)
 
 
-  // Mods
+  // Modifiers
 
 #ifdef KRYPTON_ENABLE_HRM
   #ifdef KRYPTON_MAC_MODIFIERS
@@ -103,6 +103,16 @@ enum custom_keycodes {
   #define R_MOD KC_LALT
   #define M_MOD KC_LGUI
   #define I_MOD KC_LCTL
+#endif
+
+
+// Hotkeys
+#ifdef KRYPTON_MAC_MODIFIERS
+  #define UNDO LCMD(PG_Z)
+  #define REDO LSG(PG_Z)
+#else
+  #define UNDO C(PG_Z)
+  #define REDO C(PG_Y)
 #endif
 
 

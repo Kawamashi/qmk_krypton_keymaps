@@ -136,7 +136,6 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
       switch (keycode) {
         case PG_Z:
         case PG_ECIR:
-        //case KC_SPC:  // When space is added by clever keys, for ex. in order to uppercase K after '?' for ex.
           return keycode;
 
         case PG_POIN:
@@ -210,10 +209,10 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   if (get_last_keycode() == KC_NO) { return MAGIC; }
 
   switch (keycode) {
-    case C(PG_Z):
-      return C(PG_Y);
-    case C(PG_Y):
-      return C(PG_Z);
+    case UNDO:
+      return REDO;
+    case REDO:
+      return UNDO;
   }
 
   if (mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_ALGR))) {
