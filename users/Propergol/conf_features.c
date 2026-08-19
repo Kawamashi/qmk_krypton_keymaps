@@ -280,11 +280,11 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                    0        )},
-  {OS(OS_WINM, LT_MGC,  0,                                   _FUNCAPPS)},
-  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI),                    _NUMROW  )},
-  {OS(OS_1DK,  OS_1DK,  0,                                   _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )}
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), 0        )},
+  {OS(OS_WINM, LT_MGC,  0,                _FUNCAPPS)},
+  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMROW  )},
+  {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
+  {OS(OS_NUMR, OS_NUMR, 0,                _NUMROW  )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -293,13 +293,19 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
     switch (keycode) {
 
       case OS_NUMR:
-        //if (get_oneshot_layer_on_steroids() == _1DK) { insert_1dk(keycode); }
         if (IS_LAYER_ON(_1DK)) {
           insert_1dk(keycode);
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
           // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
           return toggle_modword(capsword, CAPSWORD, record);
+        }
+        break;
+
+      case OS_SHFT:
+        if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
+          // OS_NUMR + OS_SHFT -> Numword
+          return process_layerword_triggers(NUMROW, record);
         }
         break;
 

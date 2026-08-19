@@ -257,11 +257,11 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                    _BASE    )},
-  {OS(OS_WINM, LT_MGC,  0,                                   _FUNCAPPS)},
-  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI),                    _NUMROW  )},
-  {OS(OS_1DK,  OS_1DK,  0,                                   _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                                   _NUMROW  )}
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), _BASE    )},
+  {OS(OS_WINM, LT_MGC,  0,                _FUNCAPPS)},
+  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMROW  )},
+  {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
+  {OS(OS_NUMR, OS_NUMR, 0,                _NUMROW  )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -280,6 +280,13 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
         }
         break;
 
+      case OS_SHFT:
+        if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
+          // OS_NUMR + OS_SHFT -> Numword
+          return process_layerword_triggers(NUMROW, record);
+        }
+        break;
+        
       case OS_1DK:
         // Custom behavior when alt-gr
         const uint8_t mods = get_mods() | get_oneshot_mods();

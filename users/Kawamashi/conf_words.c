@@ -317,12 +317,12 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
             return false;
       }
 
-    case _FUNCAPPS:
+    case _FUNCTIONS:
       switch (keycode) {
-        case KC_F8:
+        case KC_F1 ... KC_F12:
             return true;
         default:
-            disable_layerword(_FUNCAPPS);
+            disable_layerword(_FUNCTIONS);
             return false;
       }
   }
