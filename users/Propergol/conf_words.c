@@ -280,7 +280,6 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case PG_IND:
         case PG_H:
         case PG_2PTS:
-        case NNB_SPC:
         case PG_POIN:
         case PG_VIRG:
 

@@ -43,6 +43,8 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return S(KC_TAB); */
     case M(BACKWRD):
       return BACKWRD;
+    case LT_NNBS:
+      return NNB_SPC;
 
     default:
       return keycode &= 0xff;
@@ -99,6 +101,8 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(S(KC_TAB), record); */
       case M(BACKWRD):
         return process_custom_tap_hold(BACKWRD, record);
+      case LT_NNBS:
+        return process_custom_tap_hold(NNB_SPC, record);
     }
   }
 
