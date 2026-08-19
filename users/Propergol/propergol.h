@@ -58,7 +58,8 @@ enum custom_keycodes {
   SYMBOL_1DK,
   PG_DEG,
   HOME,
-  END
+  END,
+  PANIC
 };
 
   // Layer changers

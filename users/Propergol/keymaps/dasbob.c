@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_FUNCTIONS] = LAYOUT_split_3x5_3(
-       _______,  _______,  KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, _______,  _______,  _______,  _______, 
+       _______,  PANIC,    KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, _______,  _______,  _______,  _______, 
        P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_BRIU,                   KC_MUTE, I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
        QK_BOOT,  KC_NUM,   KC_SCRL,  KC_F5,    KC_BRID,                   KC_VOLD, KC_MPLY,  KC_MPRV,  KC_MNXT,  KC_SLEP, 
                                      _______,  KC_F10,  _______, FUNWORD, _______, _______

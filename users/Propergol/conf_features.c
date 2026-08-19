@@ -71,21 +71,40 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
       case LT_MGC:
         alt_repeat_key_invoke(&record->event);
         return false;
+
+      case PANIC:
+        if (record->event.pressed) {
+          if (!host_keyboard_led_state().num_lock) { tap_code(KC_NUM_LOCK); }
+          
+          if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
+          layer_clear();
+          set_numpad(false);
+          unregister_code(KC_LCTL);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LALT);
+          unregister_code(KC_LGUI);
+          //clear_weak_mods();
+          if (get_modword() != idle) { disable_modword(get_modword()); }
+          clear_recent_keys();
+        }
+        return false;
     }
   } else {
-    if (keycode == LT_REPT) {
-      if (record->event.pressed) {
-        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          cancel_oneshot_on_steroids(OS_SHFT);
-          register_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
-          return false;
+    switch (keycode) {
+      case LT_REPT:
+        if (record->event.pressed) {
+          if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+            cancel_oneshot_on_steroids(OS_SHFT);
+            register_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
+            return false;
+          }
+        } else {
+          if (get_mods() & MOD_BIT(KC_ALGR)) {
+            unregister_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
+            return false;
+          }
         }
-      } else {
-        if (get_mods() & MOD_BIT(KC_ALGR)) {
-          unregister_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR));
-          return false;
-        }
-      }
+        break;
     }
   }
   return true; // Process all other keycodes normally
@@ -295,6 +314,15 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
     }
   }
   return true;
+}
+
+bool is_oneshot_on_steroids_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+      case PANIC:
+        return true;
+      default:
+        return false;
+    }
 }
 
 bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
