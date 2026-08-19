@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_ACIR,    PG_LCBR, PG_RCBR, PG_DLR,  PG_PERC,                   PG_HASH, PG_DQUO, PG_EGAL,    ALGR(PG_J), PG_GRV, 
       ALGR(PG_O), PG_LPRN, PG_RPRN, PG_PVIR, PG_2PTS,                   PG_BSLS, PG_SLSH, M(PG_MOIN), PG_PLUS,    PG_ASTX,
       PG_INF,     PG_LSBR, PG_RSBR, PG_SUP,  PG_AROB,                   KC_NO,   PG_APOD, PG_ESPR,    PG_PIPE,    PG_TILD,
-                                    OS_NUMR, KC_SPC,  KC_BSPC, _______, _______, OS_NUMR
+                                    OS_NUMR, KC_SPC,  LT_BSPC, _______, _______, OS_NUMR
     ),
 
 
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, KC_DEL,     C(KC_DEL),  _______,   _______,
       SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
       UNDO,    CUT,     COPY,    PASTE,   REDO,                      CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
-                                 _______, KC_SPC,  KC_BSPC, NAVWORD, KC_BSPC,  _______
+                                 _______, KC_SPC,  LT_BSPC, NAVWORD, KC_BSPC,  _______
     ),
 
 
