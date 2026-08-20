@@ -28,17 +28,17 @@
 enum layers {
     _BASE = 0,
     _1DK,
-    _NUMROW,
+    _NUMBERS,
     _SYMBOLS,
-    _NUMPAD,
     _SHORTNAV,
-    _FUNCAPPS,
+    _WINMAN,
     _FUNCTIONS
 };
 
 enum custom_keycodes {
   NUMPAD = SAFE_RANGE,
   NUMROW,
+  NUMWORD,
   NAVWORD,
   FUNWORD,
   CAPSWORD,
@@ -59,6 +59,7 @@ enum custom_keycodes {
   SYMBOL_1DK,
   PG_DEG
 };
+
 
   // Layer changers
 #define LT_SPC LT(_SYMBOLS, KC_SPC)
@@ -82,8 +83,6 @@ enum custom_keycodes {
   #define M(k) k
   #define I(k) k
 #endif
-
-#define MT_NUMW LSFT_T(KC_PDOT)
 
 #define P_MOD KC_LSFT
 #define R_MOD KC_LALT
@@ -109,10 +108,10 @@ bool on_left_hand(keypos_t pos);
 bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record);
 
 // Set whether numbers from numrow are to be replaced by numbers from numpad 
-void set_numpad(bool target);
+void set_use_numpad(bool target);
 
 // Returns whether numbers from numrow are to be replaced by numbers from numpad
-bool replace_numpad(void);
+bool should_use_numpad(void);
 
 // This function extracts the base keycode of MT and LT,
 // even if the tap/hold key is a custom one, with non-basic tap keycode.

@@ -232,6 +232,12 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
     case N_TILD:
       return replace_ongoing_key(PG_H, ongoing_keycode, record);
-  }
 
+    case KC_1 ... KC_0:
+      if (should_use_numpad()) {
+        // Replace numrow with numpad keycodes
+        replace_ongoing_key(*ongoing_keycode + KC_P1 - KC_1, ongoing_keycode, record);
+      }
+      break;
+  }
 }

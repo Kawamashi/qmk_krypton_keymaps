@@ -208,13 +208,12 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       }
       break;
 
-/*     case U_CIRC:
-      layer_off(_1DK);  //Otherwise, is_letter can't evaluate recents keycodes correctly
-      if (prev_keycode == PG_O && !is_letter(get_recent_keycode(-2))) {
-        update_bkspc_countdown(0);
-        return replace_ongoing_key(PG_P, ongoing_keycode, record);
+    case KC_1 ... KC_0:
+      if (should_use_numpad()) {
+        // Replace numrow with numpad keycodes
+        replace_ongoing_key(*ongoing_keycode + KC_P1 - KC_1, ongoing_keycode, record);
       }
-      break; */
+      break;
   }
 
 }

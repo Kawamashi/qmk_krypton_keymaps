@@ -391,7 +391,7 @@ uint8_t layerword_layer_from_trigger(uint16_t keycode) {
     case R_OS4A: return _R_MODS;
     case NUMWORD: return _NUMBERS;
     case NAVWORD: return _SHORTNAV;
-    case FUNWORD: return _FUNCAPPS;
+    case FUNWORD: return _WINMAN;
     default: return 0;
   }
 }
@@ -404,7 +404,7 @@ uint16_t layerword_exit_timeout(uint8_t layer) {
     case _L_MODS:
     case _R_MODS:
         return 3000;
-    case _FUNCAPPS:
+    case _WINMAN:
         return 30000;
     default:
         return 0;

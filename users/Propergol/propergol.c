@@ -52,8 +52,7 @@ bool is_tapping_sequence(uint16_t keycode) {
   
   switch (get_highest_layer(layer_state)) {
     case _BASE:
-    case _NUMROW:
-    case _NUMPAD:
+    case _NUMBERS:
         return true;
     default:
         return false;

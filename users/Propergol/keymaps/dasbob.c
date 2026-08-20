@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-    [_NUMROW] = LAYOUT_split_3x5_3(
+    [_NUMBERS] = LAYOUT_split_3x5_3(
       // S(KC_4), S(KC_3) and S(PG_EGAL) are here to give easy access to ⅔, ¾ and ≠.
       PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, S(PG_EGAL), NUMPAD, 
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8),    P(KC_9),
@@ -44,14 +44,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_INF,     PG_LSBR, PG_RSBR, PG_SUP,  PG_AROB,                   KC_NO,   PG_APOD, PG_ESPR,    PG_PIPE,    PG_TILD,
                                     OS_NUMR, KC_SPC,  LT_BSPC, _______, _______, OS_NUMR
     ),
-
-
-    [_NUMPAD] = LAYOUT_split_3x5_3(
-      PG_VIRG,  PG_MOIN,  PG_PLUS,  PG_EURO,  PG_PERC,                   PG_EXP,  PG_DEG,   PG_EGAL,  _______,  NUMROW,
-      P(KC_P4), R(KC_P3), M(KC_P2), I(KC_P1), PG_POIN,                   PG_IND,  I(KC_P6), M(KC_P7), R(KC_P8), P(KC_P9),
-      _______,  _______,  PG_H,     KC_P5,    KC_PDOT,                   _______, PG_SLSH,  PG_MOIN,  PG_PLUS,  PG_ASTX,
-                                    OS_SHFT,  LT_P0  , LT_BSPC, LT_NNBS, LT_SPC,  OS_NUMR
-     ),
 
 
     [_1DK] = LAYOUT_split_3x5_3(
@@ -71,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-    [_FUNCAPPS] = LAYOUT_split_3x5_3(
+    [_WINMAN] = LAYOUT_split_3x5_3(
       _______, _______, OS_WINM, _______, _______,                   _______, LSG(KC_LEFT), G(KC_UP),   LSG(KC_RIGHT), _______,
       P_MOD,   R_MOD,   M_MOD,   I_MOD,   _______,                   _______, G(KC_LEFT),   G(KC_DOWN), G(KC_RIGHT),   _______,
       _______, _______, _______, _______, _______,                   _______, _______,      _______,    _______,       _______,

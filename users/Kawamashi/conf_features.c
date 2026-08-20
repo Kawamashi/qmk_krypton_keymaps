@@ -25,14 +25,14 @@ bool on_left_hand(keypos_t pos) {
 #endif
 }
 
-static bool is_numpad = false;
+static bool use_numpad = false;
 
-void set_numpad(bool target) {
-  is_numpad = target;
+void set_use_numpad(bool target) {
+  use_numpad = target;
 }
 
-bool replace_numpad(void) {
-  return is_numpad;
+bool should_use_numpad(void) {
+  return use_numpad;
 }
 
 
@@ -62,6 +62,18 @@ bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
+
+  if (record->event.pressed) {
+    switch (keycode) {
+      case NUMROW:
+        use_numpad = false;
+        return false;
+        
+      case NUMPAD:
+        use_numpad = true;
+        return false;
+    }
+  }
 
   if (record->tap.count) {
     // Special tap-hold keys (on tap).
@@ -166,9 +178,9 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
           return SYMBOL_1DK;
       }
     
-    // There are no symbols on _SHORTNAV, _FUNCAPPS or _FUNCTIONS
+    // There are no symbols on _SHORTNAV, _WINMAN or _FUNCTIONS
     case _SHORTNAV:
-    case _FUNCAPPS:
+    case _WINMAN:
     case _FUNCTIONS:
       clear_recent_keys();
       return KC_NO;
@@ -258,10 +270,10 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
 const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), _BASE    )},
-  {OS(OS_WINM, LT_MGC,  0,                _FUNCAPPS)},
-  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMROW  )},
+  {OS(OS_WINM, LT_MGC,  0,                _WINMAN)},
+  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS  )},
   {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                _NUMROW  )}
+  {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS  )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -283,7 +295,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       case OS_SHFT:
         if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
           // OS_NUMR + OS_SHFT -> Numword
-          return process_layerword_triggers(NUMROW, record);
+          return process_layerword_triggers(NUMWORD, record);
         }
         break;
         

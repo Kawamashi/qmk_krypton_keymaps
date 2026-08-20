@@ -228,30 +228,21 @@ void word_selection_press_user(uint16_t keycode) {
 uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
 
   switch (keycode) {
-
-    case NUMROW:
-        set_numpad(false);
-        return _NUMROW;
-        
-    case NUMPAD:
-        set_numpad(true);
-        return _NUMPAD;
-
-    case MT_NUMW:
-        return _NUMROW;
-        //return replace_numpad() ? _NUMPAD : _NUMROW;
-
-    case NAVWORD: return _SHORTNAV;
-    case FUNWORD: return _FUNCTIONS;
-    default: return 0;
+    case NUMWORD:
+      return _NUMBERS;
+    case NAVWORD:
+      return _SHORTNAV;
+    case FUNWORD:
+      return _FUNCTIONS;
+    default:
+      return 0;
   }
 }
 
 uint16_t layerword_exit_timeout(uint8_t layer) {
 
   switch (layer) {
-    case _NUMROW:
-    case _NUMPAD:
+    case _NUMBERS:
     case _SHORTNAV:
         return 3000;
     case _FUNCTIONS:
@@ -265,8 +256,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
 
   switch (layer) {
 
-    case _NUMROW:
-    case _NUMPAD:
+    case _NUMBERS:
       switch (keycode) {
         // Keycodes that should not disable numword.
         // Numpad keycodes
