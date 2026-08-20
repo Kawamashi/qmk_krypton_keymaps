@@ -22,35 +22,35 @@ static keyrecord_t next_record;
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
-  // Disable speculative hold during tapping sequences
-  if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
-  // Disable speculative hold when any mods are already active
-  // not to mess with hotkeys
-  if (get_mods() | get_oneshot_mods()) { return false; }
+    // Disable speculative hold during tapping sequences
+    if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
+    // Disable speculative hold when any mods are already active
+    // not to mess with hotkeys
+    if (get_mods() | get_oneshot_mods()) { return false; }
 
-  // Enable speculative holding for these keys.
-  switch (keycode) {
-    case I(PG_T):
-    case I(PG_N):
-      return true;
-  }
-  return false;  // Disable otherwise.
+    // Enable speculative holding for these keys.
+    switch (keycode) {
+        case I(PG_T):
+        case I(PG_N):
+            return true;
+    }
+    return false;  // Disable otherwise.
 }
 
 bool is_tapping_sequence(uint16_t keycode) {
-  // To trigger Tap Flow, the last input must be a character,
-  // the time between the keypresses must be lower than FLOW_TAP_INTERVAL
-  // and the ongoing keypress must be on a layer used for characters with mod-tap keys on it
-  if (get_recent_keycode(-1) == KC_NO) { return false; }
-  if (get_idle_time() > FLOW_TAP_INTERVAL) { return false; }
-  
-  switch (get_highest_layer(layer_state)) {
-    case _BASE:
-    case _NUMBERS:
-        return true;
-    default:
-        return false;
-  }
+    // To trigger Tap Flow, the last input must be a character,
+    // the time between the keypresses must be lower than FLOW_TAP_INTERVAL
+    // and the ongoing keypress must be on a layer used for characters with mod-tap keys on it
+    if (get_recent_keycode(-1) == KC_NO) { return false; }
+    if (get_idle_time() > FLOW_TAP_INTERVAL) { return false; }
+    
+    switch (get_highest_layer(layer_state)) {
+        case _BASE:
+        case _NUMBERS:
+            return true;
+        default:
+            return false;
+    }
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -70,6 +70,20 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                        '*', '*', '*', '*', 'R', '*'
     );
 
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t* other_record) {
+    // Exceptionally allow some one-handed chords for hotkeys.
+    switch (tap_hold_keycode) {
+        case LT_SPC:
+            if (other_keycode == PG_X) {
+                return true;
+            }
+            break;
+    }
+    // Otherwise defer to the opposite hands rule.
+    return get_chordal_hold_default(tap_hold_record, other_record);
+}
+
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // Desabling Permissive Hold for `E` when the other key is on the same side
@@ -84,7 +98,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 // Housekeeping
 
 void housekeeping_task_user(void) {
-  modword_task();
+    modword_task();
 }
 
 
@@ -102,21 +116,21 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-  // LT Repeat and Magic keys
-  if (!process_macros_I(keycode, record)) { return false; }
+    // LT Repeat and Magic keys
+    if (!process_macros_I(keycode, record)) { return false; }
 
-  // Prefixed layers
-  if (!process_prefixing_layers(keycode, record)) { return false; }
+    // Prefixed layers
+    if (!process_prefixing_layers(keycode, record)) { return false; }
 
-  // Clever keys
-  process_clever_keys(keycode, record);
+    // Clever keys
+    process_clever_keys(keycode, record);
 
-  // Caps Word
-  if (!process_modword(keycode, record)) {return false; }
+    // Caps Word
+    if (!process_modword(keycode, record)) {return false; }
 
-  // Other macros
-  if (!process_macros_II(keycode, record)) { return false; }
+    // Other macros
+    if (!process_macros_II(keycode, record)) { return false; }
 
-  // Process all other keycodes normally
-  return true;
+    // Process all other keycodes normally
+    return true;
 }

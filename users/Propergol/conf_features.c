@@ -303,11 +303,11 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), 0        )},
-  {OS(OS_WINM, LT_SPC,  0,                _WINMAN)},
-  {OS(OS_WNUM, OS_NUMR, MOD_BIT(KC_LGUI), _NUMBERS  )},
-  {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS  )}
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), 0       )},
+  {OS(OS_WINM, LT_SPC,  0,                _WINMAN )},
+  {OS(OS_WNUM, OS_NUMR, MOD_BIT(KC_LGUI), 0       )},
+  {OS(OS_1DK,  OS_1DK,  0,                _1DK    )},
+  {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS)}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
