@@ -31,10 +31,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMBERS] = LAYOUT_split_3x5_3(
       // S(KC_4), S(KC_3) and S(PG_EGAL) are here to give easy access to ⅔, ¾ and ≠.
-      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, S(PG_EGAL), NUMPAD, 
-      P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8),    P(KC_9),
-      S(KC_4), S(KC_3), PG_H,    KC_5,    KC_PDOT,                   _______, PG_SLSH, PG_MOIN, PG_PLUS,    PG_ASTX,
-                                 OS_SHFT, LT_0   , LT_BSPC, LT_NNBS, LT_SPC,  OS_NUMR
+      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP, PG_DEG,  PG_EGAL, S(PG_EGAL), OS_WNUM, 
+      P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND, I(KC_6), M(KC_7), R(KC_8),    P(KC_9),
+      S(KC_4), S(KC_3), PG_H,    KC_5,    KC_PDOT,                   NUMPAD, PG_SLSH, PG_MOIN, PG_PLUS,    PG_ASTX,
+                                 OS_SHFT, LT_0   , LT_BSPC, LT_NNBS, LT_SPC, OS_NUMR
      ),
 
 
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SHORTNAV] = LAYOUT_split_3x5_3(
-      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, KC_DEL,     C(KC_DEL),  _______,   _______,
+      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, KC_DEL,     _______,    _______,   OS_WINM,
       SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
       UNDO,    CUT,     COPY,    PASTE,   REDO,                      CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
                                  _______, KC_SPC,  LT_BSPC, NAVWORD, KC_BSPC,  _______
@@ -64,10 +64,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_WINMAN] = LAYOUT_split_3x5_3(
-      _______, _______, OS_WINM, _______, _______,                   _______, LSG(KC_LEFT), G(KC_UP),   LSG(KC_RIGHT), _______,
-      P_MOD,   R_MOD,   M_MOD,   I_MOD,   _______,                   _______, G(KC_LEFT),   G(KC_DOWN), G(KC_RIGHT),   _______,
-      _______, _______, _______, _______, _______,                   _______, _______,      _______,    _______,       _______,
-                                 _______, _______, _______, _______, _______, _______
+      _______, LSG(KC_LEFT), G(KC_UP),   LSG(KC_RIGHT), _______,                   _______, _______, _______, _______, OS_WINM,
+      _______, G(KC_LEFT),   G(KC_DOWN), G(KC_RIGHT),   _______,                   _______, I_MOD,   M_MOD,   R_MOD,   P_MOD,
+      _______, _______,      _______,    _______,       _______,                   _______, _______, _______, _______, _______,
+                             _______,    _______,       _______, _______, _______, _______
     ),
 
 

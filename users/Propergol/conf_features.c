@@ -25,6 +25,17 @@ bool on_left_hand(keypos_t pos) {
 #endif
 }
 
+bool bilateral_combination(const keyrecord_t* tap_hold_record, const keyrecord_t* other_record) {
+  return on_left_hand(tap_hold_record->event.key) != on_left_hand(other_record->event.key);
+}
+
+// By default, use the BILATERAL_COMBINATIONS rule to consider the tap-hold key
+// "held" only when it and the other key are on opposite hands.
+__attribute__((weak)) bool approved_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                                           uint16_t other_keycode, keyrecord_t* other_record) {
+  return bilateral_combination(tap_hold_record, other_record);
+}
+
 static bool use_numpad = false;
 
 void set_use_numpad(bool target) {
@@ -293,8 +304,8 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
 const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), 0        )},
-  {OS(OS_WINM, LT_MGC,  0,                _WINMAN)},
-  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS  )},
+  {OS(OS_WINM, LT_SPC,  0,                _WINMAN)},
+  {OS(OS_WNUM, OS_NUMR, MOD_BIT(KC_LGUI), _NUMBERS  )},
   {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
   {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS  )}
 };

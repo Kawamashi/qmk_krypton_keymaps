@@ -17,14 +17,8 @@
 
 #include "propergol.h"
 
-
-const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
-    CHORDAL_HOLD_KAWA_LAYOUT(
-        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', '*',
-                       '*', 'L', '*', '*', 'R', '*'
-    );
+static uint16_t next_keycode;
+static keyrecord_t next_record;
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
@@ -59,6 +53,34 @@ bool is_tapping_sequence(uint16_t keycode) {
   }
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT_E:
+            return 300;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+    CHORDAL_HOLD_KAWA_LAYOUT(
+        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
+                       '*', '*', '*', '*', 'R', '*'
+    );
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Desabling Permissive Hold for `E` when the other key is on the same side
+        case LT_E:
+            return approved_chord(keycode, record, next_keycode, &next_record);
+        default:
+            return true;
+    }
+}
+
+
 // Housekeeping
 
 void housekeeping_task_user(void) {
@@ -70,8 +92,11 @@ void housekeeping_task_user(void) {
 
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-
-
+  if (record->event.pressed) {
+      // Cache the next input for mod-tap decisions
+      next_keycode = keycode;
+      next_record  = *record;
+  }
   return true;
 }
 
