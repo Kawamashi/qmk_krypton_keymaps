@@ -74,12 +74,9 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
     switch (keycode) {
-      case NUMROW:
-        use_numpad = false;
-        return false;
-        
-      case NUMPAD:
-        use_numpad = true;
+
+      case TG_NUM:
+        use_numpad = !use_numpad;
         return false;
     }
   }
@@ -307,7 +304,7 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_WINM, LT_SPC,  0,                _WINMAN )},
   {OS(OS_WNUM, OS_NUMR, MOD_BIT(KC_LGUI), 0       )},
   {OS(OS_1DK,  OS_1DK,  0,                _1DK    )},
-  {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS)}
+  {OS(OS_NUMR, OS_NUMR, 0,                _NUMROW)}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -328,7 +325,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       case OS_SHFT:
         if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
           // OS_NUMR + OS_SHFT -> Numword
-          return process_layerword_triggers(NUMROW, record);
+          return process_layerword_triggers(NUMWORD, record);
         }
         break;
 

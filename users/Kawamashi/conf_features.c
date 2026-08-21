@@ -65,12 +65,9 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
     switch (keycode) {
-      case NUMROW:
-        use_numpad = false;
-        return false;
-        
-      case NUMPAD:
-        use_numpad = true;
+
+      case TG_NUM:
+        use_numpad = !use_numpad;
         return false;
     }
   }

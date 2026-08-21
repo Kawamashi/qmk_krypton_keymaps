@@ -36,8 +36,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-  NUMPAD = SAFE_RANGE,
-  NUMROW,
+  TG_NUM = SAFE_RANGE,
   NUMWORD,
   NAVWORD,
   FUNWORD,

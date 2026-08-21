@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMBERS] = KAWA_LAYOUT(
       // S(KC_4), S(KC_3) and S(PG_EGAL) are here to give easy access to ⅔, ¾ and ≠.
-      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, S(PG_EGAL), NUMPAD,
+      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, S(PG_EGAL), TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8),    P(KC_9),
       S(KC_4), S(KC_3), PG_H,    KC_5,    _______,                   _______, PG_SLSH, PG_MOIN, PG_PLUS,    PG_ASTX,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUMR
@@ -118,10 +118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_1DK] = KAWA_LAYOUT(
-       _______, PG_J   , _______, N_TILD,  PG_X,                      PG_W,    _______, _______, _______, _______,
-       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_Y,    PG_EACU, _______,
-       _______, PG_LPRN, PG_RPRN, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
-                                  _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUMR
+      _______, PG_J   , _______, N_TILD,  PG_X,                      PG_W,    _______, _______, _______, _______,
+      _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_Y,    PG_EACU, _______,
+      _______, PG_LPRN, PG_RPRN, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
+                                 _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUMR
      ),
 
 
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       SEL_WORD,   SEL_LINE,   OS_WINM,    LGUI(PG_V), KC_VOLU,                   CAPSLOCK, C(KC_LEFT), KC_UP,      C(KC_RGHT), KC_PGUP,
       P(C(PG_A)), R(C(PG_X)), M(C(PG_C)), I(C(PG_V)), KC_VOLD,                   CAPSLIST, KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_PGDN,
       KC_MUTE,    KC_MUTE,    KC_F2,      C(PG_Z),    _______,                   _______,  C(KC_PGUP), C(KC_PGDN), KC_NO,      KC_NO,
-                                          _______,    _______, _______, NAVWORD, _______,  OS_WNUM
+                                          _______,    _______, _______, NAVWORD, _______,  _______
     ),
 
 
@@ -143,10 +143,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_FUNCTIONS] = KAWA_LAYOUT(
-       _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   QK_BOOT, _______,  OS_WNUM,  _______,  _______, 
-       P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
-       KC_MUTE,  KC_MUTE,  _______,  KC_F5,    _______,                   _______, _______,  _______,  _______,  _______, 
-                                     _______,  KC_F10,  FUNWORD, _______, _______, _______
+      _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   QK_BOOT, _______,  OS_WNUM,  _______,  _______, 
+      P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
+      KC_MUTE,  KC_MUTE,  _______,  KC_F5,    _______,                   _______, _______,  _______,  _______,  _______, 
+                                    _______,  KC_F10,  FUNWORD, _______, _______, _______
      ),
 
 };

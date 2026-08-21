@@ -276,11 +276,8 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case PG_POIN:
         case PG_VIRG:
 
-        //case TG_NUM:
-
         // Misc
         case KC_BSPC:
-        //case OS_LSFT:
             return true; 
         default:
             return false;

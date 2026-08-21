@@ -28,7 +28,7 @@
 enum layers {
     _BASE = 0,
     _1DK,
-    _NUMBERS,
+    _NUMROW,
     _SYMBOLS,
     _SHORTNAV,
     _WINMAN,
@@ -36,7 +36,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-  NUMPAD = SAFE_RANGE,
+  TG_NUM = SAFE_RANGE,
   NUMROW,
   NUMWORD,
   NAVWORD,
