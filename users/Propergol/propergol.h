@@ -48,14 +48,11 @@ enum custom_keycodes {
   SEL_WORD,
   SEL_LINE,
   OS_SHFT,
+  OS_RTHB,
   OS_NUM,
-  //OS_NUMP,
-  OS_SYMB,
   OS_1DK,
   OS_WNAV,
   OS_WNUM,
-  OS_WROW,
-  OS_WPAD,
   OS_RAS,
   A_CIRC,
   U_CIRC,
@@ -85,22 +82,21 @@ enum custom_keycodes {
   #define  LT_LBKS    LT(_FUNCTIONS, KC_BSPC)
 
   #ifdef KRYPTON_ONESHOT_NUMBERS
-    #define OS_LAYR OS_NUM
-    #define NUM_KEY    OS_NUM
-    //#define OS_NUM OS_NUMR
-    #define LT_REPT LT(_SYMBOLS, KC_1)
+    #define _OS_LAYR _NUMBERS
+    #define  NUM_KEY  OS_NUM
+    #define  LT_REPT  LT(_SYMBOLS, KC_1)
   #else
-    #define OS_LAYR OS_SYMB
-    #define LT_REPT LT(_NUMBERS, KC_1)
+    #define _OS_LAYR _SYMBOLS
+    #define  NUM_KEY  LT_MGC
+    #define  LT_REPT  LT(_NUMBERS, KC_1)
   #endif
 
 #else
   // Krypton base conf
   #define _FUNCTIONS _FUNCPAD
   #define _NUMBERS   _NUMPAD
-  #define  OS_LAYR    OS_SYMB
+  #define _OS_LAYR   _SYMBOLS
   #define  NUM_KEY    LT_MGC
-  //#define OS_NUM OS_NUMP
   #define  LT_REPT    LT(_FUNCTIONS, KC_1)
   #define  LT_MGC     LT(_NUMBERS, KC_1)
   #define  LT_LBKS    LT(_NUMBERS, KC_BSPC)

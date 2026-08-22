@@ -24,25 +24,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_VIRG, PG_EACU, PG_U,    PG_P,    PG_TIRE,                 PG_V,   PG_M,    PG_C,    PG_J,    PG_X,
       P(PG_O), R(PG_A), M(PG_I), I(PG_N), PG_POIN,                 PG_G,   I(PG_T), M(PG_S), R(PG_R), P(PG_L),
       PG_Q,    PG_EGRV, PG_Y,    PG_H,    PG_B,                    PG_K,   PG_D,    PG_F,    PG_W,    OS_1DK,
-                                 OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_LAYR
+                                 OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_RTHB
     ),
 
 
 
     [_NUMROW] = LAYOUT_split_3x5_3(
       // S(KC_4), S(KC_3) and S(PG_EGAL) are here to give easy access to ⅔, ¾ and ≠.
-      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, OS_WROW, TG_NUM,
+      PG_VIRG, PG_MOIN, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, OS_WNUM, TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   NUMWORD, I(KC_6), M(KC_7), R(KC_8), P(KC_9),
       S(KC_4), S(KC_3), PG_H,    KC_5,    KC_PDOT,                   PG_IND,  PG_SLSH, PG_MOIN, PG_PLUS, PG_ASTX,
-                                 OS_SHFT, LT_0   , LT_LBKS, NNB_SPC, LT_SPC,  OS_LAYR
+                                 OS_SHFT, LT_0   , LT_LBKS, NNB_SPC, LT_SPC,  OS_RTHB
      ),
 
 
     [_NUMPAD] = LAYOUT_split_3x5_3(
-      PG_VIRG,    OS_WPAD,    PG_EGAL,    PG_EURO,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    TG_NUM,
+      PG_VIRG,    OS_WNUM,    PG_EGAL,    PG_EURO,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    TG_NUM,
       P(PG_ASTX), R(PG_PLUS), M(PG_MOIN), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
       PG_DEG,     _______,    _______,    PG_H,       _______,                   PG_IND,  KC_1,    KC_2,    KC_3,    _______,
-                                          OS_SHFT,    LT_SPC,  NNB_SPC, LT_RBKS, LT_0,    OS_LAYR
+                                          OS_SHFT,    LT_SPC,  NNB_SPC, LT_RBKS, LT_0,    OS_RTHB
      ),
 
 
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, PG_X,                      _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, _______, _______, _______, _______,
       _______, PG_J,    _______, _______, _______,                   _______, _______, _______, _______, OS_1DK,
-                                 _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_LAYR
+                                 _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_RTHB
      ),
 
 
