@@ -49,16 +49,8 @@
 #define CHORDAL_HOLD
 #define FLOW_TAP_INTERVAL 210
 
-// EC11K encoders have a different resolution than other EC11 encodeisrs.
-// When using the default resolution of 4, if you notice your encoder skipping
-// every other tick, lower the resolution to 2.
-/* #define ENCODER_RESOLUTION 2
-#if defined(KEYBOARD_splitkb_kyria_rev1)
-#    define ENCODER_DIRECTION_FLIP
-#endif */
-
 // One shot modifiers
-#define OS_STEROIDS_COUNT 5
+#define OS_STEROIDS_COUNT 9
 #define OS_STEROIDS_SPLIT_TRIGGER_HOLD
 #define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_F18
 #define OS_STEROIDS_FREE_LAYER_STACK
@@ -74,6 +66,7 @@
 #define OS_STEROIDS_TIMEOUT 3000
 
 #define KRYPTON_ENABLE_HRM
+//#define KRYPTON_ALTERNATE_NUMBER_LAYER
 //#define KRYPTON_MAC_MODIFIERS
 #define ONE_DEAD_KEY_DEFFERED_SHIFT
 

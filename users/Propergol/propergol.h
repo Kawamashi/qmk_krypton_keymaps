@@ -29,15 +29,16 @@ enum layers {
     _BASE = 0,
     _1DK,
     _NUMROW,
+    _NUMPAD,
     _SYMBOLS,
     _SHORTNAV,
     _WINMAN,
-    _FUNCTIONS
+    _FUNCROW,
+    _FUNCPAD
 };
 
 enum custom_keycodes {
   TG_NUM = SAFE_RANGE,
-  NUMROW,
   NUMWORD,
   NAVWORD,
   FUNWORD,
@@ -47,10 +48,15 @@ enum custom_keycodes {
   SEL_WORD,
   SEL_LINE,
   OS_SHFT,
-  OS_NUMR,
+  OS_NUM,
+  //OS_NUMP,
+  OS_SYMB,
   OS_1DK,
-  OS_WINM,
+  OS_WNAV,
   OS_WNUM,
+  OS_WROW,
+  OS_WPAD,
+  OS_RAS,
   A_CIRC,
   U_CIRC,
   MAGIC,
@@ -64,18 +70,47 @@ enum custom_keycodes {
 
   // Layer changers
 #define LT_SPC LT(_SHORTNAV, KC_SPC)
-#define LT_E LT(_SHORTNAV, PG_E)
-#define LT_REPT LT(_SYMBOLS, KC_1)
-#define LT_MGC LT(_FUNCTIONS, KC_1)
-#define LT_PDOT LT(_SYMBOLS, KC_PDOT)
-#define LT_0 LT(_SHORTNAV, KC_0)
-#define LT_P0 LT(_SHORTNAV, KC_P0)
-#define LT_BSPC LT(_FUNCTIONS, KC_BSPC)
-#define LT_NNBS LT(_SYMBOLS, NNB_SPC)
+#define LT_E   LT(_SHORTNAV, PG_E)
+#define LT_0   LT(_SHORTNAV, KC_0)
+
+#define LT_RBKS LT(_FUNCPAD, KC_BSPC)
+
+
+#ifdef KRYPTON_ALTERNATE_NUMBER_LAYER
+  // Numbers and function keys in rows
+  //#define LT_AGRV LT(_NUMPAD, PG_AGRV)
+  #define _FUNCTIONS _FUNCROW
+  #define _NUMBERS   _NUMROW
+  #define  LT_MGC     LT(_FUNCTIONS, KC_1)
+  #define  LT_LBKS    LT(_FUNCTIONS, KC_BSPC)
+
+  #ifdef KRYPTON_ONESHOT_NUMBERS
+    #define OS_LAYR OS_NUM
+    #define NUM_KEY    OS_NUM
+    //#define OS_NUM OS_NUMR
+    #define LT_REPT LT(_SYMBOLS, KC_1)
+  #else
+    #define OS_LAYR OS_SYMB
+    #define LT_REPT LT(_NUMBERS, KC_1)
+  #endif
+
+#else
+  // Krypton base conf
+  #define _FUNCTIONS _FUNCPAD
+  #define _NUMBERS   _NUMPAD
+  #define  OS_LAYR    OS_SYMB
+  #define  NUM_KEY    LT_MGC
+  //#define OS_NUM OS_NUMP
+  #define  LT_REPT    LT(_FUNCTIONS, KC_1)
+  #define  LT_MGC     LT(_NUMBERS, KC_1)
+  #define  LT_LBKS    LT(_NUMBERS, KC_BSPC)
+#endif
+
+
+
 
 
   // Modifiers
-
 #ifdef KRYPTON_ENABLE_HRM
   #ifdef KRYPTON_MAC_MODIFIERS
     #define P(k) LSFT_T(k)
@@ -83,10 +118,10 @@ enum custom_keycodes {
     #define M(k) LOPT_T(k)
     #define I(k) LCMD_T(k)
   #else
-  #define P(k) LSFT_T(k)
-  #define R(k) LALT_T(k)
-  #define M(k) LGUI_T(k)
-  #define I(k) LCTL_T(k)
+    #define P(k) LSFT_T(k)
+    #define R(k) LALT_T(k)
+    #define M(k) LGUI_T(k)
+    #define I(k) LCTL_T(k)
   #endif
 #else
   #define P(k) k
@@ -94,8 +129,6 @@ enum custom_keycodes {
   #define M(k) k
   #define I(k) k
 #endif
-
-#define MT_NUMW LSFT_T(KC_PDOT)
 
 #ifdef KRYPTON_MAC_MODIFIERS
   #define P_MOD KC_LSFT

@@ -329,7 +329,7 @@ static void process_trigger_press(uint8_t index, keyrecord_t *record) {
     
         if (oneshot_os[index].layer != 0) {
 #               ifdef OS_STEROIDS_FREE_LAYER_STACK
-            if (!is_oneshot_layer_active() && !is_oneshot_layer_on_steroids_active()) {
+            if (!is_oneshot_layer_active() && (active_osl_index == -1 || oneshot_state[active_osl_index] < os_up_queued)) {
             // OSL on steroids can deactivate another layer only if there is no ongoing oneshot layer,
             // not to mess up with the layer stack.
                 const uint8_t key_layer = read_source_layers_cache(record->event.key);

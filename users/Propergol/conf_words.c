@@ -227,7 +227,7 @@ uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
 
   switch (keycode) {
     case NUMWORD:
-      return _NUMROW;
+      return _NUMBERS;
     case NAVWORD:
       return _SHORTNAV;
     case FUNWORD:
@@ -240,7 +240,7 @@ uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
 uint16_t layerword_exit_timeout(uint8_t layer) {
 
   switch (layer) {
-    case _NUMROW:
+    case _NUMBERS:
     case _SHORTNAV:
         return 3000;
     case _FUNCTIONS:
@@ -254,7 +254,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
 
   switch (layer) {
 
-    case _NUMROW:
+    case _NUMBERS:
       switch (keycode) {
         // Keycodes that should not disable numword.
         // Numpad keycodes
@@ -306,7 +306,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case KC_F1 ... KC_F12:
             return true;
         default:
-            disable_layerword(_FUNCTIONS);
+            disable_layerword(_FUNCROW);
             return false;
       }
   }

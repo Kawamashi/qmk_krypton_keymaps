@@ -67,7 +67,6 @@ enum custom_keycodes {
 #define LT_MGC LT(_SHORTNAV, KC_1)
 #define LT_PDOT LT(_SHORTNAV, KC_PDOT)
 #define LT_0 LT(_SYMBOLS, KC_0)
-#define LT_P0 LT(_SYMBOLS, KC_P0)
 
 
   // HRM

@@ -290,8 +290,9 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
         break;
 
       case OS_SHFT:
-        if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
-          // OS_NUMR + OS_SHFT -> Numword
+        const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+        if (os_num_state == 1 || os_num_state == 3) {
+          // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
           return process_layerword_triggers(NUMWORD, record);
         }
         break;

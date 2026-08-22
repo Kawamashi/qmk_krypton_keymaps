@@ -54,8 +54,10 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return S(KC_TAB); */
     case M(BACKWRD):
       return BACKWRD;
-    case LT_NNBS:
-      return NNB_SPC;
+    case P(PG_ASTX):
+      return PG_ASTX;
+    case R(PG_PLUS):
+      return PG_PLUS;
 
     default:
       return keycode &= 0xff;
@@ -111,6 +113,7 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     }
   } else {
     switch (keycode) {
+        #ifdef KRYPTON_ONESHOT_NUMBERS
       case LT_REPT:
         if (record->event.pressed) {
           if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
@@ -125,6 +128,7 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
           }
         }
         break;
+        #endif
     }
   }
   return true; // Process all other keycodes normally
@@ -140,8 +144,10 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(S(KC_TAB), record); */
       case M(BACKWRD):
         return process_custom_tap_hold(BACKWRD, record);
-      case LT_NNBS:
-        return process_custom_tap_hold(NNB_SPC, record);
+      case P(PG_ASTX):
+        return process_custom_tap_hold(PG_ASTX, record);
+      case R(PG_PLUS):
+        return process_custom_tap_hold(PG_PLUS, record);
     }
   }
 
@@ -300,11 +306,15 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), 0       )},
-  {OS(OS_WINM, LT_SPC,  0,                _WINMAN )},
-  {OS(OS_WNUM, OS_NUMR, MOD_BIT(KC_LGUI), 0       )},
-  {OS(OS_1DK,  OS_1DK,  0,                _1DK    )},
-  {OS(OS_NUMR, OS_NUMR, 0,                _NUMROW)}
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT),                     0      )},
+  {OS(OS_WNAV, LT_SPC,  0,                                   _WINMAN )},
+  {OS(OS_WROW, OS_NUM,  MOD_BIT(KC_LGUI),                     0      )},
+  {OS(OS_WPAD, LT_MGC,  MOD_BIT(KC_LGUI),                     0      )},
+  {OS(OS_1DK,  OS_1DK,  0,                                   _1DK    )},
+  //{OS(OS_NUMR, OS_NUMR, 0,                                   _NUMBERS)},
+  {OS(OS_NUM,  OS_NUM,  0,                                   _NUMBERS)},
+  {OS(OS_SYMB, OS_SYMB, 0,                                   _SYMBOLS)},
+  {OS(OS_RAS,  OS_SYMB, MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR),  0      )}
 };
 
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
@@ -312,22 +322,27 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
   if (record->event.pressed) {
     switch (keycode) {
 
-      case OS_NUMR:
+      case OS_NUM:
         if (IS_LAYER_ON(_1DK)) {
           insert_1dk(keycode);
+          #ifdef KRYPTON_ONESHOT_NUMBERS
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
-          // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
+          // OS_SHFT + OS_NUM -> Capsword only if layer _1DK is off.
+          // On _1DK layer, OS_NUM can be combined with shift to tap symbols like ⅔, ¾ etc.
           return toggle_modword(capsword, CAPSWORD, record);
+          #endif
         }
         break;
 
+        #ifdef KRYPTON_ONESHOT_NUMBERS
       case OS_SHFT:
-        if (get_oneshot_on_steroids_state(OS_NUMR) > 0) {
-          // OS_NUMR + OS_SHFT -> Numword
+        const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+        if (os_num_state == 1 || os_num_state == 3) {
+          // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
           return process_layerword_triggers(NUMWORD, record);
         }
         break;
+        #endif
 
       case OS_1DK:
         // Custom behavior when alt-gr
@@ -337,6 +352,15 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
             return false;
         }
         break;
+
+        #ifndef KRYPTON_ONESHOT_NUMBERS
+      case OS_SYMB:
+        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+          // OS_SHFT + OS_SYMB -> oneshot shift + alt-gr
+          return process_record_oneshots_on_steroids(OS_RAS, record);
+        }
+        break;
+        #endif
     }
   }
   return true;
@@ -393,7 +417,7 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
 bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer) {
 /*   switch (keycode) {
     case OS_NUMR:
-    case OS_WNUM:
+    case OS_WROW:
       return true;
 
     default:
