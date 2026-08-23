@@ -273,6 +273,9 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS  )}
 };
 
+
+static bool num_1dk = false;
+
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
   if (record->event.pressed) {
@@ -281,6 +284,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       case OS_NUMR:
         //if (get_oneshot_layer_on_steroids() == _1DK) { insert_1dk(keycode); }
         if (IS_LAYER_ON(_1DK)) {
+          num_1dk = true;
           insert_1dk(keycode);
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
@@ -290,9 +294,14 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
         break;
 
       case OS_SHFT:
+        if (num_1dk) {
+          num_1dk = false;
+          break;
+        }
         const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
         if (os_num_state == 1 || os_num_state == 3) {
           // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
+          num_1dk = false;
           return process_layerword_triggers(NUMWORD, record);
         }
         break;
@@ -305,6 +314,9 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
             return false;
         }
         break;
+
+      default:
+        num_1dk = false;
     }
   }
   return true;

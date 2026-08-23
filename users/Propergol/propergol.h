@@ -18,7 +18,7 @@
 
 #include QMK_KEYBOARD_H
 
-#include "keymap_french_propergol.h"
+#include "propergol_keycodes.h"
 #include "features/modword.h"
 #include "../../modules/Kawamashi/layer_word/layer_word.h"
 #include "../../modules/Kawamashi/oneshots_on_steroids/oneshots_on_steroids.h"
@@ -29,11 +29,13 @@ enum layers {
     _BASE = 0,
     _1DK,
     _NUMROW,
+    _NUMROW_REV,
     _NUMPAD,
     _SYMBOLS,
     _SHORTNAV,
     _WINMAN,
     _FUNCROW,
+    _FUNCROW_REV,
     _FUNCPAD
 };
 
@@ -48,7 +50,7 @@ enum custom_keycodes {
   SEL_WORD,
   SEL_LINE,
   OS_SHFT,
-  OS_RTHB,
+  OS_SYMB,
   OS_NUM,
   OS_1DK,
   OS_WNAV,
@@ -66,43 +68,45 @@ enum custom_keycodes {
 };
 
   // Layer changers
-#define LT_SPC LT(_SHORTNAV, KC_SPC)
-#define LT_E   LT(_SHORTNAV, PG_E)
-#define LT_0   LT(_SHORTNAV, KC_0)
-
-#define LT_RBKS LT(_FUNCPAD, KC_BSPC)
 
 
 #ifdef KRYPTON_ALTERNATE_NUMBER_LAYER
   // Numbers and function keys in rows
   //#define LT_AGRV LT(_NUMPAD, PG_AGRV)
-  #define _FUNCTIONS _FUNCROW
-  #define _NUMBERS   _NUMROW
-  #define  LT_MGC     LT(_FUNCTIONS, KC_1)
-  #define  LT_LBKS    LT(_FUNCTIONS, KC_BSPC)
 
   #ifdef KRYPTON_ONESHOT_NUMBERS
-    #define _OS_LAYR _NUMBERS
-    #define  NUM_KEY  OS_NUM
-    #define  LT_REPT  LT(_SYMBOLS, KC_1)
+    #define _FUNCTIONS _FUNCROW_REV
+    #define _NUMBERS   _NUMROW_REV
+    //#define _OS_LAY_R  _NUMBERS
+    #define  OS_RTHB    OS_NUM
+    #define  NUM_KEY    OS_NUM
+    #define  LT_REPT    LT(_SYMBOLS,   KC_1)
+    #define  LT_MGC     LT(_FUNCTIONS, KC_1)
   #else
-    #define _OS_LAYR _SYMBOLS
-    #define  NUM_KEY  LT_MGC
-    #define  LT_REPT  LT(_NUMBERS, KC_1)
+    #define _FUNCTIONS _FUNCROW
+    #define _NUMBERS   _NUMROW
+    //#define _OS_LAY_R  _SYMBOLS
+    #define  OS_RTHB    OS_SYMB
+    #define  NUM_KEY    LT_MGC
+    #define  LT_REPT    LT(_FUNCTIONS, KC_1)
+    #define  LT_MGC     LT(_NUMBERS,   KC_1)
   #endif
 
 #else
   // Krypton base conf
   #define _FUNCTIONS _FUNCPAD
   #define _NUMBERS   _NUMPAD
-  #define _OS_LAYR   _SYMBOLS
+  //#define _OS_LAY_R   _SYMBOLS
+  #define  OS_RTHB    OS_SYMB
   #define  NUM_KEY    LT_MGC
   #define  LT_REPT    LT(_FUNCTIONS, KC_1)
-  #define  LT_MGC     LT(_NUMBERS, KC_1)
-  #define  LT_LBKS    LT(_NUMBERS, KC_BSPC)
+  #define  LT_MGC     LT(_NUMBERS,   KC_1)
 #endif
 
-
+#define LT_SPC  LT(_SHORTNAV,  KC_SPC)
+#define LT_E    LT(_SHORTNAV,  PG_E)
+#define LT_0    LT(_SHORTNAV,  KC_0)
+#define LT_RBKS LT(_FUNCTIONS, KC_BSPC)
 
 
 

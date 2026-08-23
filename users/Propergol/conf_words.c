@@ -258,6 +258,8 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
       switch (keycode) {
         // Keycodes that should not disable numword.
         // Numpad keycodes
+        case NNB_SPC:
+          if (IS_LAYER_ON(_SYMBOLS)) { return false; }
         case KC_1 ... KC_0:
         case KC_P1 ... KC_P0:
         case KC_PDOT:
