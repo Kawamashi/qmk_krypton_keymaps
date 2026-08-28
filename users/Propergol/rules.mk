@@ -25,7 +25,7 @@ SRC += features/modword.c
 SRC += conf_clever_keys.c
 SRC += conf_words.c
 
-INTROSPECTION_KEYMAP_C = combos.c
+INTROSPECTION_KEYMAP_C = conf_combos.c
 
 MUSIC_ENABLE = no
 SPACE_CADET_ENABLE = no
