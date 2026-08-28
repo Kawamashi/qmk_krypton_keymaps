@@ -210,6 +210,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           return finish_word((uint16_t[]) {PG_U, PG_J, PG_O, PG_U, PG_R, PG_D, PG_APOS, PG_H, PG_U, PG_I}, 10, ongoing_keycode, record);
         
         default:
+          if (IS_LAYER_ON(_SYMBOLS)) { return replace_ongoing_key(prev_keycode, ongoing_keycode, record); }
           // "à"
           return replace_ongoing_key(PG_AGRV, ongoing_keycode, record);
       }
