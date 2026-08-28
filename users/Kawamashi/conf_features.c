@@ -274,60 +274,47 @@ const oneshot_on_steroids_t oneshot_os[] = {
 };
 
 
-static bool num_1dk = false;
-
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
-  if (record->event.pressed) {
-    switch (keycode) {
+  if (!record->event.pressed) { return true; }
+  switch (keycode) {
 
-      case PG_1DK:
-        if (get_oneshot_on_steroids_state(OS_NUMR)) {
-          num_1dk = true;
-          return insert_1dk(keycode);
-        }
-        break;
+    case PG_1DK:
+      if (get_oneshot_on_steroids_state(OS_NUMR)) { return insert_1dk(keycode); }
+      break;
 
-      case OS_NUMR:
-        //if (get_oneshot_layer_on_steroids() == _1DK) { insert_1dk(keycode); }
-        if (IS_LAYER_ON(_1DK)) {
-          num_1dk = true;
-          return insert_1dk(keycode);
-        } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
-          // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
-          return toggle_modword(capsword, CAPSWORD, record);
-        }
-        break;
+    case OS_NUMR:
+      if (IS_LAYER_ON(_1DK)) {
+        return insert_1dk(keycode);
+      } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+        // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
+        // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
+        return toggle_modword(capsword, CAPSWORD, record);
+      }
+      break;
 
-      case OS_SHFT:
-        if (num_1dk) {
-          num_1dk = false;
-          break;
-        }
-        const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
-        if (os_num_state == 1 || os_num_state == 3) {
-          // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
-          num_1dk = false;
-          return process_layerword_triggers(NUMWORD, record);
-        }
-        break;
-        
-      case OS_1DK:
-        // Custom behavior when alt-gr
-        const uint8_t mods = get_mods() | get_oneshot_mods();
-        if (mods & MOD_BIT(KC_ALGR)) {
-            tap_code16(ALGR(PG_1DK));
-            return false;
-        }
-        break;
-
-      default:
-        num_1dk = false;
-    }
+    case OS_SHFT:
+      if (is_ongoing_1dk()) { return true; }
+      
+      const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+      if (os_num_state == 1 || os_num_state == 3) {
+        // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
+        return process_layerword_triggers(NUMWORD, record);
+      }
+      break;
+      
+    case OS_1DK:
+      // Custom behavior when alt-gr
+      const uint8_t mods = get_mods() | get_oneshot_mods();
+      if (mods & MOD_BIT(KC_ALGR)) {
+        tap_code16(ALGR(PG_1DK));
+        return false;
+      }
+      break;
   }
   return true;
 }
+
 
 bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
 

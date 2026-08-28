@@ -17,15 +17,15 @@
 #include "propergol.h"
 
 // Keep track of the 1DK, for the Repeat Key
-static bool previous_1dk = false;
+static bool ongoing_1dk = false;
 
 bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
 
     if (!record->event.pressed) { return true; }    // Nothing special happens on release
 
-    if (previous_1dk) {
+    if (ongoing_1dk) {
         if (get_repeat_key_count() > 0) { tap_code(PG_1DK); }
-        previous_1dk = false;
+        ongoing_1dk = false;
     }
 
     // Handling keys and layers related to the One Dead Key (1DK)
@@ -35,7 +35,6 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (IS_LAYER_ON(_1DK)) {
-        //previous_1dk = true;
         // because of HRM on _NUM layer, to tap symbols like ⅔, ¾ etc.
         if (IS_QK_MOD_TAP(keycode) && !record->tap.count) { return true; }
 
@@ -73,7 +72,7 @@ bool insert_1dk(uint16_t keycode) {
     if (shift_weak_mods) { del_weak_mods(MOD_MASK_SHIFT); }
   #endif  // ONE_DEAD_KEY_DEFFERED_SHIFT
 
-    previous_1dk = true;
+    ongoing_1dk = true;
     tap_code(PG_1DK);
     
   #ifdef ONE_DEAD_KEY_DEFFERED_SHIFT
@@ -83,4 +82,8 @@ bool insert_1dk(uint16_t keycode) {
   #endif  // ONE_DEAD_KEY_DEFFERED_SHIFT
 
     return keycode != PG_1DK;
+}
+
+bool is_ongoing_1dk(void) {
+  return ongoing_1dk;
 }

@@ -140,8 +140,11 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record);
 */
 bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record);
 
-// Function to add the One Dead Key to the keys of the 1DK layer
-// Also, applies shift to the key following the dead key :
+// Adds the One Dead Key to the keys of the 1DK layer
+// Also, possibility to apply shift to the key following the dead key :
 // when I want to shift a key on the 1DK layer,
 // I prefer to press shift then the one-shot key to the 1DK layer than the opposite.
 bool insert_1dk(uint16_t keycode);
+
+// Returns whether the 1DK is being sent
+bool is_ongoing_1dk(void);
