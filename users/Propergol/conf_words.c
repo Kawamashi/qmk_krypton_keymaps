@@ -314,3 +314,78 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
   }
   return false;
 }
+
+
+// 1DK key and layer
+
+// Keep track of the 1DK, for the Repeat Key
+static bool ongoing_1dk = false;
+
+bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
+
+    if (!record->event.pressed) { return true; }    // Nothing special happens on release
+
+    if (ongoing_1dk) {
+        if (get_repeat_key_count() > 0) { tap_code(PG_1DK); }
+        ongoing_1dk = false;
+    }
+
+    // Handling keys and layers related to the One Dead Key (1DK)
+    switch (keycode) {
+        case PG_1DK:
+          return insert_1dk(keycode);
+    }
+
+    if (IS_LAYER_ON(_1DK)) {
+        // because of HRM on _NUM layer, to tap symbols like ⅔, ¾ etc.
+        if (IS_QK_MOD_TAP(keycode) && !record->tap.count) { return true; }
+
+        switch (keycode) {
+            case PG_Z:
+            case PG_Q:
+            case PG_UNDS:
+            case PG_APOS:
+            case PG_AGRV:
+            case PG_ECIR:
+              return true;
+            // handle `quê`
+            case PG_U:
+                if (get_recent_keycode(-1) == PG_Q) { return true; }
+                
+            default:
+              return insert_1dk(keycode);
+        }
+    }
+    return true;
+}
+
+
+bool insert_1dk(uint16_t keycode) {
+
+  #ifdef ONE_DEAD_KEY_DEFFERED_SHIFT
+    // Special behavior of PG_1DK when shifted
+    // Shift must apply to the keycode following PG_1DK.
+    const bool shift_mods = get_mods() & MOD_MASK_SHIFT;
+    const bool shift_weak_mods = get_weak_mods() & MOD_MASK_SHIFT;
+    const bool shift_oneshot_mods = get_oneshot_mods() & MOD_MASK_SHIFT;
+    
+    if (shift_oneshot_mods) { del_oneshot_mods(MOD_MASK_SHIFT); }
+    if (shift_mods) { del_mods(MOD_BIT(KC_LSFT)); }
+    if (shift_weak_mods) { del_weak_mods(MOD_MASK_SHIFT); }
+  #endif  // ONE_DEAD_KEY_DEFFERED_SHIFT
+
+    ongoing_1dk = true;
+    tap_code(PG_1DK);
+    
+  #ifdef ONE_DEAD_KEY_DEFFERED_SHIFT
+    if (shift_oneshot_mods) { set_oneshot_mods(MOD_BIT(KC_LSFT)); }    // Don't use weak mods !
+    if (shift_mods) { add_mods(MOD_BIT(KC_LSFT)); }
+    if (shift_weak_mods) { add_weak_mods(MOD_BIT(KC_LSFT)); }
+  #endif  // ONE_DEAD_KEY_DEFFERED_SHIFT
+
+    return keycode != PG_1DK;
+}
+
+bool is_ongoing_1dk(void) {
+  return ongoing_1dk;
+}

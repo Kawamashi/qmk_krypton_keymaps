@@ -23,9 +23,7 @@ REPEAT_KEY_ENABLE = yes
 #SRC += oled.c
 SRC += features/modword.c
 SRC += conf_clever_keys.c
-SRC += conf_features.c
 SRC += conf_words.c
-SRC += conf_prefixing_layers.c
 
 INTROSPECTION_KEYMAP_C = combos.c
 

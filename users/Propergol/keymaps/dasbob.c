@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ALGR(PG_O), PG_TILD, PG_LSBR, PG_RSBR, PG_PERC,                   PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_MOIN,    PG_PLUS, PG_ASTX, PG_SLSH, PG_BSLS,                   PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
       ALGR(PG_J), PG_INF,  PG_SUP,  PG_EGAL, _______,                   _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
-                                    OS_NUMR, KC_SPC,  KC_BSPC, _______, NNB_SPC, OS_RTHB
+                                    OS_NUM, KC_SPC,  KC_BSPC, _______, NNB_SPC, OS_RTHB
     ),
 
 
