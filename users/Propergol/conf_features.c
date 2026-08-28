@@ -113,7 +113,7 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     }
   } else {
     switch (keycode) {
-        #ifdef KRYPTON_ONESHOT_NUMBERS
+        #ifdef KRYPTON_NUMBER_ROW_WITH_ONESHOT
       case LT_REPT:
         if (record->event.pressed) {
           if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
@@ -144,7 +144,7 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(S(KC_TAB), record); */
       case M(BACKWRD):
         return process_custom_tap_hold(BACKWRD, record);
-      case P(PG_ASTX):
+      case M(PG_ASTX):
         return process_custom_tap_hold(PG_ASTX, record);
       case R(PG_PLUS):
         return process_custom_tap_hold(PG_PLUS, record);
@@ -315,7 +315,6 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_RAS,  OS_RTHB, MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR),  0      )}
 };
 
-
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
   if (record->event.pressed) {
@@ -324,7 +323,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       case OS_NUM:
         if (IS_LAYER_ON(_1DK)) {
           insert_1dk(keycode);
-          #ifdef KRYPTON_ONESHOT_NUMBERS
+          #ifdef KRYPTON_THUMB_SHORTCUTS
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_NUM -> Capsword only if layer _1DK is off.
           // On _1DK layer, OS_NUM can be combined with shift to tap symbols like ⅔, ¾ etc.
@@ -334,46 +333,19 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
         break;
 
       case OS_SYMB:
-          #ifdef KRYPTON_ONESHOT_NUMBERS
+          #ifdef KRYPTON_THUMB_SHORTCUTS
         const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
         if (os_num_state == 1 || os_num_state == 3) {
           // OS_NUM + OS_SYMB -> Numword when OS_NUM has not been used yet.
           return process_layerword_triggers(NUMWORD, record);
         }
-          #else
+          #elif !defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
         if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_SYMB -> oneshot shift + alt-gr
           return process_record_oneshots_on_steroids(OS_RAS, record);
         }
           #endif
         break;
-
-/*       case OS_RTHB:
-          #ifdef KRYPTON_ONESHOT_NUMBERS
-        if (IS_LAYER_ON(_1DK)) {
-          insert_1dk(keycode);
-        } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          // OS_SHFT + OS_NUM -> Capsword only if layer _1DK is off.
-          // On _1DK layer, OS_NUM can be combined with shift to tap symbols like ⅔, ¾ etc.
-          return toggle_modword(capsword, CAPSWORD, record);
-        }
-          #else
-        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          // OS_SHFT + OS_SYMB -> oneshot shift + alt-gr
-          return process_record_oneshots_on_steroids(OS_RAS, record);
-        }
-          #endif
-        break;
-
-        #ifdef KRYPTON_ONESHOT_NUMBERS
-      case OS_SYMB:
-        const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
-        if (os_num_state == 1 || os_num_state == 3) {
-          // OS_NUM + OS_SYMB -> Numword when OS_NUM has not been used yet.
-          return process_layerword_triggers(NUMWORD, record);
-        }
-        break;
-        #endif */
 
       case OS_1DK:
         // Custom behavior when alt-gr

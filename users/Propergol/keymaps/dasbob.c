@@ -29,25 +29,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_NUMROW] = LAYOUT_split_3x5_3(
-      PG_VIRG, OS_WNUM, _______, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, KC_PDOT, PG_1DK,
+      PG_VIRG, OS_WNUM, _______, PG_EGAL, PG_PERC,                   PG_EXP,  PG_DEG,  KC_PDOT, PG_EURO, PG_1DK,
       P(KC_9), R(KC_8), M(KC_7), I(KC_6), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      _______, _______, PG_H,    KC_5,    TG_NUM,                    PG_IND,  PG_SLSH, PG_MOIN, PG_PLUS, PG_ASTX,
+      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    _______, _______, _______,
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
      ),
 
 
     [_NUMROW_REV] = LAYOUT_split_3x5_3(
-      PG_VIRG, KC_PDOT, PG_PLUS, PG_EURO, PG_PERC,                   PG_EXP,  PG_DEG,  PG_EGAL, OS_WNUM, PG_1DK,
+      PG_VIRG, PG_EURO, KC_PDOT, PG_DEG,  PG_PERC,                   PG_EXP,  PG_EGAL, _______, OS_WNUM, PG_1DK,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   NUMWORD, I(KC_6), M(KC_7), R(KC_8), P(KC_9),
-      _______, _______, PG_H,    KC_5,    TG_NUM,                    PG_IND,  PG_SLSH, PG_MOIN, PG_PLUS, PG_ASTX,
+      _______, _______, _______, KC_5,    TG_NUM,                    PG_IND,  PG_SLSH, PG_ASTX, PG_PLUS, PG_MOIN,
                                  OS_SYMB, LT_0   , KC_BSPC, NNB_SPC, LT_SPC,  OS_NUM
      ),
 
 
     [_NUMPAD] = LAYOUT_split_3x5_3(
-      PG_VIRG,    OS_WNUM,    PG_EGAL,    PG_EURO,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    _______,
-      P(PG_ASTX), R(PG_PLUS), M(PG_MOIN), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
-      PG_DEG,     _______,    _______,    PG_H,       TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    PG_1DK,
+      PG_VIRG,    OS_WNUM,    PG_DEG,     PG_EGAL,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    PG_EURO,
+      P(PG_MOIN), R(PG_PLUS), M(PG_ASTX), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
+      _______,    _______,    _______,    PG_H,       TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    PG_1DK,
                                           OS_SHFT,    LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
      ),
 
@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SHORTNAV] = LAYOUT_split_3x5_3(
-      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, KC_DEL,     _______,    OS_WNAV,   _______,
+      KC_BSPC, HOME,    KC_UP,   END,     KC_PGUP,                   CAPSLOCK, PREV_WD,    KC_DEL,     NEXT_WD,   OS_WNAV,
       SEL_ALL, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   CAPSWORD, I(KC_BSPC), M(BACKWRD), R(KC_ENT), P(KC_ESC),
       UNDO,    CUT,     COPY,    PASTE,   REDO,                      CAPSLIST, KC_TAB,     S(KC_TAB),  SEL_LINE,  SEL_WORD,
                                  _______, KC_SPC,  KC_BSPC, NAVWORD, KC_BSPC,  _______
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_WINMAN] = LAYOUT_split_3x5_3(
-      _______, LSG(KC_LEFT), G(KC_UP),   LSG(KC_RIGHT), _______,                   _______, _______, _______, OS_WNAV, _______,
+      _______, LSG(KC_LEFT), G(KC_UP),   LSG(KC_RIGHT), _______,                   _______, _______, _______, _______, OS_WNAV,
       _______, G(KC_LEFT),   G(KC_DOWN), G(KC_RIGHT),   _______,                   _______, I_MOD,   M_MOD,   R_MOD,   P_MOD,
       _______, _______,      _______,    _______,       _______,                   _______, _______, _______, _______, _______,
                              _______,    _______,       _______, _______, _______, _______
@@ -94,15 +94,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      ),
 
     [_FUNCROW_REV] = LAYOUT_split_3x5_3(
-      _______,  PANIC,    KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, _______,  PANIC,    _______,  _______,
+      QK_BOOT,  PANIC,    KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, _______,  PANIC,    KC_SCRL,  KC_NUM,
       P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_BRIU,                   KC_MUTE, I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
-      QK_BOOT,  KC_SCRL,  KC_NUM,   KC_F5,    KC_BRID,                   KC_VOLD, KC_MPLY,  KC_MPRV,  KC_MNXT,  KC_SLEP,
+      _______,  _______,  _______,  KC_F5,    KC_BRID,                   KC_VOLD, KC_MPLY,  KC_MPRV,  KC_MNXT,  KC_SLEP,
                                     _______,  KC_F10,  _______, FUNWORD, _______, _______
      ),
 
     [_FUNCPAD] = LAYOUT_split_3x5_3(
       KC_F1,    KC_F2,    KC_F3,    KC_F4,    _______,                   _______, KC_MNXT,    KC_VOLU,    KC_BRIU,    KC_NUM,
-      P(KC_F5), R(KC_F6), M(KC_F7), I(KC_F8), PANIC,                     _______, I(KC_MPLY), M(KC_MUTE), R(KC_SCRL), P(KC_SCRL),
+      P(KC_F5), R(KC_F6), M(KC_F7), I(KC_F8), PANIC,                     _______, I(KC_MPLY), M(KC_MUTE), R(KC_SLEP), P(KC_SCRL),
       KC_F9,    KC_F10,   KC_F11,   KC_F12,   _______,                   _______, KC_MPRV,    KC_VOLD,    KC_BRID,    QK_BOOT,
                                     _______,  _______, FUNWORD, _______, _______, _______
      ),

@@ -69,34 +69,28 @@ enum custom_keycodes {
 
   // Layer changers
 
-
-#ifdef KRYPTON_ALTERNATE_NUMBER_LAYER
+#if defined KRYPTON_NUMBER_ROW
   // Numbers and function keys in rows
-  //#define LT_AGRV LT(_NUMPAD, PG_AGRV)
+  #define _FUNCTIONS _FUNCROW
+  #define _NUMBERS   _NUMROW
+  #define  OS_RTHB    OS_SYMB
+  #define  NUM_KEY    LT_MGC
+  #define  LT_REPT    LT(_FUNCTIONS, KC_1)
+  #define  LT_MGC     LT(_NUMBERS,   KC_1)
 
-  #ifdef KRYPTON_ONESHOT_NUMBERS
-    #define _FUNCTIONS _FUNCROW_REV
-    #define _NUMBERS   _NUMROW_REV
-    //#define _OS_LAY_R  _NUMBERS
-    #define  OS_RTHB    OS_NUM
-    #define  NUM_KEY    OS_NUM
-    #define  LT_REPT    LT(_SYMBOLS,   KC_1)
-    #define  LT_MGC     LT(_FUNCTIONS, KC_1)
-  #else
-    #define _FUNCTIONS _FUNCROW
-    #define _NUMBERS   _NUMROW
-    //#define _OS_LAY_R  _SYMBOLS
-    #define  OS_RTHB    OS_SYMB
-    #define  NUM_KEY    LT_MGC
-    #define  LT_REPT    LT(_FUNCTIONS, KC_1)
-    #define  LT_MGC     LT(_NUMBERS,   KC_1)
-  #endif
+#elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
+  // Numbers and function keys in rows, with a oneshot key to access the num layer
+  #define _FUNCTIONS _FUNCROW_REV
+  #define _NUMBERS   _NUMROW_REV
+  #define  OS_RTHB    OS_NUM
+  #define  NUM_KEY    OS_NUM
+  #define  LT_REPT    LT(_SYMBOLS,   KC_1)
+  #define  LT_MGC     LT(_FUNCTIONS, KC_1)
 
 #else
   // Krypton base conf
   #define _FUNCTIONS _FUNCPAD
   #define _NUMBERS   _NUMPAD
-  //#define _OS_LAY_R   _SYMBOLS
   #define  OS_RTHB    OS_SYMB
   #define  NUM_KEY    LT_MGC
   #define  LT_REPT    LT(_FUNCTIONS, KC_1)
@@ -152,6 +146,8 @@ enum custom_keycodes {
   #define CUT     LCMD(PG_X)
   #define COPY    LCMD(PG_C)
   #define PASTE   LCMD(PG_V)
+  #define PREV_WD LOPT(KC_LEFT)
+  #define NEXT_WD LOPT(KC_RGHT)
 #else
   #define UNDO    LCTL(PG_Z)
   #define REDO    LCTL(PG_Y)
@@ -160,6 +156,8 @@ enum custom_keycodes {
   #define CUT     LCTL(PG_X)
   #define COPY    LCTL(PG_C)
   #define PASTE   LCTL(PG_V)
+  #define PREV_WD LCTL(KC_LEFT)
+  #define NEXT_WD LCTL(KC_RGHT)
 #endif
 
 // conf_words
