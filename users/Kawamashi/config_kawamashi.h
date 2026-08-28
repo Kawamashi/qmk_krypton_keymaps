@@ -46,6 +46,7 @@
 #define PERMISSIVE_HOLD
 #define CHORDAL_HOLD
 #define FLOW_TAP_INTERVAL 210
+#define QUICK_TAP_TERM_PER_KEY
 
 // EC11K encoders have a different resolution than other EC11 encodeisrs.
 // When using the default resolution of 4, if you notice your encoder skipping

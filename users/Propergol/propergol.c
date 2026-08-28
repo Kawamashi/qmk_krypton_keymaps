@@ -62,6 +62,16 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT_E:
+        case LT_SPC:
+            return 150;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
     CHORDAL_HOLD_KAWA_LAYOUT(
         'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',

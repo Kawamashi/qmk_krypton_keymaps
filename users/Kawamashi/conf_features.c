@@ -281,11 +281,18 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
   if (record->event.pressed) {
     switch (keycode) {
 
+      case PG_1DK:
+        if (get_oneshot_on_steroids_state(OS_NUMR)) {
+          num_1dk = true;
+          return insert_1dk(keycode);
+        }
+        break;
+
       case OS_NUMR:
         //if (get_oneshot_layer_on_steroids() == _1DK) { insert_1dk(keycode); }
         if (IS_LAYER_ON(_1DK)) {
           num_1dk = true;
-          insert_1dk(keycode);
+          return insert_1dk(keycode);
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
           // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.

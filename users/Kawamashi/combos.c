@@ -105,6 +105,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       case PANIC:
         if (pressed) {
           if (!host_keyboard_led_state().num_lock) { tap_code(KC_NUM_LOCK); }
+          if (!host_keyboard_led_state().scroll_lock) { tap_code(KC_SCROLL_LOCK); }
           
           if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
           layer_clear();
