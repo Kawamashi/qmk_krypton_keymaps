@@ -31,7 +31,8 @@ enum layers {
     _NUMROW,
     _NUMROW_REV,
     _NUMPAD,
-    _SYMBOLS,
+    _SYMBOLS_PROPERGOL,
+    _SYMBOLS_ERGOL,
     _SHORTNAV,
     _WINMAN,
     _FUNCROW,
@@ -68,6 +69,12 @@ enum custom_keycodes {
 };
 
   // Layer changers
+
+#ifdef KRYPTON_ERGOL_SYMBOLS
+  #define _SYMBOLS _SYMBOLS_ERGOL
+#else
+  #define _SYMBOLS _SYMBOLS_PROPERGOL
+#endif
 
 #if defined KRYPTON_NUMBER_ROW
   // Numbers and function keys in rows
