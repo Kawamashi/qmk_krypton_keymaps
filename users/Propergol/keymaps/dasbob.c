@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_NUMROW] = LAYOUT_split_3x5_3(
-      PG_VIRG, _______, _______, OS_WNUM, PG_PERC,                   PG_EXP,  PG_EGAL, KC_PDOT, PG_EURO, _______,
+      PG_VIRG, REV_TAB, ALT_TAB, OS_WNUM, PG_PERC,                   PG_EXP,  PG_EGAL, KC_PDOT, PG_EURO, _______,
       P(KC_9), R(KC_8), M(KC_7), I(KC_6), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
       PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    PG_DEG,  _______, PG_1DK,
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_NUMPAD] = LAYOUT_split_3x5_3(
-      PG_VIRG,    _______,    _______,    OS_WNUM,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    PG_EURO,
+      PG_VIRG,    REV_TAB,    ALT_TAB,    OS_WNUM,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    PG_EURO,
       P(PG_MOIN), R(PG_PLUS), M(PG_ASTX), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
       PG_DEG,     _______,    PG_EGAL,    PG_H,       TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    PG_1DK,
                                           OS_SHFT,    LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      ),
 
     [_FUNCROW_REV] = LAYOUT_split_3x5_3(
-      _______,  _______,  KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, KC_MPRV,  KC_MPLY,  KC_MNXT,  _______,
+      REV_TAB,  ALT_TAB,  KC_F12,   KC_F11,   KC_F10,                    KC_VOLU, KC_MPRV,  KC_MPLY,  KC_MNXT,  _______,
       P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_BRIU,                   KC_MUTE, I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
       QK_BOOT,  _______,  _______,  KC_F5,    KC_BRID,                   KC_VOLD, KC_SLEP,  _______,  KC_SCRL,  KC_NUM,
                                     _______,  _______, _______, FUNWORD, PANIC,   _______

@@ -148,6 +148,9 @@ enum custom_keycodes {
   #define PASTE   LCMD(PG_V)
   #define PREV_WD LOPT(KC_LEFT)
   #define NEXT_WD LOPT(KC_RGHT)
+  #define ALT_TAB LCMD(KC_TAB)
+  #define REV_TAB LSG(KC_TAB)
+  #define CYCLOTAB_KEYS LCMD(KC_TAB)
 #else
   #define UNDO    LCTL(PG_Z)
   #define REDO    LCTL(PG_Y)
@@ -158,6 +161,8 @@ enum custom_keycodes {
   #define PASTE   LCTL(PG_V)
   #define PREV_WD LCTL(KC_LEFT)
   #define NEXT_WD LCTL(KC_RGHT)
+  #define ALT_TAB LALT(KC_TAB)
+  #define REV_TAB LSA(KC_TAB)
 #endif
 
 // conf_words
