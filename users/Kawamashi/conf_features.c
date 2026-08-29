@@ -76,8 +76,8 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     // Special tap-hold keys (on tap).
     switch (keycode) {
       case LT_REPT:
-        const uint8_t mods = get_mods() | get_oneshot_mods();
-        if (mods & MOD_MASK_SHIFT) { return toggle_modword(capsword, CAPSWORD, record); }
+        //const uint8_t mods = get_mods() | get_oneshot_mods();
+        //if (mods & MOD_MASK_SHIFT) { return toggle_modword(capsword, CAPSWORD, record); }
         repeat_key_invoke(&record->event);
         return false;
 
@@ -277,6 +277,7 @@ const oneshot_on_steroids_t oneshot_os[] = {
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
   if (!record->event.pressed) { return true; }
+  const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
   switch (keycode) {
 
     case PG_1DK:
@@ -295,8 +296,8 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
 
     case OS_SHFT:
       if (is_ongoing_1dk()) { return true; }
-      
-      const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+
+      //const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
       if (os_num_state == 1 || os_num_state == 3) {
         // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
         return process_layerword_triggers(NUMWORD, record);
@@ -309,6 +310,21 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       if (mods & MOD_BIT(KC_ALGR)) {
         tap_code16(ALGR(PG_1DK));
         return false;
+      }
+      break;
+
+    case LT_PDOT:
+      //const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+      if (os_num_state == 3) {
+        // OS_NUMR + LT_PDOT -> Numword when OS_NUMR has not been used yet.
+        return process_layerword_triggers(NUMWORD, record);
+      }
+      break;
+
+    case LT_REPT:
+      const int8_t os_shift_state = get_oneshot_on_steroids_state(OS_SHFT);
+      if (os_shift_state == 1 || os_shift_state == 3) {
+        return toggle_modword(capsword, CAPSWORD, record);
       }
       break;
   }
@@ -353,26 +369,4 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
     // whether keycode is a mod or a layer-change key.
     return true;
   }
-}
-
-bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer) {
-/*   switch (keycode) {
-    case OS_NUMR:
-    case OS_WNUM:
-      return true;
-
-    default:
-      return false;
-  } */
-  return true;
-}
-
-bool should_osl_on_steroids_absorb_mods(uint16_t keycode) {
-    switch (keycode) {
-/*       case OS_1DK:
-        return false; */
-
-      default:
-        return true;
-    }
 }
