@@ -179,6 +179,8 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return PG_ASTX;
     case R(PG_PLUS):
       return PG_PLUS;
+    case LT_AGRV:
+      return PG_AGRV;
 
     default:
       return keycode &= 0xff;
@@ -300,6 +302,8 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(PG_ASTX, record);
       case R(PG_PLUS):
         return process_custom_tap_hold(PG_PLUS, record);
+      case LT_AGRV:
+        return process_custom_tap_hold(PG_AGRV, record);
     }
   }
 
@@ -566,6 +570,7 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
   if (is_oneshot_layer_on_steroids(oneshot)) {
     // OS_1DK and OS_NUM shouldn’t deactivate each other
     if (oneshot == OS_1DK && keycode == OS_NUM) { return true; }
+    if (oneshot == OS_1DK && keycode == LT_AGRV) { return true; }
     if (oneshot == OS_NUM && keycode == OS_1DK) { return true; }
     // If a layer-change key is pressed after a OSL, the OSL must be reset.
     if (is_layer_key) { return false; }

@@ -18,6 +18,8 @@
 #include QMK_KEYBOARD_H
 #include "propergol.h"
 
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT_split_3x5_3(
@@ -74,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, PG_X,                      _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, _______, _______, _______, _______,
       _______, PG_J,    _______, _______, _______,                   _______, _______, _______, _______, OS_1DK,
-                                 _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUM
+                                 _______, PG_ECIR, LT_AGRV, PG_APOS, PG_UNDS, OS_NUM
      ),
 
 
