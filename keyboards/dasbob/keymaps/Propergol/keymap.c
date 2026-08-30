@@ -19,7 +19,7 @@
 
 
 
-  // Layer changers
+/*   // Layer changers
 
 #ifdef KRYPTON_ERGOL_SYMBOLS
   #define _SYMBOLS _SYMBOLS_ERGOL
@@ -126,7 +126,7 @@
   #define NEXT_WD LCTL(KC_RGHT)
   #define ALT_TAB LALT(KC_TAB)
   #define REV_TAB LSA(KC_TAB)
-#endif
+#endif */
 
 #include "layout.h"
 #include "propergol.c"
