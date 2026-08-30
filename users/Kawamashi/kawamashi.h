@@ -46,7 +46,7 @@ enum custom_keycodes {
   SEL_WORD,
   SEL_LINE,
   OS_SHFT,
-  OS_NUMR,
+  OS_NUM,
   OS_1DK,
   OS_WINM,
   OS_WNUM,

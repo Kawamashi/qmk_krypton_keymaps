@@ -270,7 +270,7 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_WINM, LT_MGC,  0,                _WINMAN)},
   {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS  )},
   {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
-  {OS(OS_NUMR, OS_NUMR, 0,                _NUMBERS  )}
+  {OS(OS_NUM, OS_NUM, 0,                _NUMBERS  )}
 };
 
 
@@ -281,15 +281,15 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
   switch (keycode) {
 
 /*     case PG_1DK:
-      if (get_oneshot_on_steroids_state(OS_NUMR)) { return insert_1dk(keycode); }
+      if (get_oneshot_on_steroids_state(OS_NUM)) { return insert_1dk(keycode); }
       break; */
 
-/*     case OS_NUMR:
+/*     case OS_NUM:
       if (IS_LAYER_ON(_1DK)) {
         //return insert_1dk(keycode);
       } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-        // OS_SHFT + OS_NUMR -> Capsword only if layer _1DK is off.
-        // On _1DK layer, OS_NUMR can be combined with shift to tap symbols like ⅔, ¾ etc.
+        // OS_SHFT + OS_NUM -> Capsword only if layer _1DK is off.
+        // On _1DK layer, OS_NUM can be combined with shift to tap symbols like ⅔, ¾ etc.
         return toggle_modword(capsword, CAPSWORD, record);
       }
       break; */
@@ -297,9 +297,9 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
 /*     case OS_SHFT:
       if (is_ongoing_1dk()) { return true; }
 
-      //const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+      //const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
       if (os_num_state == 1 || os_num_state == 3) {
-        // OS_NUMR + OS_SHFT -> Numword when OS_NUMR has not been used yet.
+        // OS_NUM + OS_SHFT -> Numword when OS_NUM has not been used yet.
         return process_layerword_triggers(NUMWORD, record);
       }
       break; */
@@ -314,9 +314,9 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       break;
 
     case LT_PDOT:
-      const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+      const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
       if (os_num_state == 3) {
-        // OS_NUMR + LT_PDOT -> Numword when OS_NUMR has not been used yet.
+        // OS_NUM + LT_PDOT -> Numword when OS_NUM has not been used yet.
         return process_layerword_triggers(NUMWORD, record);
       }
       break;
@@ -349,9 +349,9 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
 
   // Mod or layer-change key pressed after an OSoS key
   if (is_oneshot_layer_on_steroids(oneshot)) {
-    // OS_1DK and OS_NUMR shouldn’t deactivate each other
-    if (oneshot == OS_1DK && keycode == OS_NUMR) { return true; }
-    if (oneshot == OS_NUMR && keycode == OS_1DK) { return true; }
+    // OS_1DK and OS_NUM shouldn’t deactivate each other
+    if (oneshot == OS_1DK && keycode == OS_NUM) { return true; }
+    if (oneshot == OS_NUM && keycode == OS_1DK) { return true; }
     // If a layer-change key is pressed after a OSL, the OSL must be reset.
     if (is_layer_key) { return false; }
     // keycode is not a layer key, it’s a mod key.
