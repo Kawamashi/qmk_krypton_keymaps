@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMBERS] = KAWA_LAYOUT(
       PG_VIRG, PG_INF,  PG_SUP,  PG_EGAL, PG_PERC,                   PG_EXP,  PG_H,    PG_DEG,  PG_EURO, TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8), P(KC_9),
-      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, _______,                   _______, KC_5,    _______, _______, PG_1DK,
+      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, _______,                   _______, KC_5,    _______, _______, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUMR
      ),
 

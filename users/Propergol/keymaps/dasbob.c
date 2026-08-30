@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMROW] = LAYOUT_split_3x5_3(
       PG_VIRG, REV_TAB, ALT_TAB, OS_WNUM, PG_PERC,                   PG_EXP,  PG_EGAL, KC_PDOT, PG_EURO, _______,
       P(KC_9), R(KC_8), M(KC_7), I(KC_6), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    PG_DEG,  _______, PG_1DK,
+      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    PG_DEG,  _______, OS_1DK,
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
      ),
 
@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMROW_REV] = LAYOUT_split_3x5_3(
       PG_VIRG, _______, KC_PDOT, PG_EGAL, PG_PERC,                   PG_EXP,  _______, PG_DEG,  PG_EURO, OS_WNUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   NUMWORD, I(KC_6), M(KC_7), R(KC_8), P(KC_9),
-      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    _______, _______, PG_1DK,
+      PG_MOIN, PG_PLUS, PG_ASTX, PG_SLSH, TG_NUM,                    PG_IND,  KC_5,    _______, _______, OS_1DK,
                                  OS_SYMB, LT_0,    KC_BSPC, NNB_SPC, LT_SPC,  OS_NUM
      ),
 
@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMPAD] = LAYOUT_split_3x5_3(
       PG_VIRG,    REV_TAB,    ALT_TAB,    OS_WNUM,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    PG_EURO,
       P(PG_MOIN), R(PG_PLUS), M(PG_ASTX), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
-      PG_DEG,     _______,    PG_EGAL,    PG_H,       TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    PG_1DK,
+      PG_DEG,     _______,    PG_EGAL,    PG_H,       TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    OS_1DK,
                                           OS_SHFT,    LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
      ),
 
