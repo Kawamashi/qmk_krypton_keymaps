@@ -98,7 +98,7 @@ bool is_followed_by_apos(uint16_t keycode, uint16_t prev_keycode) {
 }
 
 
-// Caps Word
+// Mod Word
 
 bool caps_word_press_user(uint16_t keycode) {
 

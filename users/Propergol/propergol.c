@@ -185,23 +185,32 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
   }
 }
 
-bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {    // On press
-      tap_code16(keycode);
-      return false;
-  }
-  return true;
-}
+
+static bool number_typed = false;
+static bool nav_typed = false;
 
 bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
-    switch (keycode) {
 
+    switch (keycode) {
       case TG_NUM:
         use_numpad = !use_numpad;
         return false;
+
+        #ifdef KRYPTON_THUMB_SHORTCUTS
+      case KC_BSPC:
+        if (IS_LAYER_ON(_SHORTNAV) && !nav_typed) { return process_layerword_triggers(NAVWORD, record); }
+          //#ifndef KRYPTON_NUMBER_ROW_WITH_ONESHOT
+        if (IS_LAYER_ON(_NUMBERS) && !number_typed) { return process_layerword_triggers(NUMWORD, record); }
+          //#endif
+        break;
+        #endif
     }
+      //#ifdef KRYPTON_THUMB_SHORTCUTS
+    if (IS_LAYER_ON(_NUMBERS)) { number_typed = true; }
+    if (IS_LAYER_ON(_SHORTNAV)) { nav_typed = true; }
+      //#endif
   }
 
   if (record->tap.count) {
@@ -235,6 +244,17 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     }
   } else {
     switch (keycode) {
+      /*case LT_E:
+      case LT_SPC:
+        if (!record->event.pressed) { nav_typed = false; }
+        break;
+        
+        #ifndef KRYPTON_NUMBER_ROW_WITH_ONESHOT
+      case LT_MGC:
+        if (!record->event.pressed) { number_typed = false; }
+        break;
+        #endif*/
+
         #ifdef KRYPTON_NUMBER_ROW_WITH_ONESHOT
       case LT_REPT:
         if (record->event.pressed) {
@@ -254,6 +274,16 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     }
   }
   return true; // Process all other keycodes normally
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (number_typed && IS_LAYER_OFF_STATE(state, _NUMBERS)) {
+        number_typed = false;
+    }
+    if (nav_typed && IS_LAYER_OFF_STATE(state, _SHORTNAV)) {
+        nav_typed = false;
+    }
+    return state;
 }
 
 
@@ -440,43 +470,69 @@ const oneshot_on_steroids_t oneshot_os[] = {
 bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* record) {
 
   if (record->event.pressed) {
+    const uint8_t mods = get_mods() | get_oneshot_mods();
     switch (keycode) {
 
       case OS_NUM:
         if (IS_LAYER_ON(_1DK)) {
-          insert_1dk(keycode);
-          #ifdef KRYPTON_THUMB_SHORTCUTS
+          return insert_1dk(keycode);
+/*           #ifdef KRYPTON_THUMB_SHORTCUTS
         } else if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
           // OS_SHFT + OS_NUM -> Capsword only if layer _1DK is off.
           // On _1DK layer, OS_NUM can be combined with shift to tap symbols like ⅔, ¾ etc.
           return toggle_modword(capsword, CAPSWORD, record);
-          #endif
+          #endif */
         }
         break;
 
+        #ifndef KRYPTON_NUMBER_ROW_WITH_ONESHOT
       case OS_SYMB:
-          #ifdef KRYPTON_THUMB_SHORTCUTS
+/*           #ifdef KRYPTON_THUMB_SHORTCUTS
         const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
         if (os_num_state == 1 || os_num_state == 3) {
           // OS_NUM + OS_SYMB -> Numword when OS_NUM has not been used yet.
           return process_layerword_triggers(NUMWORD, record);
         }
-          #elif !defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
-        if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-          // OS_SHFT + OS_SYMB -> oneshot shift + alt-gr
+          #elif !defined KRYPTON_NUMBER_ROW_WITH_ONESHOT */
+
+          //#ifndef KRYPTON_NUMBER_ROW_WITH_ONESHOT
+        //const uint8_t mods = get_mods() | get_oneshot_mods();
+        if (mods & MOD_MASK_SHIFT) {
+        //if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+          // OS_SYMB when shifted -> oneshot shift + alt-gr
           return process_record_oneshots_on_steroids(OS_RAS, record);
         }
-          #endif
+          //#endif
         break;
+          #endif
 
       case OS_1DK:
         // Custom behavior when alt-gr
-        const uint8_t mods = get_mods() | get_oneshot_mods();
+        //const uint8_t mods = get_mods() | get_oneshot_mods();
         if (mods & MOD_BIT(KC_ALGR)) {
             tap_code16(ALGR(PG_1DK));
             return false;
         }
         break;
+
+        #ifdef KRYPTON_THUMB_SHORTCUTS
+/*           #ifdef KRYPTON_NUMBER_ROW_WITH_ONESHOT
+      case KC_BSPC:
+        const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUMR);
+        if (os_num_state == 1 || os_num_state == 3) {
+            // OS_NUMR + KC_BSPC -> Numword when OS_NUMR has not been used yet.
+            return process_layerword_triggers(NUMWORD, record);
+        }
+        break;
+          #endif */
+
+      case LT_REPT:
+        const int8_t os_shift_state = get_oneshot_on_steroids_state(OS_SHFT);
+        if (os_shift_state == 1 || os_shift_state == 3) {
+            return toggle_modword(capsword, CAPSWORD, record);
+        }
+        break;
+        #endif
     }
   }
   return true;
@@ -551,4 +607,12 @@ bool bilateral_combination(const keyrecord_t* tap_hold_record, const keyrecord_t
 __attribute__((weak)) bool approved_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                                            uint16_t other_keycode, keyrecord_t* other_record) {
   return bilateral_combination(tap_hold_record, other_record);
+}
+
+bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {    // On press
+      tap_code16(keycode);
+      return false;
+  }
+  return true;
 }

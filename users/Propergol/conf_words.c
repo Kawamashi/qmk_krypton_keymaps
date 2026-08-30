@@ -98,7 +98,7 @@ bool is_followed_by_apos(uint16_t keycode, uint16_t prev_keycode) {
 }
 
 
-// Caps Word
+// Mod Word
 
 bool caps_word_press_user(uint16_t keycode) {
 
@@ -348,8 +348,8 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
             case PG_AGRV:
             case PG_ECIR:
               return true;
-            // handle `quê`
             case PG_U:
+                // handle `quê`
                 if (get_recent_keycode(-1) == PG_Q) { return true; }
                 
             default:
