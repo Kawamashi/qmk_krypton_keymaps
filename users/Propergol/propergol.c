@@ -14,13 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "keymap.h"
+
 #include "propergol.h"
 
-#include "features/modword.h"
-#include "../../modules/Kawamashi/layer_word/layer_word.h"
-//#include "../../modules/Kawamashi/oneshots_on_steroids/oneshots_on_steroids.h"
-//#include "../../modules/Kawamashi/clever_keys/clever_keys.h"
 
 // Mod and layer tap configuration
 

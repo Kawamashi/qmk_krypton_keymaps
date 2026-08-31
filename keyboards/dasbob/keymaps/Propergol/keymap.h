@@ -19,11 +19,6 @@
 #include QMK_KEYBOARD_H
 #include "propergol.h"
 
-#include "propergol_keycodes.h"
- //#include "features/modword.h"
-//#include "../../modules/Kawamashi/layer_word/layer_word.h"
-#include "../../../../modules/Kawamashi/oneshots_on_steroids/oneshots_on_steroids.h"
-#include "../../../../modules/Kawamashi/clever_keys/clever_keys.h" 
 
 enum layers {
     _BASE = 0,

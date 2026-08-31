@@ -19,53 +19,29 @@
 #include "propergol.h"
 
 enum combos {
-  R_BKSPC, 
-  DELETE, 
-  BK_WORD,
-  L_BKSPC, 
-  CMB_HOME, 
-  CMB_END, 
+  BKSPC, 
   ENTER,
   TAB,
   ESC, 
-  HELP, 
-  CMB_PANIC,
   ALTTAB,
-  ALTESC,
-  L_SPACE,
-  VOLDOWN
+  CMB_PANIC
 };
 
-const uint16_t PROGMEM del_combo_d[] = {I(PG_T), M(PG_S), COMBO_END};
-const uint16_t PROGMEM bkspc_combo_d[] = {M(PG_S), R(PG_R), COMBO_END};
-const uint16_t PROGMEM bk_word_combo[] = {PG_C, PG_J, COMBO_END};
-const uint16_t PROGMEM enter_combo[] = {PG_P, PG_U, COMBO_END};
-const uint16_t PROGMEM tab_combo[] = {I(PG_N), M(PG_I), COMBO_END};
-const uint16_t PROGMEM esc_combo[] = {I(PG_N), R(PG_A), COMBO_END};
-const uint16_t PROGMEM bkspc_combo_g[] = {R(PG_A), M(PG_I), COMBO_END};
-const uint16_t PROGMEM home_combo[] = {PG_EGRV, PG_Y, COMBO_END};
-const uint16_t PROGMEM end_combo[] = {PG_U, PG_EACU, COMBO_END};
-const uint16_t PROGMEM panic_combo[] = {PG_U, PG_C, COMBO_END};
+
+const uint16_t PROGMEM bkspc_combo_d[] = {PG_C, PG_J, COMBO_END};
+const uint16_t PROGMEM enter_combo[] = {PG_F, PG_W, COMBO_END};
+const uint16_t PROGMEM tab_combo[] = {PG_EGRV, PG_Y, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {PG_U, PG_EACU, COMBO_END};
 const uint16_t PROGMEM alttab_combo[] = {PG_H, PG_Y, COMBO_END};
-const uint16_t PROGMEM altesc_combo[] = {R(PG_A), M(PG_I), I(PG_N), COMBO_END};
-const uint16_t PROGMEM space_combo[] = {PG_EGRV, PG_H, COMBO_END};
-const uint16_t PROGMEM voldown_combo[] = {PG_D, PG_F, COMBO_END};
+const uint16_t PROGMEM panic_combo[] = {PG_D, PG_F, COMBO_END};
 
 combo_t key_combos[] = {
-    [R_BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
-    [DELETE] = COMBO(del_combo_d, KC_DEL),
-    [BK_WORD] = COMBO(bk_word_combo, BACKWRD), 
-    [L_BKSPC] = COMBO(bkspc_combo_g, KC_BSPC),
-    [CMB_HOME] = COMBO(home_combo, HOME),
-    [CMB_END] = COMBO(end_combo, END),
+    [BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
     [ENTER] = COMBO(enter_combo, KC_ENT),
     [TAB] = COMBO(tab_combo, KC_TAB),
     [ESC] = COMBO(esc_combo, KC_ESC),
     [CMB_PANIC] = COMBO(panic_combo, PANIC),
     [ALTTAB] = COMBO(alttab_combo, KC_NO),
-    [ALTESC] = COMBO(altesc_combo, LALT(KC_ESC)),
-    [L_SPACE] = COMBO(space_combo, KC_SPC),
-    [VOLDOWN] = COMBO(voldown_combo, KC_VOLD)
     };
 
 
@@ -73,12 +49,8 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 
     // Some combos should trigger regardless of the idle time.
     switch (combo_index) {
-        case R_BKSPC:
-        case BK_WORD:
+        case BKSPC:
         case ENTER:
-        case HOME:
-        case END:
-        case L_SPACE:
           return true;
 
         default:
@@ -117,18 +89,6 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
               return true;
         }
         break;
-
-      case VOLDOWN:
-        switch (keycode) {
-          case PG_D:
-              tap_code(KC_VOLD);
-              return true;
-          case PG_F:
-              tap_code(KC_VOLU);
-              return true;
-        }
-        break;
-
   }
   return false;
 }
