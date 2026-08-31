@@ -18,14 +18,13 @@
 
 #include QMK_KEYBOARD_H
 
-#include "propergol_keycodes.h"
-#include "features/modword.h"
-#include "../../modules/Kawamashi/layer_word/layer_word.h"
-#include "../../modules/Kawamashi/oneshots_on_steroids/oneshots_on_steroids.h"
-#include "../../modules/Kawamashi/clever_keys/clever_keys.h"
+//#include "features/modword.h"
+//#include "../../modules/Kawamashi/layer_word/layer_word.h"
+//#include "../../modules/Kawamashi/oneshots_on_steroids/oneshots_on_steroids.h"
+//#include "../../modules/Kawamashi/clever_keys/clever_keys.h"
 
 
-enum layers {
+/*  enum layers {
     _BASE = 0,
     _1DK,
     _NUMROW,
@@ -66,9 +65,9 @@ enum custom_keycodes {
   HOME,
   END,
   PANIC
-};
+};  */
 
-  // Layer changers
+/*   // Layer changers
 
 #ifdef KRYPTON_ERGOL_SYMBOLS
   #define _SYMBOLS _SYMBOLS_ERGOL
@@ -175,7 +174,7 @@ enum custom_keycodes {
   #define NEXT_WD LCTL(KC_RGHT)
   #define ALT_TAB LALT(KC_TAB)
   #define REV_TAB LSA(KC_TAB)
-#endif
+#endif */
 
 // conf_words
 

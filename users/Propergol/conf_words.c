@@ -15,6 +15,7 @@
  */
 
 #include "propergol.h"
+#include "keymap.c"
 
 bool is_letter(uint16_t keycode) {
 

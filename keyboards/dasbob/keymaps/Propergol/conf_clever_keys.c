@@ -215,5 +215,4 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       }
       break;
   }
-
 }
