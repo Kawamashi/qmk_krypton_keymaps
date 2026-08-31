@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "keymap.h"
 #include "propergol.h"
-//#include "keymap.c"
 
 #include "features/modword.h"
 #include "../../modules/Kawamashi/layer_word/layer_word.h"

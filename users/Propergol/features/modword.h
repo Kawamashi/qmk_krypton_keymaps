@@ -1,8 +1,8 @@
 #pragma once
 
 #include "quantum.h"
-//#include "propergol.h"
-#include "keymap.c"
+#include "propergol.h"
+#include "keymap.h"
 
 // Represents the five states a one-shot key can be in
 typedef enum {
