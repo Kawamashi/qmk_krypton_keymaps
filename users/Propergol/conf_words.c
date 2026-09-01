@@ -308,7 +308,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case KC_F1 ... KC_F12:
             return true;
         default:
-            disable_layerword(_FUNCROW);
+            disable_layerword(_FUNCTIONS);
             return false;
       }
   }
