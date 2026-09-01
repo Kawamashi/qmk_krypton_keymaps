@@ -32,8 +32,7 @@ enum combos {
   PANIC,
   ALTTAB,
   ALTESC,
-  L_SPACE,
-  VOLDOWN
+  L_SPACE
 };
 
 const uint16_t PROGMEM del_combo_d[] = {I(PG_T), M(PG_S), COMBO_END};
@@ -49,7 +48,6 @@ const uint16_t PROGMEM panic_combo[] = {PG_U, PG_C, COMBO_END};
 const uint16_t PROGMEM alttab_combo[] = {PG_H, PG_Y, COMBO_END};
 const uint16_t PROGMEM altesc_combo[] = {R(PG_A), M(PG_I), I(PG_N), COMBO_END};
 const uint16_t PROGMEM space_combo[] = {PG_EGRV, PG_H, COMBO_END};
-const uint16_t PROGMEM voldown_combo[] = {PG_D, PG_F, COMBO_END};
 
 combo_t key_combos[] = {
     [R_BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
@@ -64,8 +62,7 @@ combo_t key_combos[] = {
     [PANIC] = COMBO(panic_combo, KC_NO),
     [ALTTAB] = COMBO(alttab_combo, KC_NO),
     [ALTESC] = COMBO(altesc_combo, LALT(KC_ESC)),
-    [L_SPACE] = COMBO(space_combo, KC_SPC),
-    [VOLDOWN] = COMBO(voldown_combo, KC_VOLD)
+    [L_SPACE] = COMBO(space_combo, KC_SPC)
     };
 
 
@@ -136,18 +133,6 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
               return true;
         }
         break;
-
-      case VOLDOWN:
-        switch (keycode) {
-          case PG_D:
-              tap_code(KC_VOLD);
-              return true;
-          case PG_F:
-              tap_code(KC_VOLU);
-              return true;
-        }
-        break;
-
   }
   return false;
 }
