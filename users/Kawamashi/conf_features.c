@@ -78,7 +78,11 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
       case LT_REPT:
         //const uint8_t mods = get_mods() | get_oneshot_mods();
         //if (mods & MOD_MASK_SHIFT) { return toggle_modword(capsword, CAPSWORD, record); }
-        repeat_key_invoke(&record->event);
+        if (IS_LAYER_ON(_SYMBOLS)) {
+          alt_repeat_key_invoke(&record->event);
+        } else {
+          repeat_key_invoke(&record->event);
+        }
         return false;
 
       case LT_MGC:

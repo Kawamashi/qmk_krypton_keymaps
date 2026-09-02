@@ -112,18 +112,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMBERS] = KAWA_LAYOUT(
       PG_VIRG, _______, KC_5,    PG_H,    PG_PERC,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
-      P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_6), M(KC_7), R(KC_8), P(KC_9),
-      PG_ASTX, PG_MOIN, PG_PLUS, PG_SLSH, _______,                   _______, PG_EGAL, PG_SUP,  PG_INF,  OS_1DK,
+      P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   PG_IND,  I(KC_1), M(KC_2), R(KC_3), P(KC_4),
+      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, _______,                   _______, _______, _______, _______, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUM
      ),
 
 
     [_SYMBOLS] = KAWA_LAYOUT(
-      ALGR(PG_O), PG_APOD, PG_LSBR, PG_RSBR, PG_PERC,                   PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
-      PG_ASTX,    PG_MOIN, PG_PLUS, PG_SLSH, PG_BSLS,                   PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, _______,                   _______, PG_EGAL, PG_SUP,  PG_INF,  ALGR(PG_J),
-                                    OS_NUM,  KC_SPC,  _______, _______, _______, OS_NUM
+      ALGR(PG_O), PG_INF,  PG_SUP,  PG_MOIN, PG_PERC,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_BSLS,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
+      ALGR(PG_J), PG_TILD, PG_ESPR, PG_2PTS, _______,                  _______, PG_LSBR, PG_RSBR, PG_PIPE, PG_APOD,
+                                    OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
     ),
+
+/*         [_SYMBOLS] = KAWA_LAYOUT(
+      ALGR(PG_O), PG_APOD, PG_LSBR, PG_RSBR, PG_PERC,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      PG_ASTX,    PG_MOIN, PG_PLUS, PG_SLSH, PG_BSLS,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
+      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, _______,                  _______, PG_EGAL, PG_SUP,  PG_INF,  ALGR(PG_J),
+                                    OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
+    ), */
 
 
     [_1DK] = KAWA_LAYOUT(
@@ -153,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FUNCTIONS] = KAWA_LAYOUT(
       _______,  _______,  KC_F5,    _______,  KC_VOLU,                   KC_SCRL, _______,  OS_WNUM,  _______,  _______,
-      P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F6), M(KC_F7), R(KC_F8), P(KC_F9),
+      P(KC_6),  R(KC_F7), M(KC_F8), I(KC_F9), KC_VOLD,                   KC_NUM,  I(KC_F1), M(KC_F2), R(KC_F3), P(KC_F4),
       KC_MUTE,  KC_MUTE,  KC_F12,   KC_F11,   _______,                   _______, _______,  _______,  _______,  QK_BOOT,
                                     _______,  KC_F10,  FUNWORD, _______, _______, _______
      ),

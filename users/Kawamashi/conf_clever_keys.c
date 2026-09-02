@@ -173,22 +173,22 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
         case PG_Q:
           // "qué" scissor
-          invoke_key(PG_U,record);
+          invoke_key(PG_U, record);
           return replace_ongoing_key(PG_EACU, ongoing_keycode, record);
 
         case PG_Y:
           // "you" bad redirection
-          invoke_key(PG_O,record);
+          invoke_key(PG_O, record);
           return replace_ongoing_key(PG_U, ongoing_keycode, record);
 
         case PG_T:
           // "tion"
-          invoke_key(PG_I,record);
+          invoke_key(PG_I, record);
           //return replace_ongoing_key(PG_N, ongoing_keycode, record);
 
         case PG_I:
           // "ion"
-          invoke_key(PG_O,record);
+          invoke_key(PG_O, record);
           return replace_ongoing_key(PG_N, ongoing_keycode, record);
 
         case PG_M:
@@ -208,6 +208,16 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "aujourd'hui"
           layer_off(_1DK);
           return finish_word((uint16_t[]) {PG_U, PG_J, PG_O, PG_U, PG_R, PG_D, PG_APOS, PG_H, PG_U, PG_I}, 10, ongoing_keycode, record);
+
+        case PG_LPRN:
+          // "();"
+          invoke_key(PG_RPRN, record);
+          return replace_ongoing_key(PG_PVIR, ongoing_keycode, record);
+
+        case PG_RPRN:
+          // ") {"
+          invoke_key(KC_SPC, record);
+          return replace_ongoing_key(PG_LCBR, ongoing_keycode, record);
         
         default:
           if (IS_LAYER_ON(_SYMBOLS)) { return replace_ongoing_key(prev_keycode, ongoing_keycode, record); }
