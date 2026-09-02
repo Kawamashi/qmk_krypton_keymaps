@@ -38,7 +38,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      ),
 
 
-    //[_NUMPAD] = LAYOUT_split_3x5_3(
     [_NUMBERS] = LAYOUT_split_3x5_3(
 #if defined KRYPTON_NUMBER_ROW
       // Numbers in row, triggered by a layer-tap key on the left half.
@@ -48,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
 
 #elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
-      // Numbers in reverse order, triggered by a one shot key on the right half.
+      // Numbers in row, triggered by a one shot key on the right half.
       PG_VIRG, _______, KC_5,    KC_PDOT, PG_PERC,                   PG_EXP,  _______, PG_DEG,  PG_EURO, OS_WNUM,
       P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, TG_NUM,                    PG_IND,  KC_ENT,  _______, _______, OS_1DK,
@@ -57,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #else
       // Default configuration: numpad
       PG_VIRG,    REV_TAB,    ALT_TAB,    OS_WNUM,    PG_PERC,                   PG_EXP,  KC_7,    KC_8,    KC_9,    PG_EURO,
-      P(PG_ASTX), R(PG_MOIN), M(PG_PLUS), I(PG_SLSH), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
+      P(PG_PLUS), R(PG_ASTX), M(PG_SLSH), I(PG_MOIN), PG_POIN,                   NUMWORD, I(KC_4), M(KC_5), R(KC_6), P(KC_PDOT),
       PG_DEG,     _______,    _______,    KC_ENT,     TG_NUM,                    PG_IND,  KC_1,    KC_2,    KC_3,    OS_1DK,
                                           OS_SHFT,    LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
 
@@ -76,9 +75,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #else
       // Default configuration: Propergol optimized symbol layer
       // NNB_SPC finishes a numword (e.g. `127 km`) with reversed numrow.
-      ALGR(PG_O), PG_APOD, PG_LSBR, PG_RSBR, PG_PERC,                   PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
-      PG_ASTX,    PG_MOIN, PG_PLUS, PG_SLSH, PG_BSLS,                   PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, PG_AROB,                   _______, PG_EGAL, PG_SUP,  PG_INF,  ALGR(PG_J),
+      ALGR(PG_O), PG_INF,  PG_SUP,  PG_MOIN, PG_PERC,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_BSLS,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
+      ALGR(PG_J), PG_TILD, PG_LSBR, PG_RSBR, PG_AROB,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
                                     OS_NUM,  KC_SPC,  KC_BSPC, _______, NNB_SPC, OS_RTHB
 #endif
     ),
@@ -104,14 +103,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FUNCTIONS] = LAYOUT_split_3x5_3(
 #if defined KRYPTON_NUMBER_ROW
-      // Function keys matching the number row layer
+      // Function keys matching the numrow layer
       _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_VOLU,                   KC_BRIU, _______,  KC_F5,    _______,  _______,
       P(KC_F6), R(KC_F7), M(KC_F8), I(KC_F9), KC_MUTE,                   KC_BRID, I(KC_F1), M(KC_F2), R(KC_F3), P(KC_F4),
       KC_NUM,   KC_SCRL,  _______,  KC_SLEP,  KC_VOLD,                   KC_F10,  KC_F11,   KC_F12,   _______,  QK_BOOT,
                                     _______,  PANIC,   FUNWORD, _______, _______, _______
 
 #elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
-      // Function keys matching the reversed numrow layer
+      // Function keys matching the numrow layer
       REV_TAB,  ALT_TAB,  KC_F5,    _______,  KC_BRIU,                   KC_VOLU, KC_MPRV,  KC_MPLY,  KC_MNXT,  _______,
       P(KC_F6), R(KC_F7), M(KC_F8), I(KC_F9), KC_BRID,                   KC_MUTE, I(KC_F1), M(KC_F2), R(KC_F3), P(KC_F4),
       QK_BOOT,  _______,  KC_F12,   KC_F11,   KC_F10,                    KC_VOLD, KC_SLEP,  _______,  KC_SCRL,  KC_NUM,

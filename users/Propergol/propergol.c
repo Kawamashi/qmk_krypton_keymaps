@@ -175,9 +175,9 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return S(KC_TAB); */
     case M(BACKWRD):
       return BACKWRD;
-    case P(PG_ASTX):
+    case R(PG_ASTX):
       return PG_ASTX;
-    case M(PG_PLUS):
+    case P(PG_PLUS):
       return PG_PLUS;
     case LT_AGRV:
       return PG_AGRV;
@@ -288,9 +288,9 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(S(KC_TAB), record); */
       case M(BACKWRD):
         return process_custom_tap_hold(BACKWRD, record);
-      case P(PG_ASTX):
+      case R(PG_ASTX):
         return process_custom_tap_hold(PG_ASTX, record);
-      case M(PG_PLUS):
+      case P(PG_PLUS):
         return process_custom_tap_hold(PG_PLUS, record);
       case LT_AGRV:
         return process_custom_tap_hold(PG_AGRV, record);
