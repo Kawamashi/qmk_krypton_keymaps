@@ -34,13 +34,17 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       switch (*ongoing_keycode) {
 
         // Capitalize punctuation after a thin non-breaking space
-        case PG_POIN:
+        //case PG_POIN:
+        case PG_D:
           // uses less space than process_word
           tap_code(KC_BSPC);
           invoke_key(SAGR(KC_SPC), record);
+          return replace_ongoing_key(PG_2PTS, ongoing_keycode, record);
+        case PG_Q:
+          return replace_ongoing_key(PG_EXCL, ongoing_keycode, record);
         case PG_TIRE:
-        case PG_VIRG:
-          return replace_ongoing_key(S(*ongoing_keycode), ongoing_keycode, record);
+        //case PG_VIRG:
+          return replace_ongoing_key(PG_QUES, ongoing_keycode, record);
       }
       break;
 

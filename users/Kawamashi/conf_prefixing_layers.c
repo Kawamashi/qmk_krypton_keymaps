@@ -48,8 +48,6 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
             case PG_APOS:
             case PG_AGRV:
             case PG_ECIR:
-            case PG_LPRN:
-            case PG_RPRN:
             //case KC_SPC:    // When space is added by Clever Keys
               return true;
             case PG_U:
