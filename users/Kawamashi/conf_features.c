@@ -274,7 +274,8 @@ const oneshot_on_steroids_t oneshot_os[] = {
   {OS(OS_WINM, LT_MGC,  0,                _WINMAN)},
   {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS  )},
   {OS(OS_1DK,  OS_1DK,  0,                _1DK     )},
-  {OS(OS_NUM, OS_NUM, 0,                _NUMBERS  )}
+  {OS(OS_2DK,  OS_2DK,  0,                _2DK     )},
+  {OS(OS_NUM,  OS_NUM,  0,                _NUMBERS  )}
 };
 
 

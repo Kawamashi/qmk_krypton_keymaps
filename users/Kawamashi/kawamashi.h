@@ -28,6 +28,7 @@
 enum layers {
     _BASE = 0,
     _1DK,
+    _2DK,
     _NUMBERS,
     _SYMBOLS,
     _SHORTNAV,
@@ -48,6 +49,7 @@ enum custom_keycodes {
   OS_SHFT,
   OS_NUM,
   OS_1DK,
+  OS_2DK,
   OS_WINM,
   OS_WNUM,
   A_CIRC,

@@ -49,12 +49,20 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
             case PG_AGRV:
             case PG_ECIR:
             //case KC_SPC:    // When space is added by Clever Keys
-              return true;
+                return true;
             case PG_U:
                 // handle `quê`
                 if (get_recent_keycode(-1) == PG_Q) { return true; }
                 
             default:
+                return insert_1dk(keycode);
+        }
+    } else if (IS_LAYER_ON(_2DK)) {
+        switch (keycode) {
+            case PG_W:
+            case PG_V:
+            case PG_M:
+            case PG_C:
               return insert_1dk(keycode);
         }
     }

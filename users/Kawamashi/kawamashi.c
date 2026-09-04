@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = KAWA_LAYOUT(
       PG_EGRV, PG_EACU, PG_U,    PG_P,    PG_VIRG,                 PG_V,   PG_M,    PG_C,    PG_J,    PG_X,
       P(PG_O), R(PG_A), M(PG_I), I(PG_N), PG_POIN,                 PG_G,   I(PG_T), M(PG_S), R(PG_R), P(PG_L),
-      PG_Q,    PG_TIRE, PG_Y,    PG_H,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
+      PG_Q,    PG_TIRE, OS_2DK,  PG_H,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
                                  OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_NUM
     ),
 
@@ -140,6 +140,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUM
      ),
 
+
+    [_2DK] = KAWA_LAYOUT(
+      _______, _______, _______, _______, _______,                   _______, _______, _______, PG_EURO, _______,
+      _______, _______, _______, _______, _______,                   _______, PG_LPRN, PG_RPRN, PG_PVIR, PG_Y,
+      _______, PG_W,    OS_2DK,  _______, _______,                   _______, _______, _______, _______, _______,
+                                 _______, _______, _______, _______, _______, _______
+     ),
 
 
     [_SHORTNAV] = KAWA_LAYOUT(
