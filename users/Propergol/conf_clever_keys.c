@@ -211,9 +211,18 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
     case KC_1 ... KC_0:
       if (should_use_numpad()) {
         // Replace numrow with numpad keycodes
-        replace_ongoing_key(*ongoing_keycode + KC_P1 - KC_1, ongoing_keycode, record);
+        return replace_ongoing_key(*ongoing_keycode + KC_P1 - KC_1, ongoing_keycode, record);
       }
       break;
-  }
 
+    case KC_LEFT:
+      // ←
+      return replace_ongoing_key(PG_APOD, ongoing_keycode, record);
+    case KC_DOWN:
+      // ↔
+      return replace_ongoing_key(PG_APOS, ongoing_keycode, record);
+    case KC_RIGHT:
+      // →
+      return replace_ongoing_key(PG_UNDS, ongoing_keycode, record);
+  }
 }
