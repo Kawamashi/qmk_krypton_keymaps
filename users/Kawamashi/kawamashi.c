@@ -17,6 +17,7 @@
 
 #include "kawamashi.h"
 
+static uint16_t next_keycode;
 
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
     CHORDAL_HOLD_KAWA_LAYOUT(
@@ -25,6 +26,19 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
         'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', '*',
                        '*', 'L', '*', '*', 'R', '*'
     );
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LT_MGC:
+      if (next_keycode == OS_WINM) {return true;}
+      return false;
+    case LT_REPT:
+      if (next_keycode == OS_WNUM) {return true;}
+      return false;
+    default:
+      return false;
+  }
+}
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
@@ -75,6 +89,15 @@ void housekeeping_task_user(void) {
 
 
 // Key processing
+
+bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  if (record->event.pressed) {
+      // Cache the next input for mod-tap decisions
+      next_keycode = keycode;
+  }
+  return true;
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
