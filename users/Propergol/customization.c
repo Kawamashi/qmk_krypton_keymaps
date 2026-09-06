@@ -18,6 +18,7 @@
 
 #include "propergol.h"
 
+// Clever keys
 
 void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
@@ -225,4 +226,99 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       // →
       return replace_ongoing_key(PG_UNDS, ongoing_keycode, record);
   }
+}
+
+
+// Layer Word
+
+uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
+
+  switch (keycode) {
+    case NUMWORD:
+      return _NUMBERS;
+    case NAVWORD:
+      return _SHORTNAV;
+    case FUNWORD:
+      return _FUNCTIONS;
+    default:
+      return 0;
+  }
+}
+
+uint16_t layerword_exit_timeout(uint8_t layer) {
+
+  switch (layer) {
+    case _NUMBERS:
+    case _SHORTNAV:
+        return 3000;
+    case _FUNCTIONS:
+        return 0;
+    default:
+        return 0;
+  }
+}
+
+bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *record) {
+
+  switch (layer) {
+
+    case _NUMBERS:
+      switch (keycode) {
+        // Keycodes that should not disable numword.
+        // Numpad keycodes
+        case NNB_SPC:
+          if (IS_LAYER_ON(_SYMBOLS)) { return false; }
+        case KC_1 ... KC_0:
+        case KC_P1 ... KC_P0:
+        case KC_PDOT:
+        case PG_MOIN:
+        case PG_ASTX: 
+        case PG_PLUS:
+        case PG_SLSH:
+        case PG_EGAL:
+        case PG_EXP:
+        case PG_IND:
+        case PG_H:
+        case PG_2PTS:
+        case PG_POIN:
+        case PG_VIRG:
+
+        // Misc
+        case KC_BSPC:
+            return true; 
+        default:
+            return false;
+      }
+
+    case _SHORTNAV:
+      switch (keycode) {
+        case SEL_WORD:
+        case SEL_LINE:
+          return true;
+      }
+      keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
+      switch (keycode) {
+        case KC_LEFT:
+        case KC_RIGHT:
+        case KC_DOWN:
+        case KC_UP:
+        case KC_PGUP:
+        case KC_PGDN:
+        case HOME:
+        case END:
+            return true;
+        default:
+            return false;
+      }
+
+    case _FUNCTIONS:
+      switch (keycode) {
+        case KC_F1 ... KC_F12:
+            return true;
+        default:
+            disable_layerword(_FUNCTIONS);
+            return false;
+      }
+  }
+  return false;
 }
