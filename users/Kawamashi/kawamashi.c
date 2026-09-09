@@ -183,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FUNCTIONS] = KAWA_LAYOUT(
       _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   KC_SCRL, _______,  OS_WNUM,  _______,  _______,
-      P(KC_4),  R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F9), M(KC_F8), R(KC_F7), P(KC_F6),
+      P(KC_F4), R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F9), M(KC_F8), R(KC_F7), P(KC_F6),
       KC_MUTE,  KC_MUTE,  _______,  KC_F5,    _______,                   _______, _______,  _______,  _______,  QK_BOOT,
                                     _______,  KC_F10,  FUNWORD, _______, _______, _______
      ),
