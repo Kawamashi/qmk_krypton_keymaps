@@ -41,9 +41,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMBERS] = LAYOUT_split_3x5_3(
 #if defined KRYPTON_NUMBER_ROW
       // Numbers in row, triggered by a layer-tap key on the left half.
-      PG_PERC, REV_TAB, ALT_TAB, OS_WNUM, PG_VIRG,                   PG_EXP,  KC_ENT,  KC_5,    PG_EURO, PG_DEG,
+      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, PG_VIRG,                   PG_EXP,  KC_ENT,  KC_5,    PG_EURO, PG_DEG,
       P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, TG_NUM,                    PG_IND,  KC_PDOT, _______, _______, OS_1DK,
+      OS_WNUM, PG_PERC, REV_TAB, ALT_TAB, TG_NUM,                    PG_IND,  KC_PDOT, _______, _______, OS_1DK,
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
 
 #elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT

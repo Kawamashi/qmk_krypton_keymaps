@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMBERS] = KAWA_LAYOUT(
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
-      P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   PG_IND,  I(KC_1), M(KC_2), R(KC_3), P(KC_4),
+      P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_9), M(KC_8), R(KC_7), P(KC_6),
       _______, PG_PERC, PG_H,    KC_5,    _______,                   _______, PG_2PTS, _______, _______, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUM
      ),
@@ -182,9 +182,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_FUNCTIONS] = KAWA_LAYOUT(
-      _______,  _______,  KC_F5,    _______,  KC_VOLU,                   KC_SCRL, _______,  OS_WNUM,  _______,  _______,
-      P(KC_6),  R(KC_F7), M(KC_F8), I(KC_F9), KC_VOLD,                   KC_NUM,  I(KC_F1), M(KC_F2), R(KC_F3), P(KC_F4),
-      KC_MUTE,  KC_MUTE,  _______,  _______,  _______,                   _______, KC_F11,   KC_F12,   _______,  QK_BOOT,
+      _______,  _______,  KC_F12,   KC_F11,   KC_VOLU,                   KC_SCRL, _______,  OS_WNUM,  _______,  _______,
+      P(KC_4),  R(KC_F3), M(KC_F2), I(KC_F1), KC_VOLD,                   KC_NUM,  I(KC_F9), M(KC_F8), R(KC_F7), P(KC_F6),
+      KC_MUTE,  KC_MUTE,  _______,  KC_F5,    _______,                   _______, _______,  _______,  _______,  QK_BOOT,
                                     _______,  KC_F10,  FUNWORD, _______, _______, _______
      ),
 };
