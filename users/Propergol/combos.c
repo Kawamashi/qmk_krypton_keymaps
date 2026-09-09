@@ -76,8 +76,8 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
         case R_BKSPC:
         case BK_WORD:
         case ENTER:
-        case HOME:
-        case END:
+        case CMB_HOME:
+        case CMB_END:
         case L_SPACE:
           return true;
 

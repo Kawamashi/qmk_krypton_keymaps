@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SYMBOLS] = KAWA_LAYOUT(
-      ALGR(PG_J), PG_INF,  PG_SUP,  PG_MOIN, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      ALGR(KC_Q), PG_INF,  PG_SUP,  PG_MOIN, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_POIN,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
       PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
                                     OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
@@ -157,8 +157,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_1DK] = KAWA_LAYOUT(
-      PG_VIRG, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
-      _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    PG_EACU, _______,
+      PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
+      _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
       _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
                                  _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUM
      ),

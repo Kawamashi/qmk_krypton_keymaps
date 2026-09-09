@@ -22,13 +22,9 @@ bool is_letter(uint16_t keycode) {
   if (IS_LAYER_ON(_1DK)) {
     switch (keycode) {
 
-      case PG_VIRG:
-        return true;
-
       case PG_V:
       case PG_M:
       case PG_C:
-      case PG_J:    // arrobe
       case PG_X:    // non-breaking hyphen
       case PG_G:    // greek dead key
       case PG_T:    // slash

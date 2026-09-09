@@ -25,7 +25,7 @@
  * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
  * │ ` │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │ 9 │ 0 │ / │ = │       │
  * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
- * │     │ , │ É │ U │ P │ - │ V │ M │ C │ J │ X │ ' │ - │     │
+ * │     │ - │ É │ U │ P │ , │ V │ M │ C │ J │ X │ ' │ - │     │
  * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
  * │      │ O │ A │ I │ N │ . │ G │ T │ S │ R │ L │ _ │ ’ │    │
  * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
@@ -51,11 +51,11 @@
 #define PG_EGAL KC_EQL  // =
 
 // Row 2
-#define PG_VIRG KC_Q    // ,
+#define PG_TIRE KC_Q    // ,
 #define PG_EACU KC_W    // É    
 #define PG_U    KC_E    // U
 #define PG_P    KC_R    // P
-#define PG_TIRE KC_T    // -
+#define PG_VIRG KC_T    // -
 #define PG_V    KC_Y    // V
 #define PG_M    KC_U    // M
 #define PG_C    KC_I    // C
@@ -96,7 +96,7 @@
  * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
  * │ ~ │ € │ < │ > │ $ │ % │ ^ │ & │ | │ # │ @ │ * │ \ │       │
  * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
- * │     │ ? │   │   │   │ ! │   │   │   │   │   │ " │ + │     │
+ * │     │ ! │   │   │   │ ? │   │   │   │   │   │ " │ + │     │
  * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
  * │      │   │   │   │   │ : │   │   │   │   │   │ [ │ ] │    │
  * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
@@ -122,8 +122,8 @@
 #define PG_BSLS S(PG_EGAL)  // '\'
 
 // Row 2
-#define PG_QUES S(PG_VIRG) // ?
 #define PG_EXCL S(PG_TIRE) // !
+#define PG_QUES S(PG_VIRG) // ?
 #define PG_DQUO S(PG_APOD) // "
 #define PG_PLUS S(PG_MOIN) // +
 //#define PG_DIFF S(PG_EGAL) // ≠
@@ -145,7 +145,7 @@
  * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
  * │ … │ ₁ │ ₂ │ ₃ │ ₄ │ ₅ │ ₆ │ ₇ │ ₈ │ ₉ │ ₀ │   │   │       │
  * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
- * │     │ ^ │ { │ } │ $ │ # │ % │ " │ = │ ! │ ` │ è │ ê │     │
+ * │     │ $ │ < │ > │ $ │ # │ % │ " │ = │ ! │ ` │ è │ ê │     │
  * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
  * │      │ ? │ ( │ ) │ ; │ : │ \ │ / │ - │ + │ * │ à │   │    │
  * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
@@ -166,6 +166,8 @@
 //#define PG_PVIR ALGR(PG_M)    // ;
 //#define PG_QUES ALGR(PG_APOS) // ?
 //#define PG_2PTS ALGR(PG_X) // :
+#define PG_LCBR ALGR(PG_M)    // {
+#define PG_RCBR ALGR(PG_C)    // }
 #define PG_EGRV ALGR(PG_APOD)
 #define PG_ECIR ALGR(PG_MOIN)
 
@@ -176,8 +178,8 @@
 #define PG_MOIN ALGR(PG_I)    // - 
 #define PG_BSLS ALGR(PG_VIRG)    // '\'
 #define PG_GRV  ALGR(PG_G)    // `*/
-#define PG_LPRN ALGR(PG_A)    // (
-#define PG_RPRN ALGR(PG_I)    // )
+#define PG_LPRN ALGR(PG_T)    // (
+#define PG_RPRN ALGR(PG_S)    // )
 #define PG_AGRV ALGR(PG_UNDS)
 //#define PG_INF ALGR(PG_R)    // <
 //#define PG_SUP ALGR(PG_L)    // >
@@ -190,8 +192,8 @@
 //#define PG_PIPE ALGR(PG_Z)    // |
 //#define PG_ESPR ALGR(PG_Y)    // &
 //#define PG_DQUO ALGR(PG_H)    // "
-#define PG_LCBR ALGR(PG_EACU)    // {
-#define PG_RCBR ALGR(PG_U)    // }
+//#define PG_LCBR ALGR(PG_EACU)    // {
+//#define PG_RCBR ALGR(PG_U)    // }
 //#define PG_LSBR ALGR(PG_W)    // [
 //#define PG_RSBR ALGR(PG_1DK) // ]
 

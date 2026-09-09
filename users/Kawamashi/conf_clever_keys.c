@@ -40,10 +40,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           tap_code(KC_BSPC);
           invoke_key(SAGR(KC_SPC), record);
           return replace_ongoing_key(PG_2PTS, ongoing_keycode, record);
-        case PG_Q:
+        case PG_EGRV:
           return replace_ongoing_key(PG_EXCL, ongoing_keycode, record);
-        case PG_TIRE:
-        //case PG_VIRG:
+        case PG_VIRG:
           return replace_ongoing_key(PG_QUES, ongoing_keycode, record);
       }
       break;
