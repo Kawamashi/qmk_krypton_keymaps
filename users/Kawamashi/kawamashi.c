@@ -134,17 +134,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_NUMBERS] = KAWA_LAYOUT(
-      PG_PERC, _______, KC_5,    PG_H,    PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
+      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
       P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   PG_IND,  I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, _______,                   _______, PG_2PTS, _______, _______, OS_1DK,
+      _______, PG_PERC, PG_H,    KC_5,    _______,                   _______, PG_2PTS, _______, _______, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUM
      ),
 
 
     [_SYMBOLS] = KAWA_LAYOUT(
-      PG_PERC,    PG_INF,  PG_SUP,  PG_MOIN, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      ALGR(PG_J), PG_INF,  PG_SUP,  PG_MOIN, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_POIN,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      ALGR(PG_J), PG_TILD, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
+      PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
                                     OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
     ),
 
