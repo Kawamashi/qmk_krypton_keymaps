@@ -17,5 +17,5 @@
 
 #include QMK_KEYBOARD_H
 
-#include "layout.h"
 #include "kawamashi.c"
+#include "customization.c"

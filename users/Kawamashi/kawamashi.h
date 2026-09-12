@@ -18,6 +18,7 @@
 
 #include QMK_KEYBOARD_H
 
+#include "layout.h"
 #include "propergol_keycodes.h"
 #include "features/modword.h"
 #include "../../modules/Kawamashi/layer_word/layer_word.h"

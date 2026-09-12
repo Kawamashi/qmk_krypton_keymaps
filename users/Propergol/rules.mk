@@ -22,10 +22,10 @@ REPEAT_KEY_ENABLE = yes
 
 #SRC += oled.c
 SRC += features/modword.c
-SRC += customization.c
-#SRC += conf_words.c
+#SRC += customization.c
 
-INTROSPECTION_KEYMAP_C = combos.c
+INTROSPECTION_KEYMAP_C = customization.c
+#INTROSPECTION_KEYMAP_C = combos.c
 
 MUSIC_ENABLE = no
 SPACE_CADET_ENABLE = no
