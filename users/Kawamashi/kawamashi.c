@@ -17,7 +17,9 @@
 
 #include "kawamashi.h"
 
+  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
 static uint16_t next_keycode;
+  #endif
 
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
     CHORDAL_HOLD_KAWA_LAYOUT(
@@ -29,12 +31,21 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+
+      #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+    case LT_MGC:
+    case LT_REPT:
+      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) { return true; }
+      return false;
+      #else
     case LT_MGC:
       if (next_keycode == OS_WINM) {return true;}
       return false;
     case LT_REPT:
       if (next_keycode == OS_WNUM) {return true;}
       return false;
+      #endif
+
     default:
       return false;
   }
@@ -90,6 +101,7 @@ void housekeeping_task_user(void) {
 
 // Key processing
 
+  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
@@ -98,6 +110,7 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+  #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
@@ -160,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
       _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
-                                 _______, PG_ECIR, PG_AGRV, PG_APOS, PG_UNDS, OS_NUM
+                                 _______, PG_ECIR, PG_AGRV, PG_APOS, _______, OS_NUM
      ),
 
 
@@ -168,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SHORTNAV] = KAWA_LAYOUT(
       SEL_WORD,   SEL_LINE,   OS_WINM,    LGUI(PG_V), KC_VOLU,                   CAPSLOCK, C(KC_LEFT), KC_UP,      C(KC_RGHT), KC_PGUP,
       P(C(PG_A)), R(C(PG_X)), M(C(PG_C)), I(C(PG_V)), KC_VOLD,                   CAPSLIST, KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_PGDN,
-      KC_MUTE,    KC_MUTE,    KC_F2,      C(PG_Z),    _______,                   _______,  C(KC_PGUP), C(KC_PGDN), KC_NO,      OS_1DK,
+      KC_MUTE,    KC_MUTE,    _______,    C(PG_Z),    _______,                   _______,  C(KC_PGUP), C(KC_PGDN), KC_NO,      OS_1DK,
                                           _______,    _______, _______, NAVWORD, _______,  _______
     ),
 

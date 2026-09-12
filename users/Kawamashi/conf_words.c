@@ -102,6 +102,7 @@ bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {  
       case PG_D:    // umlaut
       case PG_X:    // non-breaking hyphen
+      case KC_SPC:  // underscore
         return true;
     }
   }
@@ -115,7 +116,6 @@ bool caps_word_press_user(uint16_t keycode) {
   switch (keycode) {
     // Keycodes that continue Caps Word, without shifting.
     case PG_1DK:
-    case PG_UNDS:
     case PG_TIRE:
     case PG_SLSH:
     case KC_1 ... KC_0:

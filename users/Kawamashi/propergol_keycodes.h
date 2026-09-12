@@ -213,8 +213,8 @@
  * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
  */
 
- #define PG_EXP S(ALGR(PG_VIRG)) // ^ (dead)
- #define PG_IND S(ALGR(PG_O)) // ˇ (dead)
+ #define PG_EXP S(ALGR(PG_V)) // ^ (dead)
+ #define PG_IND S(ALGR(PG_G)) // ˇ (dead)
 /* // Row 1
 #define PG_IBRV S(ALGR(PG_AROB))   //  ̑ (dead)
 #define PG_HACU S(ALGR(PG_LPRN)) // ˝ (dead)

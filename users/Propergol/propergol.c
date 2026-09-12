@@ -111,6 +111,20 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+
+    case LT_MGC:
+    case LT_REPT:
+      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) { return true; }
+      break;
+
+    default:
+      return false;
+  }
+}
+  #endif
 
 // Housekeeping
 
@@ -124,9 +138,9 @@ void housekeeping_task_user(void) {
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
-      // Cache the next input for mod-tap decisions
-      next_keycode = keycode;
-      next_record  = *record;
+    // Cache the next input for mod-tap decisions
+    next_keycode = keycode;
+    next_record  = *record;
   }
   return true;
 }
@@ -534,6 +548,7 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
   // Mod or layer-change key pressed after an OSoS key
   if (is_oneshot_layer_on_steroids(oneshot)) {
     // OS_1DK and OS_NUM shouldn’t deactivate each other
+    //if (oneshot == OS_1DK) { return true; }
     if (oneshot == OS_1DK && keycode == OS_NUM) { return true; }
     if (oneshot == OS_1DK && keycode == LT_AGRV) { return true; }
     if (oneshot == OS_NUM && keycode == OS_1DK) { return true; }

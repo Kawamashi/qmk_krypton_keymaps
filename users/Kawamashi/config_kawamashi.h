@@ -47,6 +47,7 @@
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define CHORDAL_HOLD
 #define FLOW_TAP_INTERVAL 210
+#define IDLE_TIME_BEFORE_HOLD_PRIORITY 300
 #define QUICK_TAP_TERM_PER_KEY
 
 // EC11K encoders have a different resolution than other EC11 encodeisrs.
