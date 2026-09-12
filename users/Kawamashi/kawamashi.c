@@ -146,6 +146,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
+    [_1DK] = KAWA_LAYOUT(
+      PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
+      _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
+      _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
+                                 _______, PG_ECIR, PG_AGRV, PG_APOS, LT_RSA,  OS_NUM
+     ),
+
+
     [_NUMBERS] = KAWA_LAYOUT(
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_9), M(KC_8), R(KC_7), P(KC_6),
@@ -160,22 +168,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
                                     OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
     ),
-
-/*         [_SYMBOLS] = KAWA_LAYOUT(
-      ALGR(PG_O), PG_APOD, PG_LSBR, PG_RSBR, PG_PERC,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
-      PG_ASTX,    PG_MOIN, PG_PLUS, PG_SLSH, PG_BSLS,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, _______,                  _______, PG_EGAL, PG_SUP,  PG_INF,  ALGR(PG_J),
-                                    OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
-    ), */
-
-
-    [_1DK] = KAWA_LAYOUT(
-      PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
-      _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
-      _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
-                                 _______, PG_ECIR, PG_AGRV, PG_APOS, _______, OS_NUM
-     ),
-
 
 
     [_SHORTNAV] = KAWA_LAYOUT(

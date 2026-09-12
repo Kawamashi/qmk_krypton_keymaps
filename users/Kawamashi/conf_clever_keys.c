@@ -187,7 +187,6 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
         case PG_T:
           // "tion"
           invoke_key(PG_I, record);
-          //return replace_ongoing_key(PG_N, ongoing_keycode, record);
 
         case PG_I:
           // "ion"
@@ -261,9 +260,21 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
     case KC_DOWN:
       // ↔
       return replace_ongoing_key(PG_APOS, ongoing_keycode, record);
-      
+
     case KC_RIGHT:
       // →
       return replace_ongoing_key(PG_UNDS, ongoing_keycode, record);
+
+    case PG_EGRV:
+      if (get_shift_altgr()) { return replace_ongoing_key(PG_TIRE, ongoing_keycode, record); }
+      break;
+
+    case PG_N:
+      if (get_shift_altgr()) { return replace_ongoing_key(PG_EGAL, ongoing_keycode, record); }
+      break;
+
+    case RSA(PG_TIRE):
+      if (get_shift_altgr()) { return replace_ongoing_key(PG_Z, ongoing_keycode, record); }
+      break;
   }
 }

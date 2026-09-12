@@ -491,7 +491,6 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
 
         #ifndef KRYPTON_NUMBER_ROW_WITH_ONESHOT
       case OS_SYMB:
-        //const uint8_t mods = get_mods() | get_oneshot_mods();
         if (mods & MOD_MASK_SHIFT) {
           // OS_SYMB when shifted -> oneshot shift + alt-gr
           return process_record_oneshots_on_steroids(OS_RAS, record);
@@ -501,7 +500,6 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
 
       case OS_1DK:
         // Custom behavior when alt-gr
-        //const uint8_t mods = get_mods() | get_oneshot_mods();
         if (mods & MOD_BIT(KC_ALGR)) {
             tap_code16(ALGR(PG_1DK));
             return false;
@@ -531,9 +529,6 @@ bool is_oneshot_on_steroids_cancel_key(uint16_t keycode) {
 }
 
 bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
-
-  const uint8_t mods = get_mods() | get_oneshot_mods();
-  if (keycode == OS_1DK && (mods & MOD_BIT(KC_ALGR))) { return false; }
 
   bool is_mod_key = is_oneshot_mod_on_steroids(keycode);
   bool is_layer_key = is_oneshot_layer_on_steroids(keycode);

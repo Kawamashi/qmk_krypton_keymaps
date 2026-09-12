@@ -61,12 +61,13 @@ enum custom_keycodes {
 
 
   // Layer changers
-#define LT_SPC LT(_SYMBOLS, KC_SPC)
-#define LT_E LT(_SYMBOLS, PG_E)
+#define LT_SPC  LT(_SYMBOLS,   KC_SPC)
+#define LT_E    LT(_SYMBOLS,   PG_E)
 #define LT_REPT LT(_FUNCTIONS, KC_1)
-#define LT_MGC LT(_SHORTNAV, KC_1)
-#define LT_PDOT LT(_SHORTNAV, KC_PDOT)
-#define LT_0 LT(_SYMBOLS, KC_0)
+#define LT_MGC  LT(_SHORTNAV,  KC_1)
+#define LT_PDOT LT(_SHORTNAV,  KC_PDOT)
+#define LT_0    LT(_SYMBOLS,   KC_0)
+#define LT_RSA  LT(_BASE,      KC_SPC)
 
 
   // HRM
@@ -110,6 +111,12 @@ void set_use_numpad(bool target);
 
 // Returns whether numbers from numrow are to be replaced by numbers from numpad
 bool should_use_numpad(void);
+
+// Set whether shift + alt-gr are to be added to base layer
+void set_shift_altgr(bool target);
+
+// Returns whether shift + alt-gr are to be added to base layer
+bool get_shift_altgr(void);
 
 // This function extracts the base keycode of MT and LT,
 // even if the tap/hold key is a custom one, with non-basic tap keycode.

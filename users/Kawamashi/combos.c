@@ -107,6 +107,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
           if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
           layer_clear();
           set_use_numpad(false);
+          set_shift_altgr(false);
           clear_oneshots_on_steroids();
           unregister_code(KC_LCTL);
           unregister_code(KC_LSFT);

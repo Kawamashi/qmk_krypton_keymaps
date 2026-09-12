@@ -31,31 +31,43 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
     // Handling keys and layers related to the One Dead Key (1DK)
     switch (keycode) {
         case PG_1DK:
-          return insert_1dk(keycode);
+            return insert_1dk(keycode);
+    }
+
+    switch (keycode) {
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+            if (record->tap.count == 0) { return true; }
+            keycode &= 0xff;
+            break;
     }
 
     if (IS_LAYER_ON(_1DK)) {
-        // because of HRM on _NUM layer, to tap symbols like ⅔, ¾ etc.
-        if (IS_QK_MOD_TAP(keycode) && !record->tap.count) { return true; }
-
         switch (keycode) {
             case PG_K:
             case PG_B:
             case PG_H:
             case PG_Z:
             case PG_Q:
-            case PG_UNDS:
             case PG_APOS:
             case PG_AGRV:
             case PG_ECIR:
             //case KC_SPC:    // When space is added by Clever Keys
-              return true;
+                return true;
             case PG_U:
                 // handle `quê`
                 if (get_recent_keycode(-1) == PG_Q) { return true; }
                 
             default:
-              return insert_1dk(keycode);
+                return insert_1dk(keycode);
+        }
+        
+    } else if (get_shift_altgr()) {
+        if (keycode == PG_N) {
+            return insert_1dk(keycode);
+        } else {
+            set_oneshot_mods(MOD_BIT(KC_RSFT) | MOD_BIT(KC_ALGR));
+            return true;
         }
     }
     return true;
