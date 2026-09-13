@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_NUMBERS] = KAWA_LAYOUT(
-      PG_PLUS, PG_ASTX, PG_SLSH, PG_MOIN, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
+      PG_PLUS, PG_ASTX, PG_SLSH, PG_MINS, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_9), M(KC_8), R(KC_7), P(KC_6),
       _______, PG_PERC, PG_H,    KC_5,    _______,                   _______, PG_2PTS, _______, _______, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUM
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SYMBOLS] = KAWA_LAYOUT(
-      ALGR(KC_Q), PG_INF,  PG_SUP,  PG_MOIN, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
+      ALGR(KC_Q), PG_INF,  PG_SUP,  PG_MINS, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_POIN,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
       PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
                                     OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
@@ -85,7 +85,7 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
     switch (keycode) {
-      
+
       case TG_NUM:
         use_numpad = !use_numpad;
         return false;
@@ -589,7 +589,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case KC_1 ... KC_0:
         case KC_P1 ... KC_P0:
         case KC_PDOT:
-        case PG_MOIN:
+        case PG_MINS:
         case PG_ASTX: 
         case PG_PLUS:
         case PG_SLSH:

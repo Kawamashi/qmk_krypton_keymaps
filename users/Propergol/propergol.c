@@ -533,9 +533,29 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
   bool is_mod_key = is_oneshot_mod_on_steroids(keycode);
   bool is_layer_key = is_oneshot_layer_on_steroids(keycode);
   
-  if (!record->tap.count) {
-    if (IS_QK_MOD_TAP(keycode)) { is_mod_key = true; }
-    if (IS_QK_LAYER_TAP(keycode)) { is_layer_key = true; }
+  switch (keycode) {
+    // mod keys.
+    case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        if (record->tap.count) { break; }
+    case KC_LCTL ... KC_RGUI:
+    case KC_HYPR:
+    case KC_MEH:
+    case QK_ONE_SHOT_MOD ... QK_ONE_SHOT_MOD_MAX:
+        is_mod_key = true;
+        break;
+
+    // layer switch keys.
+    case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+        if (record->tap.count) { break; }
+    case QK_LAYER_TAP_TOGGLE ... QK_LAYER_TAP_TOGGLE_MAX:
+    case QK_MOMENTARY ... QK_MOMENTARY_MAX:
+    case QK_LAYER_MOD ... QK_LAYER_MOD_MAX:
+    case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX:
+    case QK_TO ... QK_TO_MAX:
+    case QK_TOGGLE_LAYER ... QK_TOGGLE_LAYER_MAX:
+    case QK_TRI_LAYER_LOWER ... QK_TRI_LAYER_UPPER:
+        is_layer_key = true;
+        break;
   }
 
   if (!is_mod_key && !is_layer_key) { return false; }
