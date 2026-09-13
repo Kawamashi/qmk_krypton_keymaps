@@ -17,7 +17,7 @@
 
 #include "kawamashi.h"
 
-  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+  #ifndef IDLE_TIME_BEFORE_HOLD_PRIORITY
 static uint16_t next_keycode;
   #endif
 
@@ -101,7 +101,7 @@ void housekeeping_task_user(void) {
 
 // Key processing
 
-  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+  #ifndef IDLE_TIME_BEFORE_HOLD_PRIORITY
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
@@ -111,7 +111,7 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
   #endif
-  
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
@@ -135,25 +135,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-bool on_left_hand(keypos_t pos) {
-#ifdef SPLIT_KEYBOARD
-  return pos.row < MATRIX_ROWS / 2;
-#else
-  return (MATRIX_COLS > MATRIX_ROWS) ? pos.col < MATRIX_COLS / 2
-                                     : pos.row < MATRIX_ROWS / 2;
-#endif
-}
-
 static bool use_numpad = false;
-
-void set_use_numpad(bool target) {
-  use_numpad = target;
-}
-
-bool should_use_numpad(void) {
-  return use_numpad;
-}
-
+static bool shift_altgr = false;
 
 uint16_t tap_hold_extractor(uint16_t keycode) {
 
@@ -170,105 +153,6 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
     default:
       return keycode &= 0xff;
   }
-}
-
-bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {    // On press
-      tap_code16(keycode);
-      return false;
-  }
-  return true;
-}
-
-static bool shift_altgr = false;
-
-void set_shift_altgr(bool target) {
-  shift_altgr = target;
-}
-
-bool get_shift_altgr(void) {
-  return shift_altgr;
-}
-
-
-bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
-
-  if (record->event.pressed) {
-    switch (keycode) {
-
-      case TG_NUM:
-        use_numpad = !use_numpad;
-        return false;
-    }
-  }
-
-  if (record->tap.count) {
-    // Special tap-hold keys (on tap).
-    switch (keycode) {
-      case LT_REPT:
-        if (IS_LAYER_ON(_SYMBOLS)) {
-          alt_repeat_key_invoke(&record->event);
-        } else {
-          repeat_key_invoke(&record->event);
-        }
-        return false;
-
-      case LT_MGC:
-        alt_repeat_key_invoke(&record->event);
-        return false;
-    }
-  } else {
-    // Special tap-hold keys (on hold).
-    switch (keycode) {
-
-      case LT_SPC:
-        if (record->event.pressed) {
-          if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
-            cancel_oneshot_on_steroids(OS_SHFT);
-            shift_altgr = true;
-            return false;
-          }
-        } else if (shift_altgr) {
-          shift_altgr = false;
-          return false;
-        }
-        break;
-
-      case LT_RSA:
-        shift_altgr = record->event.pressed;
-        return true;
-    }
-  }
-  return true; // Process all other keycodes normally
-}
-
-
-bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
-
-  if (record->tap.count) {
-    // Special tap-hold keys (on tap).
-    switch (keycode) {
-      case P(C(PG_A)):
-        return process_custom_tap_hold(C(PG_A), record);
-      case R(C(PG_X)):
-        return process_custom_tap_hold(C(PG_X), record);
-      case M(C(PG_C)) :
-        return process_custom_tap_hold(C(PG_C), record);
-      case I(C(PG_V)):
-        return process_custom_tap_hold(C(PG_V), record);
-    }
-  }
-
-  if (record->event.pressed) {
-    // Other macros (on press).
-    switch (keycode) {
-      case PG_DEG:
-        tap_code(PG_1DK);
-        tap_code(KC_0);
-        return false;
-    }
-  }
-  return true; // Process all other keycodes normally
 }
 
 
@@ -425,7 +309,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
   if (!record->event.pressed) { return true; }
   
   switch (keycode) {
-      
+
     case OS_1DK:
       // Custom behavior when alt-gr
       if (shift_altgr) {
@@ -707,6 +591,9 @@ void word_selection_press_user(uint16_t keycode) {
 }
 
 
+
+// Prefixing Layers
+
 // Keep track of the 1DK, for the Repeat Key
 static bool ongoing_1dk = false;
 
@@ -793,4 +680,40 @@ bool insert_1dk(uint16_t keycode) {
 
 bool is_ongoing_1dk(void) {
   return ongoing_1dk;
+}
+
+
+// Utilities
+
+bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {    // On press
+      tap_code16(keycode);
+      return false;
+  }
+  return true;
+}
+
+bool on_left_hand(keypos_t pos) {
+#ifdef SPLIT_KEYBOARD
+  return pos.row < MATRIX_ROWS / 2;
+#else
+  return (MATRIX_COLS > MATRIX_ROWS) ? pos.col < MATRIX_COLS / 2
+                                     : pos.row < MATRIX_ROWS / 2;
+#endif
+}
+
+void set_use_numpad(bool target) {
+  use_numpad = target;
+}
+
+bool should_use_numpad(void) {
+  return use_numpad;
+}
+
+void set_shift_altgr(bool target) {
+  shift_altgr = target;
+}
+
+bool get_shift_altgr(void) {
+  return shift_altgr;
 }

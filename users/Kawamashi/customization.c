@@ -77,6 +77,92 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+// Special behaviors for tap-hold keys,
+// executed before other key processing
+// (prefixing layers, Mod Word, Clever Keys)
+
+bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
+
+  if (record->event.pressed) {
+    switch (keycode) {
+      
+      case TG_NUM:
+        use_numpad = !use_numpad;
+        return false;
+    }
+  }
+
+  if (record->tap.count) {
+    // Special tap-hold keys (on tap).
+    switch (keycode) {
+
+      case LT_REPT:
+        if (IS_LAYER_ON(_SYMBOLS)) {
+          alt_repeat_key_invoke(&record->event);
+        } else {
+          repeat_key_invoke(&record->event);
+        }
+        return false;
+
+      case LT_MGC:
+        alt_repeat_key_invoke(&record->event);
+        return false;
+    }
+  } else {
+    // Special tap-hold keys (on hold).
+    switch (keycode) {
+
+      case LT_SPC:
+        if (record->event.pressed) {
+          if (get_oneshot_on_steroids_state(OS_SHFT) > 0) {
+            cancel_oneshot_on_steroids(OS_SHFT);
+            shift_altgr = true;
+            return false;
+          }
+        } else if (shift_altgr) {
+          shift_altgr = false;
+          return false;
+        }
+        break;
+
+      case LT_RSA:
+        shift_altgr = record->event.pressed;
+        return true;
+    }
+  }
+  return true; // Process all other keycodes normally
+}
+
+
+bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
+
+  if (record->tap.count) {
+    // Special tap-hold keys (on tap).
+    switch (keycode) {
+      case P(C(PG_A)):
+        return process_custom_tap_hold(C(PG_A), record);
+      case R(C(PG_X)):
+        return process_custom_tap_hold(C(PG_X), record);
+      case M(C(PG_C)) :
+        return process_custom_tap_hold(C(PG_C), record);
+      case I(C(PG_V)):
+        return process_custom_tap_hold(C(PG_V), record);
+    }
+  }
+
+  if (record->event.pressed) {
+    // Other macros (on press).
+    switch (keycode) {
+      case PG_DEG:
+        tap_code(PG_1DK);
+        tap_code(KC_0);
+        return false;
+    }
+  }
+  return true; // Process all other keycodes normally
+}
+
+
 // Combos
 
 enum combos {
