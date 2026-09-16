@@ -17,9 +17,8 @@
 
 #include "kawamashi.h"
 
-  #ifndef IDLE_TIME_BEFORE_HOLD_PRIORITY
 static uint16_t next_keycode;
-  #endif
+static keyrecord_t next_record;
 
 static bool hands_swapping = false;
 static bool use_numpad = false;
@@ -37,9 +36,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
       #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+    // Hold priority for hotkeys 
     case LT_MGC:
     case LT_REPT:
-      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) { return true; }
+      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) {
+        return !approved_chord(keycode, record, next_keycode, &next_record);
+      }
       return false;
       #else
     case LT_MGC:
@@ -105,16 +107,15 @@ void housekeeping_task_user(void) {
 
 // Key processing
 
-  #ifndef IDLE_TIME_BEFORE_HOLD_PRIORITY
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
       // Cache the next input for mod-tap decisions
       next_keycode = keycode;
+      next_record  = *record;
   }
   return true;
 }
-  #endif
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -710,6 +711,17 @@ bool on_left_hand(keypos_t pos) {
   return (MATRIX_COLS > MATRIX_ROWS) ? pos.col < MATRIX_COLS / 2
                                      : pos.row < MATRIX_ROWS / 2;
 #endif
+}
+
+bool bilateral_combination(const keyrecord_t* tap_hold_record, const keyrecord_t* other_record) {
+  return on_left_hand(tap_hold_record->event.key) != on_left_hand(other_record->event.key);
+}
+
+// By default, use the BILATERAL_COMBINATIONS rule to consider the tap-hold key
+// "held" only when it and the other key are on opposite hands.
+__attribute__((weak)) bool approved_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                                           uint16_t other_keycode, keyrecord_t* other_record) {
+  return bilateral_combination(tap_hold_record, other_record);
 }
 
 void set_use_numpad(bool target) {

@@ -268,6 +268,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
           layer_clear();
           set_use_numpad(false);
           set_shift_altgr(false);
+          hands_swapping = false;
           clear_oneshots_on_steroids();
           unregister_code(KC_LCTL);
           unregister_code(KC_LSFT);
