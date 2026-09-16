@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
       _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
-                                 _______, PG_ECIR, PG_AGRV, PG_APOS, LT_RSA,  OS_NUM
+                                 _______, PG_ECIR, LT_AGRV, PG_APOS, LT_RSA,  OS_NUM
      ),
 
 
@@ -147,6 +147,8 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(C(PG_C), record);
       case I(C(PG_V)):
         return process_custom_tap_hold(C(PG_V), record);
+      case LT_AGRV:
+        return process_custom_tap_hold(PG_AGRV, record);
     }
   }
 
@@ -182,34 +184,34 @@ enum combos {
   L_SPACE
 };
 
-const uint16_t PROGMEM del_combo_d[] = {I(PG_T), M(PG_S), COMBO_END};
-const uint16_t PROGMEM bkspc_combo_d[] = {M(PG_S), R(PG_R), COMBO_END};
-const uint16_t PROGMEM bk_word_combo[] = {PG_C, PG_J, COMBO_END};
-const uint16_t PROGMEM enter_combo[] = {PG_P, PG_U, COMBO_END};
-const uint16_t PROGMEM tab_combo[] = {I(PG_N), M(PG_I), COMBO_END};
-const uint16_t PROGMEM esc_combo[] = {I(PG_N), R(PG_A), COMBO_END};
-const uint16_t PROGMEM bkspc_combo_g[] = {R(PG_A), M(PG_I), COMBO_END};
-const uint16_t PROGMEM home_combo[] = {PG_TIRE, PG_Y, COMBO_END};
-const uint16_t PROGMEM end_combo[] = {PG_U, PG_EACU, COMBO_END};
-const uint16_t PROGMEM panic_combo[] = {PG_U, PG_C, COMBO_END};
-const uint16_t PROGMEM alttab_combo[] = {PG_H, PG_Y, COMBO_END};
-const uint16_t PROGMEM altesc_combo[] = {R(PG_A), M(PG_I), I(PG_N), COMBO_END};
-const uint16_t PROGMEM space_combo[] = {PG_TIRE, PG_H, COMBO_END};
+const uint16_t PROGMEM del_combo_d[]   = {I(PG_T), M(PG_S),          COMBO_END};
+const uint16_t PROGMEM bkspc_combo_d[] = {M(PG_S), R(PG_R),          COMBO_END};
+const uint16_t PROGMEM bk_word_combo[] = {PG_C,    PG_J,             COMBO_END};
+const uint16_t PROGMEM enter_combo[]   = {PG_P,    PG_U,             COMBO_END};
+const uint16_t PROGMEM tab_combo[]     = {I(PG_N), M(PG_I),          COMBO_END};
+const uint16_t PROGMEM esc_combo[]     = {I(PG_N), R(PG_A),          COMBO_END};
+const uint16_t PROGMEM bkspc_combo_g[] = {R(PG_A), M(PG_I),          COMBO_END};
+const uint16_t PROGMEM home_combo[]    = {PG_TIRE, PG_Y,             COMBO_END};
+const uint16_t PROGMEM end_combo[]     = {PG_U,    PG_EACU,          COMBO_END};
+const uint16_t PROGMEM panic_combo[]   = {PG_U,    PG_C,             COMBO_END};
+const uint16_t PROGMEM alttab_combo[]  = {PG_H,    PG_Y,             COMBO_END};
+const uint16_t PROGMEM altesc_combo[]  = {R(PG_A), M(PG_I), I(PG_N), COMBO_END};
+const uint16_t PROGMEM space_combo[]   = {PG_TIRE, PG_H,             COMBO_END};
 
 combo_t key_combos[] = {
     [R_BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
-    [DELETE] = COMBO(del_combo_d, KC_DEL),
+    [DELETE]  = COMBO(del_combo_d,   KC_DEL),
     [BK_WORD] = COMBO(bk_word_combo, LCTL(KC_BSPC)), 
     [L_BKSPC] = COMBO(bkspc_combo_g, KC_BSPC),
-    [HOME] = COMBO(home_combo, KC_HOME),
-    [END] = COMBO(end_combo, KC_END),
-    [ENTER] = COMBO(enter_combo, KC_ENT),
-    [TAB] = COMBO(tab_combo, KC_TAB),
-    [ESC] = COMBO(esc_combo, KC_ESC),
-    [PANIC] = COMBO(panic_combo, KC_NO),
-    [ALTTAB] = COMBO(alttab_combo, KC_NO),
-    [ALTESC] = COMBO(altesc_combo, LALT(KC_ESC)),
-    [L_SPACE] = COMBO(space_combo, KC_SPC)
+    [HOME]    = COMBO(home_combo,    KC_HOME),
+    [END]     = COMBO(end_combo,     KC_END),
+    [ENTER]   = COMBO(enter_combo,   KC_ENT),
+    [TAB]     = COMBO(tab_combo,     KC_TAB),
+    [ESC]     = COMBO(esc_combo,     KC_ESC),
+    [PANIC]   = COMBO(panic_combo,   KC_NO),
+    [ALTTAB]  = COMBO(alttab_combo,  KC_NO),
+    [ALTESC]  = COMBO(altesc_combo,  LALT(KC_ESC)),
+    [L_SPACE] = COMBO(space_combo,   KC_SPC)
     };
 
 

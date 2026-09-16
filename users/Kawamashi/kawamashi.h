@@ -69,6 +69,7 @@ enum custom_keycodes {
 #define LT_PDOT LT(_SHORTNAV,  KC_PDOT)
 #define LT_0    LT(_SYMBOLS,   KC_0)
 #define LT_RSA  LT(_BASE,      KC_SPC)
+#define LT_AGRV LT(_SHORTNAV,  PG_AGRV)
 
 
   // HRM
