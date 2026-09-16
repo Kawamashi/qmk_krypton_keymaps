@@ -20,10 +20,7 @@ CAPS_WORD_ENABLE = no
 COMBO_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
 
-#SRC += oled.c
 SRC += features/modword.c
-
-INTROSPECTION_KEYMAP_C = customization.c
 
 MUSIC_ENABLE = no
 SPACE_CADET_ENABLE = no

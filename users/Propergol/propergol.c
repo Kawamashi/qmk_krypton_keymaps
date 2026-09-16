@@ -375,7 +375,7 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
           return SYMBOL_1DK;
       }
     
-    // There are no symbols on _SHORTNAV, _WINMAN or _FUNCTIONS
+    // There are no symbols on _SHORTNAV (except ←, ↔ and →), _WINMAN or _FUNCTIONS
     case _SHORTNAV:
       if (IS_LAYER_ON(_1DK)) {
         switch (keycode) {

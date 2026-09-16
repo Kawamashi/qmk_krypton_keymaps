@@ -19,3 +19,4 @@
 
 #include "propergol.c"
 #include "keymaps/dasbob.c"
+#include "customization.c"

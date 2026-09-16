@@ -33,14 +33,14 @@
 #    define RGBLIGHT_LIMIT_VAL 150
 #endif
 
-// combo
+// Combos
 #define COMBO_TERM 50
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
 #define COMBO_PROCESS_KEY_REPRESS
 #define IDLE_TIME_BEFORE_COMBO 210
 
-// mod tap
+// Mod-Tap
 #define TAPPING_TERM 250
 #define TAPPING_TERM_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY

@@ -54,6 +54,8 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     switch (combo_index) {
         case BKSPC:
         case ENTER:
+        case TAB:
+        case CMB_PANIC:
           return true;
 
         default:
