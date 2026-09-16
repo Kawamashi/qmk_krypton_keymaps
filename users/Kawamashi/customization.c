@@ -28,6 +28,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
+    [_L_SWAPPED] = KAWA_LAYOUT(
+      PG_X,    PG_J,    PG_C,    PG_M,    PG_V,                    PG_V,   PG_M,    PG_C,    PG_J,    PG_X,
+      P(PG_L), R(PG_R), M(PG_S), I(PG_T), PG_G,                    PG_G,   I(PG_T), M(PG_S), R(PG_R), P(PG_L),
+      OS_1DK,  PG_W,    PG_F,    PG_D,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
+                                 OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_NUM
+    ),
+
+
     [_1DK] = KAWA_LAYOUT(
       PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
@@ -55,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SHORTNAV] = KAWA_LAYOUT(
       SEL_WORD,   SEL_LINE,   OS_WINM,    LGUI(PG_V), KC_VOLU,                   CAPSLOCK, C(KC_LEFT), KC_UP,      C(KC_RGHT), KC_PGUP,
       P(C(PG_A)), R(C(PG_X)), M(C(PG_C)), I(C(PG_V)), KC_VOLD,                   CAPSLIST, KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_PGDN,
-      KC_MUTE,    KC_MUTE,    _______,    C(PG_Z),    _______,                   _______,  C(KC_PGUP), C(KC_PGDN), KC_NO,      OS_1DK,
+      SWAP_H,     KC_MUTE,    _______,    C(PG_Z),    _______,                   _______,  C(KC_PGUP), C(KC_PGDN), KC_NO,      OS_1DK,
                                           _______,    _______, _______, NAVWORD, _______,  _______
     ),
 
@@ -88,6 +96,9 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
       case TG_NUM:
         use_numpad = !use_numpad;
+        return false;
+      case SWAP_H:
+        hands_swapping = !hands_swapping;
         return false;
     }
   }

@@ -28,6 +28,7 @@
 
 enum layers {
     _BASE = 0,
+    _L_SWAPPED,
     _1DK,
     _NUMBERS,
     _SYMBOLS,
@@ -51,13 +52,15 @@ enum custom_keycodes {
   OS_1DK,
   OS_WINM,
   OS_WNUM,
+  OS_SWAP,
   A_CIRC,
   U_CIRC,
   N_TILD,
   MAGIC,
   LETTER_1DK,
   SYMBOL_1DK,
-  PG_DEG
+  PG_DEG,
+  SWAP_H
 };
 
 

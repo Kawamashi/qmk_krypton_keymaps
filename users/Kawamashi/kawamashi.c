@@ -21,6 +21,10 @@
 static uint16_t next_keycode;
   #endif
 
+static bool hands_swapping = false;
+static bool use_numpad = false;
+static bool shift_altgr = false;
+
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
     CHORDAL_HOLD_KAWA_LAYOUT(
         'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R',
@@ -134,9 +138,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-
-static bool use_numpad = false;
-static bool shift_altgr = false;
 
 uint16_t tap_hold_extractor(uint16_t keycode) {
 
@@ -298,11 +299,12 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // One-shot mods
 
 const oneshot_on_steroids_t oneshot_os[] = {
-  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), _BASE   )},
-  {OS(OS_WINM, LT_MGC,  0,                _WINMAN )},
-  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS)},
-  {OS(OS_1DK,  OS_1DK,  0,                _1DK    )},
-  {OS(OS_NUM,  OS_NUM, 0,                 _NUMBERS)}
+  {OS(OS_SHFT, OS_SHFT, MOD_BIT(KC_LSFT), _BASE     )},
+  {OS(OS_WINM, LT_MGC,  0,                _WINMAN   )},
+  {OS(OS_WNUM, LT_REPT, MOD_BIT(KC_LGUI), _NUMBERS  )},
+  {OS(OS_1DK,  OS_1DK,  0,                _1DK      )},
+  {OS(OS_NUM,  OS_NUM,  0,                _NUMBERS  )},
+  {OS(OS_SWAP, OS_SHFT, 0,                _L_SWAPPED)}
 };
 
 
@@ -317,6 +319,12 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       if (shift_altgr) {
         tap_code16(RSA(PG_1DK));
         return false;
+      }
+      break;
+
+    case OS_SHFT:
+      if (hands_swapping) {
+          return process_record_oneshots_on_steroids(OS_SWAP, record);
       }
       break;
 
