@@ -64,15 +64,6 @@ Couche centrale, donc accessible avec des layer-tap sur les touches de repos des
 - FUNWORD et PANIC. PANIC permet de remettre le clavier dans sa configuration par défaut, en désactivant tout ce qui aurait pu être activé par erreur : one-shots, layer words, caps word, Clever keys, etc.
 
 
-### Combos
-
-- Les combos peuvent être un game-changer sur les claviers compacts, mais tout le monde n’aime pas. 
-- La configuration embarque quelques combos (backspace, enter, tab, escape, alt-tab et PANIC), qui utilisent des touches hors de la rangée de repos.
-Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé. 
-- Si l’utilisation des combos vous parait naturelle, la configuration peut être optimisée. Ma configuration personnelle en utilise plus, ce qui me permet d’avoir une couche de navigation mieux adaptée à mes besoins.
-- La combo alt-tab utilise le [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), ce qui permet de naviguer dans vos fenêtres en lâchant et en réappuyant sur `H` ou `Y` : en appuyant sur les deux touches en même temps on déclenche la combo, qui envoie Alt-tab au système. On peut ensuite se déplacer dans les fenêtres ouvertes en relâchant `H` et en réappuyant dessus. On peut faire la même chose dans l’autre sens avec 'Y'.
-
-
 ## Modifier and layer keys
 
 ### Modifier keys
@@ -91,6 +82,14 @@ Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé.
 - La configuration utilise des touches “one shot”. Ces touches se comportent comme des 
 - one shot on steroids : timeless, annulables facilement, non soumises à la layer stack, compatibles avec le [Shaka Gesture](https://github.com/lobre/shaka34/blob/main/gesture/README.md)
 
+
+### Combos
+
+- Les combos peuvent être un game-changer sur les claviers compacts, mais tout le monde n’aime pas. 
+- La configuration embarque quelques combos (backspace, enter, tab, escape, alt-tab et PANIC), qui utilisent des touches hors de la rangée de repos.
+Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé. 
+- Si l’utilisation des combos vous parait naturelle, la configuration peut être optimisée. Ma configuration personnelle en utilise plus, ce qui me permet d’avoir une couche de navigation mieux adaptée à mes besoins.
+- La combo alt-tab utilise le [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), ce qui permet de naviguer dans vos fenêtres en lâchant et en réappuyant sur `H` ou `Y` : en appuyant sur les deux touches en même temps on déclenche la combo, qui envoie Alt-tab au système. On peut ensuite se déplacer dans les fenêtres ouvertes en relâchant `H` et en réappuyant dessus. On peut faire la même chose dans l’autre sens avec 'Y'.
 
 
 ## Features
