@@ -21,9 +21,9 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = KAWA_LAYOUT(
-      PG_EGRV, PG_EACU, PG_U,    PG_P,    PG_VIRG,                 PG_V,   PG_M,    PG_C,    PG_J,    PG_X,
+      PG_TIRE, PG_EACU, PG_U,    PG_P,    PG_VIRG,                 PG_V,   PG_M,    PG_C,    PG_J,    PG_X,
       P(PG_O), R(PG_A), M(PG_I), I(PG_N), PG_POIN,                 PG_G,   I(PG_T), M(PG_S), R(PG_R), P(PG_L),
-      PG_Q,    PG_TIRE, PG_Y,    PG_H,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
+      PG_Q,    PG_EGRV, PG_Y,    PG_H,    KC_NO,                   KC_NO,  PG_D,    PG_F,    PG_W,    OS_1DK,
                                  OS_SHFT, LT_E,   LT_MGC, LT_REPT, LT_SPC, OS_NUM
     ),
 
@@ -37,9 +37,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_1DK] = KAWA_LAYOUT(
-      PG_EACU, PG_J   , _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
+      PG_X,    _______, _______, N_TILD,  _______,                   _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, PG_K,    PG_W,    _______, _______,
-      _______, PG_X,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
+      _______, PG_J,    _______, PG_H,    _______,                   _______, PG_B,    PG_D,    PG_S,    OS_1DK,
                                  _______, PG_ECIR, LT_AGRV, PG_APOS, LT_RSA,  OS_NUM
      ),
 
@@ -202,12 +202,12 @@ const uint16_t PROGMEM enter_combo[]   = {PG_P,    PG_U,             COMBO_END};
 const uint16_t PROGMEM tab_combo[]     = {I(PG_N), M(PG_I),          COMBO_END};
 const uint16_t PROGMEM esc_combo[]     = {I(PG_N), R(PG_A),          COMBO_END};
 const uint16_t PROGMEM bkspc_combo_g[] = {R(PG_A), M(PG_I),          COMBO_END};
-const uint16_t PROGMEM home_combo[]    = {PG_TIRE, PG_Y,             COMBO_END};
+const uint16_t PROGMEM home_combo[]    = {PG_EGRV, PG_Y,             COMBO_END};
 const uint16_t PROGMEM end_combo[]     = {PG_U,    PG_EACU,          COMBO_END};
 const uint16_t PROGMEM panic_combo[]   = {PG_U,    PG_C,             COMBO_END};
 const uint16_t PROGMEM alttab_combo[]  = {PG_H,    PG_Y,             COMBO_END};
 const uint16_t PROGMEM altesc_combo[]  = {R(PG_A), M(PG_I), I(PG_N), COMBO_END};
-const uint16_t PROGMEM space_combo[]   = {PG_TIRE, PG_H,             COMBO_END};
+const uint16_t PROGMEM space_combo[]   = {PG_EGRV, PG_H,             COMBO_END};
 
 combo_t key_combos[] = {
     [R_BKSPC] = COMBO(bkspc_combo_d, KC_BSPC),
@@ -316,16 +316,14 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       switch (*ongoing_keycode) {
 
         // Capitalize punctuation after a thin non-breaking space
-        //case PG_POIN:
         case PG_D:
           // uses less space than process_word
           tap_code(KC_BSPC);
           invoke_key(SAGR(KC_SPC), record);
           return replace_ongoing_key(PG_2PTS, ongoing_keycode, record);
-        case PG_EGRV:
-          return replace_ongoing_key(PG_EXCL, ongoing_keycode, record);
+        case PG_TIRE:
         case PG_VIRG:
-          return replace_ongoing_key(PG_QUES, ongoing_keycode, record);
+          return replace_ongoing_key(S(*ongoing_keycode), ongoing_keycode, record);
       }
       break;
 
@@ -547,16 +545,8 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       // →
       return replace_ongoing_key(PG_UNDS, ongoing_keycode, record);
 
-    case PG_EGRV:
-      if (get_shift_altgr()) { return replace_ongoing_key(PG_TIRE, ongoing_keycode, record); }
-      break;
-
     case PG_N:
       if (get_shift_altgr()) { return replace_ongoing_key(PG_EGAL, ongoing_keycode, record); }
-      break;
-
-    case RSA(PG_TIRE):
-      if (get_shift_altgr()) { return replace_ongoing_key(PG_Z, ongoing_keycode, record); }
       break;
   }
 }
