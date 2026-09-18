@@ -72,6 +72,7 @@ enum custom_keycodes {
   #define  LT_MGC     LT(_NUMBERS,   KC_1)
   // to combine _NUMBERS with _1DK
   #define  LT_AGRV    LT(_NUMBERS,   PG_AGRV)
+  #define  LT_APOS    PG_APOS
 
 #elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
   // Numbers and function keys in rows, with a oneshot key to access the num layer
@@ -80,6 +81,7 @@ enum custom_keycodes {
   #define  LT_REPT    LT(_SYMBOLS,   KC_1)
   #define  LT_MGC     LT(_FUNCTIONS, KC_1)
   #define  LT_AGRV    PG_AGRV
+  #define  LT_APOS    LT(_SYMBOLS,   PG_APOS)
 
 #else
   // Krypton base conf
@@ -89,6 +91,7 @@ enum custom_keycodes {
   #define  LT_MGC     LT(_NUMBERS,   KC_1)
   // to combine _NUMBERS with _1DK
   #define  LT_AGRV    LT(_NUMBERS,   PG_AGRV)
+  #define  LT_APOS    PG_APOS
 #endif
 
 #define LT_SPC  LT(_SHORTNAV,  KC_SPC)

@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       PG_X,    _______, _______, _______, _______,                   _______, _______, _______, _______, _______,
       _______, _______, _______, PG_Z,    _______,                   _______, _______, _______, _______, _______,
       _______, PG_J,    _______, _______, _______,                   _______, _______, _______, _______, OS_1DK,
-                                 _______, PG_ECIR, LT_AGRV, PG_APOS, PG_UNDS, OS_NUM
+                                 _______, PG_ECIR, LT_AGRV, LT_APOS, PG_UNDS, OS_RTHB
      ),
 
 
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // NNB_SPC finishes a numword (e.g. `127 km`) with reversed numrow.
       PG_ACIR, PG_INF,  PG_SUP,  PG_DLR,  PG_PERC,                   PG_AROB, PG_ESPR,    PG_ASTX, PG_APOD, PG_GRV,
       PG_LCBR, PG_LPRN, PG_RPRN, PG_RCBR, PG_EGAL,                   PG_BSLS, PG_PLUS,    PG_MINS, PG_SLSH, PG_DQUO,
-      PG_TILD, PG_LSBR, PG_RSBR, PG_UNDS, PG_HASH,                   PG_PIPE, ALGR(PG_J), PG_PVIR, PG_2PTS, ALGR(PG_O),
+      PG_TILD, PG_LSBR, PG_RSBR, PG_UNDS, PG_HASH,                   PG_PIPE, ALGR(KC_Q), PG_PVIR, PG_2PTS, ALGR(KC_T),
                                  OS_NUM,  KC_SPC,  KC_BSPC, _______, NNB_SPC, OS_RTHB
 #else
       // Default configuration: Propergol optimized symbol layer

@@ -563,9 +563,7 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
   // Mod or layer-change key pressed after an OSoS key
   if (is_oneshot_layer_on_steroids(oneshot)) {
     // OS_1DK and OS_NUM shouldn’t deactivate each other
-    //if (oneshot == OS_1DK) { return true; }
-    if (oneshot == OS_1DK && keycode == OS_NUM) { return true; }
-    if (oneshot == OS_1DK && keycode == LT_AGRV) { return true; }
+    if (oneshot == OS_1DK) { return true; }
     if (oneshot == OS_NUM && keycode == OS_1DK) { return true; }
     // If a layer-change key is pressed after a OSL, the OSL must be reset.
     if (is_layer_key) { return false; }
