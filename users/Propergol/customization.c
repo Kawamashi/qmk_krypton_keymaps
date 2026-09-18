@@ -21,6 +21,7 @@
 
 // Combos
 
+  #ifndef NO_COMBO
 enum combos {
   BKSPC, 
   ENTER,
@@ -59,7 +60,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
           return true;
 
         default:
-          //return enough_time_before_combo();    // takes more space
           if (get_idle_time() < IDLE_TIME_BEFORE_COMBO) { return false; }
     }
     return true;
@@ -87,17 +87,17 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
       case ALTTAB:
         switch (keycode) {
           case PG_Y:
-              tap_code16(S(KC_TAB));
+              tap_code16(REV_TAB);
               return true;
           case PG_H:
-              tap_code(KC_TAB);
+              tap_code(ALT_TAB);
               return true;
         }
         break;
   }
   return false;
 }
-
+  #endif
 
 // Clever keys
 

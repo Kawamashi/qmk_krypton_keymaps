@@ -239,7 +239,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
           return true;
 
         default:
-          //return enough_time_before_combo();    // takes more space
           if (get_idle_time() < IDLE_TIME_BEFORE_COMBO) { return false; }
     }
     return true;
