@@ -330,8 +330,7 @@ bool is_oneshot_on_steroids_custom_behavior(uint16_t keycode, keyrecord_t* recor
       break;
 
     case LT_PDOT:
-      const int8_t os_num_state = get_oneshot_on_steroids_state(OS_NUM);
-      if (os_num_state == 3) {
+      if (get_oneshot_on_steroids_state(OS_NUM) == 3) {
         // OS_NUM + LT_PDOT -> Numword when OS_NUM has not been used yet.
         return process_layerword_triggers(NUMWORD, record);
       }
@@ -388,14 +387,24 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
 }
 
 bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer) {
-    switch (keycode) {
-        case OS_1DK:
-          // OS_1DK shouldn’t deactivate other layers
-          // for ex. to be combined with _NUMBERS
-          return false;
-        default:
-            return true;
-    }
+  switch (keycode) {
+    case OS_1DK:
+      // OS_1DK shouldn’t deactivate other layers
+      // for ex. to be combined with _NUMBERS
+      return false;
+    default:
+        return true;
+  }
+}
+
+bool automatic_release_after_other_keypress(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
+  switch (oneshot) {
+    case OS_1DK:
+      if (keycode == PG_K) { return true; }
+
+    default:
+      return false;
+  }
 }
 
 

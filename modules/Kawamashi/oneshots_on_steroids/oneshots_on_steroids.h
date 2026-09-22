@@ -142,6 +142,12 @@ bool should_oneshot_on_steroids_absorb_mods(uint16_t keycode);
 bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer);
 #   endif  // OS_STEROIDS_FREE_LAYER_STACK
 
+#   ifdef OS_STEROIDS_ONLY_ONE_SHOT
+// Callback to customise which OSoS keys should be released after another keypress,
+// even if the OSoS key is still pressed
+bool automatic_release_after_other_keypress(uint16_t keycode, uint16_t oneshot, keyrecord_t* record);
+#   endif
+
 #ifdef __cplusplus
 }
 #endif

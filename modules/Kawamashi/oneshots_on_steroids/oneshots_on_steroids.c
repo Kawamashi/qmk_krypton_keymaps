@@ -320,6 +320,14 @@ void clear_oneshot_mods_on_steroids(void) {
     }
 }
 
+static bool should_oneshot_on_steroids_stay_pressed(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
+#       ifdef OS_STEROIDS_ONLY_ONE_SHOT
+    return !automatic_release_after_other_keypress(keycode, oneshot, record);
+#       else
+    return true;
+#       endif
+}
+
 
 static void process_trigger_press(uint8_t index, keyrecord_t *record) {
 
@@ -424,8 +432,10 @@ static void process_other_key_press(uint8_t index, uint16_t keycode, keyrecord_t
     switch (oneshot_state[index]) {
         case os_down_unused:
             // When the oneshot key is still pressed
-            oneshot_state[index] = os_down_used;
-            break;
+            if (should_oneshot_on_steroids_stay_pressed(keycode, oneshot_os[index].trigger, record)) {
+                oneshot_state[index] = os_down_used;
+                break;
+            }
         case os_up_queued:
             if (is_oneshot_on_steroids(keycode)) {
                 // because process_record_oneshots_on_steroids() will return false,
@@ -632,6 +642,16 @@ __attribute__((weak)) bool should_oneshot_on_steroids_absorb_mods(uint16_t keyco
 
 #ifdef OS_STEROIDS_FREE_LAYER_STACK
 __attribute__((weak)) bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer) {
+    switch (keycode) {
+
+        default:
+            return true;
+    }
+}
+#endif  // OS_STEROIDS_FREE_LAYER_STACK
+
+#ifdef OS_STEROIDS_ONLY_ONE_SHOT
+__attribute__((weak)) bool automatic_release_after_other_keypress(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
     switch (keycode) {
 
         default:
