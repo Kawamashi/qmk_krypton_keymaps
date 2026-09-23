@@ -52,7 +52,7 @@ typedef enum {
     os_down_unused,
     os_down_used,
     os_up_queued,
-    os_up_queued_used,
+    os_finished,
 } oneshot_on_steroids_state_t;
 
 // Oneshot-type wrapper
