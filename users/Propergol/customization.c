@@ -53,6 +53,9 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 
     // Some combos should trigger regardless of the idle time.
     switch (combo_index) {
+        case ALTTAB:
+          if (IS_LAYER_ON(_SYMBOLS)) { return false; }
+          break;
         case BKSPC:
         case ENTER:
         case TAB:

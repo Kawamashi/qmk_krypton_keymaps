@@ -705,6 +705,25 @@ bool is_ongoing_1dk(void) {
 
 // Utilities
 
+void hotkeys_management(uint16_t keycode, keyrecord_t *record) {
+  static uint8_t weak_mods = 0;
+
+  if (record->event.pressed) {
+    // Roll involving hotkey
+    // for ex. != or */
+    if (weak_mods) {
+      clear_weak_mods();
+      weak_mods = 0;
+    }
+    // Hotkey press
+    if (IS_QK_MODS(keycode)) { weak_mods = QK_MODS_GET_MODS(keycode); }
+
+  } else if (IS_QK_MODS(keycode)) {
+    // Hotkey release
+    weak_mods = 0;
+  }
+}
+
 bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {    // On press
       tap_code16(keycode);

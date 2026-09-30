@@ -132,6 +132,11 @@ bool bilateral_combination(const keyrecord_t* tap_hold_record, const keyrecord_t
  */
 bool approved_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record);
 
+// Handles weak mods of hotkeys
+// Helps with rolls involving keys containing weak mods
+// for ex. `!=` or `*/`
+void hotkeys_management(uint16_t keycode, keyrecord_t *record);
+
 // Handles the tap function of tap-hold keys using non-basic keycodes
 bool process_custom_tap_hold(uint16_t keycode, keyrecord_t *record);
 
