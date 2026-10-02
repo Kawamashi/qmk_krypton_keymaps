@@ -207,6 +207,8 @@ static bool nav_typed = false;
 
 bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
 
+  hotkeys_management(keycode, record);
+
   if (record->event.pressed) {
 
     switch (keycode) {
@@ -877,6 +879,19 @@ bool is_followed_by_apos(uint16_t keycode, uint16_t prev_keycode) {
 
 
 // Tap-hold utilities
+
+void hotkeys_management(uint16_t keycode, keyrecord_t *record) {
+  static bool weak_mods = false;
+
+  if (weak_mods && record->event.pressed) {
+    // Roll involving hotkey
+    // for ex. != or */
+    clear_weak_mods();
+    weak_mods = false;
+  }
+  // Hotkey press or release
+  if (IS_QK_MODS(keycode)) { weak_mods = record->event.pressed; } 
+}
 
 bool on_left_hand(keypos_t pos) {
 #ifdef SPLIT_KEYBOARD

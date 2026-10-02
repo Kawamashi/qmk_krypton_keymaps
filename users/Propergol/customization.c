@@ -73,7 +73,11 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
       case ALTTAB:
         if (pressed) {
+#             ifdef KRYPTON_MAC_MODIFIERS
+            register_mods(MOD_LGUI);
+#             else
             register_mods(MOD_LALT);
+#             endif
             tap_code(KC_TAB);
             layer_on(_SHORTNAV);
         } else {
@@ -90,10 +94,10 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
       case ALTTAB:
         switch (keycode) {
           case PG_Y:
-              tap_code16(REV_TAB);
+              tap_code16(S(KC_TAB));
               return true;
           case PG_H:
-              tap_code(ALT_TAB);
+              tap_code(KC_TAB);
               return true;
         }
         break;
