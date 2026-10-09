@@ -307,12 +307,18 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
     case KC_LEFT:
       // ←
       return replace_ongoing_key(PG_APOD, ongoing_keycode, record);
+
     case KC_DOWN:
       // ↔
       return replace_ongoing_key(PG_APOS, ongoing_keycode, record);
+
     case KC_RIGHT:
       // →
       return replace_ongoing_key(PG_UNDS, ongoing_keycode, record);
+
+    case PG_EGRV:
+      if (get_shift_altgr()) { return replace_ongoing_key(PG_Z, ongoing_keycode, record); }
+      break;
   }
 }
 

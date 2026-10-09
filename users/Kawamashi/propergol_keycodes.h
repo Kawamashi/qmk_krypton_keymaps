@@ -19,7 +19,6 @@
 #pragma once
 #include "keycodes.h"
 
-// clang-format off
 
 /*
  * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
@@ -179,7 +178,7 @@
  * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
  * │      │ ± │ × │ ÷ │ ≠ │   │ *ˇ│ *˘│   │   │ *”│   │   │    │
  * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
- * │    │ *¯│ *~│ ‰ │ *,│ *˛│   │   │ : │ *¸│ ¦ │ *´│          │
+ * │    │ *¯│ *~│ ¦ │ *¸│ : │   │   │ *,│ *˛│ ‰ │ *´│          │
  * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤
  * │    │    │    │                        │    │    │    │    │
  * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
@@ -209,9 +208,9 @@
 
 // Row 4
 #define PG_DTIL S(ALGR(PG_Q))    // ~ (dead)
-#define PG_PERM S(ALGR(PG_Z))    // ‰
-#define PG_CEDL S(ALGR(PG_Y))    // ¸ (dead)
-#define PG_OGON S(ALGR(PG_H))    // ˛ (dead)
-#define PG_DCLN S(ALGR(EL_G))    // cédille ronde (dead)
-#define PG_BPIP S(ALGR(PG_W))    // ¦
+#define PG_BPIP S(ALGR(PG_Z))    // ¦
+#define PG_DCLN S(ALGR(PG_Y))    // cédille ronde (dead)
+#define PG_CEDL S(ALGR(PG_D))    // ¸ (dead)
+#define PG_OGON S(ALGR(PG_F))    // ˛ (dead)
+#define PG_PERM S(ALGR(PG_W))    // ‰
 #define PG_ACUT S(ALGR(PG_1DK))  // ´ (dead)*/

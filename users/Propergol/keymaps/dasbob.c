@@ -43,14 +43,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // Numbers in row, triggered by a layer-tap key on the left half.
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MINS, PG_VIRG,                   PG_EXP,  KC_ENT,  KC_5,    PG_EURO, PG_DEG,
       P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      OS_WNUM, PG_PERC, REV_TAB, ALT_TAB, TG_NUM,                    PG_IND,  KC_PDOT, _______, _______, OS_1DK,
+      OS_WNUM, _______, REV_TAB, ALT_TAB, TG_NUM,                    PG_IND,  KC_PDOT, _______, PG_PERC, OS_1DK,
                                  OS_SHFT, LT_SPC,  NNB_SPC, KC_BSPC, LT_0,    OS_SYMB
 
 #elif defined KRYPTON_NUMBER_ROW_WITH_ONESHOT
       // Numbers in row, triggered by a one shot key on the right half.
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MINS, PG_VIRG,                   PG_EXP,  KC_ENT,  PG_DEG,  PG_EURO, OS_WNUM,
       P(KC_6), R(KC_7), M(KC_8), I(KC_9), PG_POIN,                   NUMWORD, I(KC_1), M(KC_2), R(KC_3), P(KC_4),
-      _______, PG_PERC, _______, KC_5,    TG_NUM,                    PG_IND,  KC_PDOT, _______, _______, OS_1DK,
+      _______, _______, _______, KC_5,    TG_NUM,                    PG_IND,  KC_PDOT, _______, PG_PERC, OS_1DK,
                                  OS_SYMB, LT_0,    KC_BSPC, NNB_SPC, LT_SPC,  OS_NUM
 
 #else
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // NNB_SPC finishes a numword (e.g. `127 km`) with reversed numrow.
       ALGR(KC_Q), PG_INF,  PG_SUP,  PG_MINS, ALGR(KC_T),                   PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_POIN,                      PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, PG_BSLS,                      PG_AROB, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
+      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, PG_BSLS,                      PG_AROB, PG_LSBR, PG_RSBR, PG_PERC, PG_APOD,
                                     OS_NUM,  LT_SPC,     KC_BSPC, _______, NNB_SPC, OS_RTHB
 #endif
     ),

@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMBERS] = KAWA_LAYOUT(
       PG_PLUS, PG_ASTX, PG_SLSH, PG_MINS, PG_VIRG,                   PG_EXP,  _______, PG_DEG,  PG_EURO, TG_NUM,
       P(KC_4), R(KC_3), M(KC_2), I(KC_1), PG_POIN,                   PG_IND,  I(KC_9), M(KC_8), R(KC_7), P(KC_6),
-      _______, PG_PERC, PG_H,    KC_5,    _______,                   _______, PG_2PTS, _______, _______, OS_1DK,
+      _______, _______, PG_H,    KC_5,    _______,                   _______, PG_2PTS, _______, PG_PERC, OS_1DK,
                                  OS_SHFT, LT_0   , LT_PDOT, NNB_SPC, LT_SPC,  OS_NUM
      ),
 
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYMBOLS] = KAWA_LAYOUT(
       ALGR(KC_Q), PG_INF,  PG_SUP,  PG_MINS, PG_BSLS,                  PG_ACIR, PG_LCBR, PG_RCBR, PG_DLR,  PG_GRV,
       PG_PLUS,    PG_ASTX, PG_SLSH, PG_EGAL, PG_POIN,                  PG_HASH, PG_LPRN, PG_RPRN, PG_PVIR, PG_DQUO,
-      PG_TILD,    PG_PERC, PG_LSBR, PG_RSBR, _______,                  _______, PG_2PTS, PG_ESPR, PG_PIPE, PG_APOD,
+      PG_TILD,    PG_PIPE, PG_ESPR, PG_2PTS, _______,                  _______, PG_LSBR, PG_RSBR, PG_PERC, PG_APOD,
                                     OS_NUM,  KC_SPC,  LT_MGC, LT_REPT, _______, OS_NUM
     ),
 
@@ -321,7 +321,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       switch (*ongoing_keycode) {
 
         // Capitalize punctuation after a thin non-breaking space
-        case PG_D:
+        case PG_H:
           // uses less space than process_word
           tap_code(KC_BSPC);
           invoke_key(SAGR(KC_SPC), record);
@@ -505,6 +505,10 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // ") {"
           invoke_key(KC_SPC, record);
           return replace_ongoing_key(PG_LCBR, ongoing_keycode, record);
+
+        case PG_2PTS:
+          // ":="
+          return replace_ongoing_key(PG_EGAL, ongoing_keycode, record);
         
         default:
           if (IS_LAYER_ON(_SYMBOLS)) { return replace_ongoing_key(prev_keycode, ongoing_keycode, record); }
@@ -552,6 +556,10 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
     case PG_N:
       if (get_shift_altgr()) { return replace_ongoing_key(PG_EGAL, ongoing_keycode, record); }
+      break;
+
+    case PG_EGRV:
+      if (get_shift_altgr()) { return replace_ongoing_key(PG_Z, ongoing_keycode, record); }
       break;
   }
 }
