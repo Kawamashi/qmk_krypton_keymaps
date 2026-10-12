@@ -13,9 +13,12 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 ### Main layer
 
-- shift et one-shot symbols
-- HRM optionnels pour les claviers à 6 colonnes
-- Layer-tap sous les pouces pour accéder aux couches nav, nombres et fonctions
+<img src="png/base layer.png" width="1200">
+
+- Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
+- Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
+- To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
+- Similarly, the Symbol Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a One Shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
 
 ### 1DK layer
