@@ -23,13 +23,13 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 ### 1DK layer
 
-La touche morte est implémentée sous forme de couche. De cette manière : 
-- l’utilisateur peut personnaliser la couche 1DK sans avoir besoin de retoucher le driver
-- la touche morte peut être annulée par un autre appui sur celle-ci
-- les caractères de la couche morte peuvent être enchaînés par un appui prolongé sur la touche 1DK
-- Repeat est capable de répéter un caractère de la couche 1DK
-- on peut rendre la couche 1DK compatible avec d’autres fonctionnalités de QMK, comme Caps Word, les Clever Keys, etc.
-- si l’utilisateur le souhaite, Shift peut s’appliquer au caractère suivant la touche morte. Par exemple, pour taper Ô, on peut faire Shift ★ O.
+Instead of relying solely on Propergol’s driver, the [dead key](https://github.com/Kawamashi/Propergol/blob/main/README.md#la-touche-morte-de-propergol) is implemented as a layer, activated with a [One Shot on Steroids](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids) key. This makes the 1DK system much more flexible:
+- You can customize the 1DK layer without having to modify the driver itself.
+- If you tapped `★` by mistake, just tap it again to cancel it.
+- Holding `★` allows you to chain several characters from the 1DK layer.
+- `Repeat` can repeat a character from the 1DK layer.
+- The 1DK layer can be made compatible with other QMK features such as [Caps Word](https://docs.qmk.fm/features/caps_word) and Clever Keys.
+- If desired, Shift can be applied to the character following the dead key. For example, `Shift` `★` `O` can be used to type `Ô`. To do so,  uncomment `#define ONE_DEAD_KEY_DEFFERED_SHIFT` in `config_propergol.h`.
 
 
 ### Navigation 
