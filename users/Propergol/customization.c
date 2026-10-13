@@ -295,6 +295,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           invoke_key(PG_O,record);
           return replace_ongoing_key(PG_U, ongoing_keycode, record);
       }
+      if ((get_mods() | get_oneshot_mods()) == (MOD_BIT(KC_LSFT) | MOD_BIT(KC_ALGR))) {
+        return replace_ongoing_key(PG_Z, ongoing_keycode, record);
+      }
       break;
 
     case KC_1 ... KC_0:
