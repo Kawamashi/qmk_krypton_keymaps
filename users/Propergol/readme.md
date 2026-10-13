@@ -105,7 +105,7 @@ Krypton uses [Propergol’s Symbols layer](https://github.com/Kawamashi/Propergo
 
 A one-shot key provides access to the Numbers layer, making it easy to type symbols/numbers combinations such as `(0)` or `[1]`.
 
-If `Shift` is active when you press the Symbols layer key, you will get the characters using Shift + AltGr instead.
+If `Shift` is active when you press the Symbols layer key, you will get the characters using `Shift` + `AltGr` instead.
 <details>
 <summary>Shift + AltGr Symbols</summary>
 <img src="../../png/Common/symbols layer ext.png" width="820">
