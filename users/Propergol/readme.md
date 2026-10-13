@@ -18,7 +18,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
-- Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a One Shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+- Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
 &nbsp;</br>
 ### 1DK layer
@@ -53,10 +53,40 @@ The right half provides:
 &nbsp;</br>
 ### Numbers
 
-- Possibilité de choisir entre 3 couches de nombres différentes, suivant que l’utilisateur veut les nombres disposés en pavé (par défaut) ou en ligne. - Couche accessible par un layer-tap sur une touche de pouce côté gauche, ou bien avec le one-shot de pouce côté droit.
+Krypton’s default configuration uses a a numpad-style Numbers layer:
 
-- En plus des chiffres, on trouve NUMWORD. On trouve aussi la touche 1DK (pour pouvoir faire ½, ⅓, etc).
-- On trouve aussi Alt-tab/shift alt-tab (ou leurs équivalents Mac) accessible de la main gauche. Ces touches sont implémentées avec [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/). Il y a également une touche WinNum en one-shot, pour pouvoir gérer les fenêtres en faisant un [Shaka Gesture](https://github.com/lobre/shaka34/blob/main/gesture/README.md).
+<details open>
+<summary>Numpad</summary>
+<img src="../../png/Common/numpad layer.png" width="820">
+</details>
+
+In addition to the number keys, the layer provides:
+- `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
+- `Num Word`, to type sequences of numbers without having to hold down the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
+- Previous/Next Window keys (equivalent to Alt+Tab or ⌘+Tab) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
+- A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
+- A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other).
+
+&nbsp;</br>
+You can also use a number-row layout instead of the default numpad layout:
+
+<details open>
+<summary>Numrow</summary>
+<img src="../../png/Common/numrow layer.png" width="820">
+
+To enable it, uncomment `#define KRYPTON_NUMBER_ROW` in `config_propergol.h`.
+</details>
+
+&nbsp;</br>
+Finally, the Symbols and Numbers keys can be swapped if you prefer to activate the Numbers layer with a one shot key:
+
+<details open>
+<summary>Numrow + one shot key </summary>
+<img src="../../png/Common/numrow-os layer.png" width="820">
+
+To enable it, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+</details>
+
 
 
 ### Symboles
