@@ -22,7 +22,12 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
-- Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+- Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols, Functions and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+
+<details>
+<summary>One shot for Numbers layer</summary>
+<img src="../../png/Propergol/base alt.png" width="900">
+</details>
 
 &nbsp;</br>
 ### 1DK layer
@@ -66,7 +71,7 @@ Krypton’s default configuration uses a a numpad-style Numbers layer:
 
 In addition to the number keys, the layer provides:
 - `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
-- `Num Word`, to type sequences of numbers without having to hold down the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
+- `Num Word`, to type sequences of numbers without having to keep holding the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
 - Previous/Next Window keys (equivalent to Alt+Tab or ⌘+Tab) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
 - A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 - A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other).
@@ -91,13 +96,22 @@ Finally, the Symbols and Numbers keys can be swapped if you prefer to activate t
 To enable it, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 </details>
 
+&nbsp;</br>
+### Symbols
 
+<img src="../../png/Common/symbols layer.png" width="820">
 
-### Symboles
+Krypton uses [Propergol’s Symbols layer](https://github.com/Kawamashi/Propergol/blob/main/README.md#propergol-pour-la-programmation). The symbol positions are optimized for both symbol frequency and comfort of typing common symbol sequences. To do so, the layer minimizes same-finger bigrams while prioritizing comfortable rolls. 
 
-- Possibilité de choisir entre la couche optimisée de symboles de Propergol ou bien celle d’Ergo‑L.
-- Accès aux chiffres grâce à un one-shot, pour pouvoir taper `(0)` ou `[1]` facilement.
-- Si Shift est actif quand on accède à la couche de symboles, on accède aux symboles en shift alt-gr à la place.
+A one-shot key provides access to the Numbers layer, making it easy to type symbols/numbers combinations such as `(0)` or `[1]`.
+
+If `Shift` is active when you press the Symbols layer key, you will get the characters using Shift + AltGr instead.
+<details>
+<summary>Shift + AltGr Symbols</summary>
+<img src="../../png/Common/symbols layer ext.png" width="820">
+</details>
+
+If you prefer, you can use the Ergo-L Symbols layer instead, by uncommenting `#define KRYPTON_ERGOL_SYMBOLS` in `config_propergol.h`.
 
 
 ### Fonctions
