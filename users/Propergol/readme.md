@@ -18,7 +18,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
-- Similarly, the Symbol Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a One Shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+- Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a One Shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
 
 ### 1DK layer
@@ -38,12 +38,29 @@ Instead of relying solely on Propergol’s driver, the [dead key](https://github
 
 <img src="../../png/Common/nav layer.png" width="820">
 
+This layer is activated by holding either thumb home key, on the base layer as well as on Numbers and Symbols layers.
+
+The left half provides:
+- Navigation keys (arrows, Home/End, Page Up/Page Down)
+- Common keyboard shortcuts (Cut, Copy, Paste, Undo, Redo and Select All), allowing you to keep your right hand on the mouse.
+
+The right half provides:
+- Editing keys (Backspace under the right thumb and index finger home positions, Delete, Enter, Escape, Tab and Shift-Tab)
+- Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection).
+- [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and Caps Lock
+- A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-Layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
+
+
+
+### Windows Management Layer
+
+
 couche pour :
 - les touches de navigation (flèches, home/end, page up/page down)
 - les touches d’édition (backspace (sous les positions de repos de l’index et du pouce), delete, enter, escape, tab, shift tab)
 - les raccourcis clavier usuels (cut, copy, paste, undo, redo and select all), accessibles de la main gauche pour pouvoir garder la main sur la souris.
 - des macros de navigation mot à mot ainsi que pour effacer un mot entier, des raccourcis pour sélectionner des mots et des lignes
-- CAPSWORD, CAPSLIST et CAPSLOCK
+- [Caps Word](https://docs.qmk.fm/features/caps_word), Caps List and Caps Lock
 - WinMan en one-shot, pour pouvoir gérer les fenêtres en faisant un [Shaka Gesture](https://github.com/lobre/shaka34/blob/main/gesture/README.md).
 
 Couche centrale, donc accessible avec des layer-tap sur les touches de repos des pouces (de la couche principale mais aussi des couches de nombres et de symboles)
