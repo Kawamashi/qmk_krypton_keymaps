@@ -13,7 +13,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 ### Main layer
 
-<img src="../../png/krypton propergol base.png" width="900">
+<img src="../../png/Propergol/base.png" width="900">
 
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
@@ -22,6 +22,8 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 
 ### 1DK layer
+
+<img src="../../png/Propergol/1dk.png" width="820">
 
 Instead of relying solely on Propergol’s driver, the [dead key](https://github.com/Kawamashi/Propergol/blob/main/README.md#la-touche-morte-de-propergol) is implemented as a layer, activated with a [One Shot on Steroids](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids) key. This makes the 1DK system much more flexible:
 - You can customize the 1DK layer without having to modify the driver itself.
