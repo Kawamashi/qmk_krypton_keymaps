@@ -50,23 +50,8 @@ The right half provides:
 - [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and Caps Lock
 - A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
-
-
-### Windows Management layer
-
-
-couche pour :
-- les touches de navigation (flèches, home/end, page up/page down)
-- les touches d’édition (backspace (sous les positions de repos de l’index et du pouce), delete, enter, escape, tab, shift tab)
-- les raccourcis clavier usuels (cut, copy, paste, undo, redo and select all), accessibles de la main gauche pour pouvoir garder la main sur la souris.
-- des macros de navigation mot à mot ainsi que pour effacer un mot entier, des raccourcis pour sélectionner des mots et des lignes
-- [Caps Word](https://docs.qmk.fm/features/caps_word), Caps List and Caps Lock
-- WinMan en one-shot, pour pouvoir gérer les fenêtres en faisant un [Shaka Gesture](https://github.com/lobre/shaka34/blob/main/gesture/README.md).
-
-Couche centrale, donc accessible avec des layer-tap sur les touches de repos des pouces (de la couche principale mais aussi des couches de nombres et de symboles)
-
-
-### Nombres
+&nbsp;</br>
+### Numbers
 
 - Possibilité de choisir entre 3 couches de nombres différentes, suivant que l’utilisateur veut les nombres disposés en pavé (par défaut) ou en ligne. - Couche accessible par un layer-tap sur une touche de pouce côté gauche, ou bien avec le one-shot de pouce côté droit.
 
@@ -86,6 +71,9 @@ Couche centrale, donc accessible avec des layer-tap sur les touches de repos des
 - Touches de fonctions et touches média (vol ±, mute, play/pause, previous/next, etc)
 - Les touches sont arrangées en fonction de la couche de nombres choisie.
 - FUNWORD et PANIC. PANIC permet de remettre le clavier dans sa configuration par défaut, en désactivant tout ce qui aurait pu être activé par erreur : one-shots, layer words, caps word, Clever keys, etc.
+
+
+### Windows Management layer
 
 
 ## Modifier and layer keys
