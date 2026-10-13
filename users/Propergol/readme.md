@@ -11,7 +11,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 ## Layers
 
-### Main layer
+### Base layer
 
 <img src="../../png/Propergol/base.png" width="900">
 
@@ -34,7 +34,7 @@ Instead of relying solely on Propergol’s driver, the [dead key](https://github
 - If desired, Shift can be applied to the character following the dead key. For example, `Shift` `★` `O` can be used to type `Ô`. To do so,  uncomment `#define ONE_DEAD_KEY_DEFFERED_SHIFT` in `config_propergol.h`.
 
 &nbsp;</br>
-### Navigation
+### Navigation layer
 
 <img src="../../png/Common/nav layer.png" width="820">
 
@@ -48,11 +48,11 @@ The right half provides:
 - Editing keys (Backspace under the right thumb and index finger home positions, Delete, Enter, Escape, Tab and Shift-Tab)
 - Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection).
 - [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and Caps Lock
-- A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-Layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
+- A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
 
 
-### Windows Management Layer
+### Windows Management layer
 
 
 couche pour :
