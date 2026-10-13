@@ -20,7 +20,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
 - Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols and Numbers keys if you prefer to use a One Shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
-
+&nbsp;</br>
 ### 1DK layer
 
 <img src="../../png/Propergol/1dk.png" width="820">
@@ -33,7 +33,7 @@ Instead of relying solely on Propergol’s driver, the [dead key](https://github
 - The 1DK layer can be made compatible with other QMK features such as [Caps Word](https://docs.qmk.fm/features/caps_word) and Clever Keys.
 - If desired, Shift can be applied to the character following the dead key. For example, `Shift` `★` `O` can be used to type `Ô`. To do so,  uncomment `#define ONE_DEAD_KEY_DEFFERED_SHIFT` in `config_propergol.h`.
 
-
+&nbsp;</br>
 ### Navigation
 
 <img src="../../png/Common/nav layer.png" width="820">
