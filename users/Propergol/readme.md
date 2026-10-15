@@ -124,6 +124,12 @@ If you prefer, you can use the Ergo-L Symbols layer instead, by uncommenting `#d
 
 ### Windows Management layer
 
+<img src="../../png/Common/winman  layer.png" width="900">
+
+As the name suggests, this layer allows you to manage your windows. The implementation is intentionally minimal, so feel free to add keys to suit your needs.
+It’s activated with a [Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys) from the [Navigation layer](#Navigation-layer). Another press on the Windows Management key brings you back to this layer.
+
+
 
 ## Modifier and layer keys
 
