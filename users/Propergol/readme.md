@@ -89,7 +89,7 @@ To enable it, uncomment `#define KRYPTON_NUMBER_ROW` in `config_propergol.h`.
 &nbsp;</br>
 Finally, the Symbols and Numbers keys can be swapped if you prefer to activate the Numbers layer with a one shot key:
 
-<details open>
+<details>
 <summary>Numrow + one shot key </summary>
 <img src="../../png/Common/numrow-os layer.png" width="820">
 
