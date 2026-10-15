@@ -55,9 +55,9 @@ The left half provides:
 
 The right half provides:
 - Editing keys (`Backspace` under the right thumb and index finger home positions, `Delete`, `Enter`, `Escape`, `Tab` and `Shift-Tab`)
-- Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection).
+- Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection)
 - [`Caps Word`](https://docs.qmk.fm/features/caps_word), [`Caps List`](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and `Caps Lock`
-- `Nav Word`, to type sequences of navigation keys without having to keep holding the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type navigation keys.
+- `Nav Word`, to type sequences of navigation keys without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type navigation keys.
 - A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
 &nbsp;</br>
@@ -72,10 +72,10 @@ Krypton’s default configuration uses a a numpad-style Numbers layer:
 
 In addition to the number keys, the layer provides:
 - `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
-- `Num Word`, to type sequences of numbers without having to keep holding the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
+- `Num Word`, to type sequences of numbers without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
 - `Previous`/`Next Window` keys (equivalent to `Alt+Tab` or `⌘+Tab`) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
 - A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
-- A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other).
+- A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other)
 
 &nbsp;</br>
 You can also use a number-row layout instead of the default numpad layout:
@@ -114,14 +114,30 @@ If Shift is active when you press the Symbols layer key, you will get the charac
 
 If you prefer, you can use the Ergo-L Symbols layer instead, by uncommenting `#define KRYPTON_ERGOL_SYMBOLS` in `config_propergol.h`.
 
+&nbsp;</br>
+### Fonction keys
 
-### Fonctions
+<details open>
+<summary>FuncPad</summary>
+<img src="../../png/Common/funcpad layer.png" width="900">
+</details>
 
-- Touches de fonctions et touches média (vol ±, mute, play/pause, previous/next, etc)
-- Les touches sont arrangées en fonction de la couche de nombres choisie.
-- FUNWORD et PANIC. PANIC permet de remettre le clavier dans sa configuration par défaut, en désactivant tout ce qui aurait pu être activé par erreur : one-shots, layer words, caps word, Clever keys, etc.
+This layer provides :
+- function and media keys, following the same layout as the Numbers layer
+- `Func Word`, to type sequences of function keys without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type function keys.
+- A `Panic` key, which restores the keyboard to its default state by disabling anything that might have been activated accidentally (one shot keys, Layer Words, Caps Word, Clever Keys, etc.).
 
+<details>
+<summary>FuncRow</summary>
+<img src="../../png/Common/funcrow layer.png" width="900">
+</details>
 
+<details>
+<summary>FuncRow + one shot key for numbers</summary>
+<img src="../../png/Common/funcrow-os layer.png" width="900">
+</details>
+
+&nbsp;</br>
 ### Windows Management layer
 
 <img src="../../png/Common/winman  layer.png" width="900">
