@@ -50,13 +50,14 @@ Instead of relying solely on Propergol’s driver, the [dead key](https://github
 This layer is activated by holding either thumb home key, on the base layer as well as on Numbers and Symbols layers.
 
 The left half provides:
-- Navigation keys (arrows, Home/End, Page Up/Page Down)
-- Common keyboard shortcuts (Cut, Copy, Paste, Undo, Redo and Select All), allowing you to keep your right hand on the mouse.
+- Navigation keys (arrows, `Home`/`End`, `Page Up`/`Page Down`)
+- Common keyboard shortcuts (`Cut`, `Copy`, `Paste`, `Undo`, `Redo` and `Select All`), allowing you to keep your right hand on the mouse.
 
 The right half provides:
-- Editing keys (Backspace under the right thumb and index finger home positions, Delete, Enter, Escape, Tab and Shift-Tab)
+- Editing keys (`Backspace` under the right thumb and index finger home positions, `Delete`, `Enter`, `Escape`, `Tab` and `Shift-Tab`)
 - Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection).
-- [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and Caps Lock
+- [`Caps Word`](https://docs.qmk.fm/features/caps_word), [`Caps List`](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and `Caps Lock`
+- `Nav Word`, to type sequences of navigation keys without having to keep holding the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type navigation keys.
 - A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
 &nbsp;</br>
@@ -72,7 +73,7 @@ Krypton’s default configuration uses a a numpad-style Numbers layer:
 In addition to the number keys, the layer provides:
 - `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
 - `Num Word`, to type sequences of numbers without having to keep holding the layer-tap key. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
-- Previous/Next Window keys (equivalent to Alt+Tab or ⌘+Tab) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
+- `Previous`/`Next Window` keys (equivalent to `Alt+Tab` or `⌘+Tab`) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
 - A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 - A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other).
 
@@ -105,7 +106,7 @@ Krypton uses [Propergol’s Symbols layer](https://github.com/Kawamashi/Propergo
 
 A one-shot key provides access to the Numbers layer, making it easy to type symbols/numbers combinations such as `(0)` or `[1]`.
 
-If `Shift` is active when you press the Symbols layer key, you will get the characters using `Shift` + `AltGr` instead.
+If Shift is active when you press the Symbols layer key, you will get the characters using Shift + AltGr instead.
 <details>
 <summary>Shift + AltGr Symbols</summary>
 <img src="../../png/Common/symbols layer ext.png" width="820">
