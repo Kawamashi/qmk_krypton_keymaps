@@ -195,8 +195,12 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 
 ### One shot on steroids keys
 
-- La configuration utilise des touches “one shot”. Ces touches se comportent comme des 
-- one shot on steroids : timeless, annulables facilement, non soumises à la layer stack, compatibles avec le [Shaka Gesture](https://github.com/lobre/shaka34/blob/main/gesture/README.md)
+For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypton uses [One Shot on Steroids](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids) (OSoS) keys. Compared to standard QMK one shot keys, this implementation offers several advantages:
+- [**Instant activation**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#how-one-shots-on-steroids-work): modifiers and layers are activated as soon as you press an OSoS key, without waiting for the tapping term to expire.
+- [**Easy cancellation**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#cancelling-one-shots-on-steroids): if you tapped an OSoS key by mistake, just tap it again to cancel it.
+- [**No layer-stack restrictions**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#one-shot-layers-freed-from-the-layer-stack): OSoS layer keys can bypass the usual layer-stack restrictions, allowing you to type symbols from the Numbers layer and numbers from the Symbols layer for example.
+- [**Shaka Gesture compatibility**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys): OSoS keys are compatible with the Shaka Gesture, which is a really nice way of changing the behavior of secondary layers.
+- **Customizable behavior**: you can further customize OSoS keys to [“absorb” modifiers](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#mod-absorbing-one-shot-layers) or to affect only the next keypress even if the OSoS key is still held down.
 
 
 ### Combos
