@@ -150,9 +150,9 @@ It’s activated with a [Shaka Gesture](https://github.com/Kawamashi/qmk_modules
 
 
 &nbsp;</br>
-## Modifier and layer keys configuration
+## Tap-Hold keys configuration
 
-### Modifier keys
+### Mod-tap keys
 
 Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/). It’s the most thoughtfully designed configuration I've come across. This setup definitively resolved the issues that some users were experiencing with the HRMs. 
 
@@ -188,7 +188,7 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 ```
 
 
-### Layer keys
+### Layer-tap keys
 
 - cas particulier du réglage du `E`, `IDLE_TIME_BEFORE_HOLD_PRIORITY`
 
