@@ -1,9 +1,11 @@
 # QMK Krypton keymap for Propergol
 
+&nbsp;</br>
 <p align="center">
 <img src="../../png/Common/logo Krypton.png" width="200">
 </p>
 
+&nbsp;</br>
 ## Philosophy
 
 [Propergol](https://github.com/Kawamashi/Propergol) is a great layout, but it needs 4 dedicated thumb keys (for `Space`, `E`, `Repeat` and `Alt-Repeat`). [Nordrassil](https://github.com/empressabyss/nordrassil/tree/main) needs 4 as well, [Magic Roll](https://github.com/Brooklyn-Style/Magic_Roll) 3. Cramming such layouts into a 36-keys keyboard can be quite a challenge. Krypton is my take on this issue. 
@@ -12,7 +14,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 *Tweak it until you love it!*
 
-
+&nbsp;</br>
 ## Layers
 
 ### Base layer
@@ -20,7 +22,8 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 <img src="../../png/Propergol/base.png" width="900">
 
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
-- Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) (HRM) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
+- Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) ([HRM](#Modifier-keys)) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
+- MacOS users can adapt the configuration by commenting out `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
 - Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols, Functions and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
@@ -146,18 +149,46 @@ As the name suggests, this layer allows you to manage your windows. The implemen
 It’s activated with a [Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys) from the [Navigation layer](#Navigation-layer). Another press on the Windows Management key brings you back to this layer.
 
 
-
-## Modifier and layer keys
+&nbsp;</br>
+## Modifier and layer keys configuration
 
 ### Modifier keys
 
-- Les HRM et les layer-tap sont [*timeless*](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) : cette configuration a solutionné définitivement les problèmes qu’un certain nombre d’utilisateurs pouvait rencontrer avec les HRM. Contrairement à ce qu’on pourrait penser, elle utilise plusieurs timers, mais l’utilisateur n’a pas à s’en préoccuper lors de la frappe. Les touches duales doivent juste être combinées avec les touches situées de l’autre côté du clavier pour que tout fonctionne naturellement. Avec les Timeless HRM, vous ne devriez avoir ni de faux positif (une couche ou une modificatrice qui s’active alors qu’elle ne devrait pas), ni de faux négatif (une couche ou une modificatrice qui ne s’active pas alors qu’elle le devrait).
-- Possibilité de désactiver les HRM en commentant `KRYPTON_ENABLE_HRM` dans le fichier `config_propergol.h`.
-- Possibilité d’affiner le réglage des timers dans ce même fichier.
-- Possibilité d’adapter la configuration pour un usage sous macOS en décommentant la ligne `#define KRYPTON_MAC_MODIFIERS` dans le fichier `config_propergol.h`.
-- Possibilité de modifier rapidement l’ordre des HRM en éditant le fichier `propergol.h`
-- cas particulier du réglage du `E`
-- `IDLE_TIME_BEFORE_HOLD_PRIORITY`
+Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/). It’s the most thoughtfully designed configuration I've come across. This setup definitively resolved the issues that some users were experiencing with the HRMs. 
+
+Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply combine a mod-tap key with a key on the opposite half of the keyboard, and everything will work naturally. In case of same-hand rolls or during tap sequences, the hold behavior is inhibited.
+
+Although HRMs are already configured in Krypton, I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work.
+
+Timeless is designed to prevent both false positives (a modifier activating when it shouldn't) and false negatives (a modifier failing to activate when it should). If you experience any of these issues, try adjusting the relevant timer:
+- false negatives (same-hand): reduce `TAPPING_TERM`
+- false negatives (cross-hand): reduce `FLOW_TAP_TERM`
+- false positives (same-hand): increase `TAPPING_TERM`
+- false positives (cross-hand): Increase `FLOW_TAP_TERM`
+
+MacOS users can enable the macOS modifier arrangement by commenting out `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
+
+If you prefer not to use HRMs, you can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`. The different timers can be tuned in the same file. 
+
+Finally, you can easily change the order of the HRMs across all layers by editing the following macros in `propergol.h`:
+```c
+  #ifdef KRYPTON_MAC_MODIFIERS
+    #define P(k) LSFT_T(k)
+    #define R(k) LCTL_T(k)
+    #define M(k) LOPT_T(k)
+    #define I(k) LCMD_T(k)
+  #else
+    #define P(k) LSFT_T(k)
+    #define R(k) LALT_T(k)
+    #define M(k) LGUI_T(k)
+    #define I(k) LCTL_T(k)
+  #endif
+```
+
+
+### Layer keys
+
+- cas particulier du réglage du `E`, `IDLE_TIME_BEFORE_HOLD_PRIORITY`
 
 
 ### One shot on steroids keys
