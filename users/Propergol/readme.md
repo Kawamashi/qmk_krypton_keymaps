@@ -166,6 +166,8 @@ Timeless is designed to prevent both false positives (a modifier activating when
 - false positives (same-hand): increase `TAPPING_TERM`
 - false positives (cross-hand): Increase `FLOW_TAP_TERM`
 
+Change only one timer at a time, then test your typing before making further adjustments. This way, you can tell which change improved the behavior.
+
 MacOS users can enable the macOS modifier arrangement by uncommenting `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
 
 If you prefer not to use HRMs, you can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`. The different timers can be tuned in the same file. 
