@@ -14,6 +14,11 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 *Tweak it until you love it!*
 
+* [Layers](#Layers)
+    * [Base layer](#Base-layer)
+* [Tap-Hold keys configuration](#Tap-Hold-keys-configuration)
+* [Features](#Features)
+
 &nbsp;</br>
 ## Layers
 
@@ -60,7 +65,7 @@ The right half provides:
 - Editing keys (`Backspace` under the right thumb and index finger home positions, `Delete`, `Enter`, `Escape`, `Tab` and `Shift-Tab`)
 - Word-by-word navigation and deletion macros, as well as shortcuts for [selecting words and lines](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#word-selection)
 - [`Caps Word`](https://docs.qmk.fm/features/caps_word), [`Caps List`](https://github.com/Kawamashi/qmk_krypton_keymaps/tree/main#caps-list) and `Caps Lock`
-- `Nav Word`, to type sequences of navigation keys without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type navigation keys.
+- `Nav Word`, to type sequences of navigation keys without having to keep the layer-tap key held down. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type navigation keys.
 - A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
 &nbsp;</br>
@@ -75,7 +80,7 @@ Krypton’s default configuration uses a a numpad-style Numbers layer:
 
 In addition to the number keys, the layer provides:
 - `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
-- `Num Word`, to type sequences of numbers without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
+- `Num Word`, to type sequences of numbers without having to keep the layer-tap key held down. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
 - `Previous`/`Next Window` keys (equivalent to `Alt+Tab` or `⌘+Tab`) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
 - A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 - A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other)
@@ -127,7 +132,7 @@ If you prefer, you can use the Ergo-L Symbols layer instead, by uncommenting `#d
 
 This layer provides :
 - function and media keys, following the same layout as the Numbers layer
-- `Func Word`, to type sequences of function keys without having to keep the layer-tap key held. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type function keys.
+- `Func Word`, to type sequences of function keys without having to keep the layer-tap key held down. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type function keys.
 - A `Panic` key, which restores the keyboard to its default state by disabling anything that might have been activated accidentally (one shot keys, Layer Words, Caps Word, Clever Keys, etc.).
 
 <details>
@@ -193,7 +198,7 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 The general philosophy for Propergol Layer-tap keys configuration relies on [`PERMISSIVE_HOLD`](https://docs.qmk.fm/tap_hold#permissive-hold) and [`CHORDAL_HOLD`](https://docs.qmk.fm/tap_hold#chordal-hold). `PERMISSIVE_HOLD` makes it easier to trigger the hold behavior of thumb keys. `CHORDAL_HOLD` prevents false activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
 
 
-However, E needs special handling to allow hotkeys to be typed using only the left hand. Since `CHORDAL_HOLD` prevents same-hand activation, a different approach is needed: during tapping sequences, `PERMISSIVE_HOLD` is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrows) if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_PERMISSIVE_HOLD` duration can be tuned in `config_propergol.h`.
+However, E needs special handling to allow hotkeys to be typed using only the left hand. Since `CHORDAL_HOLD` prevents same-hand activation, a different approach is needed: during tapping sequences, `PERMISSIVE_HOLD` is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrow keys) if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_PERMISSIVE_HOLD` duration can be tuned in `config_propergol.h`.
 
 Experienced Propergol users can go further by defining `HOLD_PRIORITY_FOR_HOTKEYS` in `config_propergol.h`. When this option is enabled, `HOLD_ON_OTHER_KEY_PRESS` is activated for `E`, `Magic` and `Repeat` if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_HOLD_PRIORITY` duration can be tuned in `config_propergol.h`.
 
@@ -223,7 +228,7 @@ In summary:
     <th>Permissive Hold</th>
     <td>Yes</td>
     <td>- if the next key is on the right half<br>
-    - after IDLE_TIME_BEFORE_PERMISSIVE_HOLD</td>
+    - after IDLE_TIME_BEFORE_PERMISSIVE_HOLD (exept for arrow keys)</td>
     <td>Yes</td>
     <td>Yes</td>
    </tr>
@@ -268,8 +273,10 @@ Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé.
 - La combo alt-tab utilise le [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), ce qui permet de naviguer dans vos fenêtres en lâchant et en réappuyant sur `H` ou `Y` : en appuyant sur les deux touches en même temps on déclenche la combo, qui envoie Alt-tab au système. On peut ensuite se déplacer dans les fenêtres ouvertes en relâchant `H` et en réappuyant dessus. On peut faire la même chose dans l’autre sens avec 'Y'.
 
 ### Layer words
-- numword, navword, funword
-- facilement modifiables dans `customization.c`
+Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys without having to keep a layer-tap key held down. A layer word remains active until a word-breaking character is typed.
+
+The entire Layer Words configuration is located in `customization.c`.
+
 
 ### Caps word, caps list et caps lock
 
