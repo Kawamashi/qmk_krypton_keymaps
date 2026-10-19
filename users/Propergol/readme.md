@@ -16,8 +16,19 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 * [Layers](#Layers)
     * [Base layer](#Base-layer)
+    * [1DK layer](#1DK-layer)
+    * [Navigation layer](#Navigation-layer)
+    * [Numbers layer](#Numbers-layer)
+    * [Symbols layer](#Symbols-layer)
+    * [Fonction keys layer](#Fonction-keys-layer)
+    * [Windows Management layer](#Windows-Management-layer)
 * [Tap-Hold keys configuration](#Tap-Hold-keys-configuration)
+    * [Mod-tap keys](Mod-tap-keys)
+    * [Layer-tap keys](#Layer-tap-keys)
 * [Features](#Features)
+    * [One shot on steroids keys](#One-shot-on-steroids-keys)
+    * [Combos](#Combos)
+    * [Layer words](#Layer-words)
 
 &nbsp;</br>
 ## Layers
@@ -69,7 +80,7 @@ The right half provides:
 - A one shot Windows Management key, to activate the [Windows Management layer](#Windows-Management-layer) using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 
 &nbsp;</br>
-### Numbers
+### Numbers layer
 
 Krypton’s default configuration uses a a numpad-style Numbers layer:
 
@@ -106,7 +117,7 @@ To enable it, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_pro
 </details>
 
 &nbsp;</br>
-### Symbols
+### Symbols layer
 
 <img src="../../png/Common/symbols layer.png" width="820">
 
@@ -123,7 +134,7 @@ If Shift is active when you press the Symbols layer key, you will get the charac
 If you prefer, you can use the Ergo-L Symbols layer instead, by uncommenting `#define KRYPTON_ERGOL_SYMBOLS` in `config_propergol.h`.
 
 &nbsp;</br>
-### Fonction keys
+### Fonction keys layer
 
 <details open>
 <summary>FuncPad</summary>
