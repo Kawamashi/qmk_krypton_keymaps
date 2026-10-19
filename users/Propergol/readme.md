@@ -287,11 +287,6 @@ To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos
 
 The entire combos configuration is located in `customization.c`.
 
-- Les combos peuvent être un game-changer sur les claviers compacts, mais tout le monde n’aime pas. 
-- La configuration embarque quelques combos (backspace, enter, tab, escape, alt-tab et PANIC), qui utilisent des touches hors de la rangée de repos.
-Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé. 
-- Si l’utilisation des combos vous parait naturelle, la configuration peut être optimisée. Ma configuration personnelle en utilise plus, ce qui me permet d’avoir une couche de navigation mieux adaptée à mes besoins.
-- La combo alt-tab utilise le [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), ce qui permet de naviguer dans vos fenêtres en lâchant et en réappuyant sur `H` ou `Y` : en appuyant sur les deux touches en même temps on déclenche la combo, qui envoie Alt-tab au système. On peut ensuite se déplacer dans les fenêtres ouvertes en relâchant `H` et en réappuyant dessus. On peut faire la même chose dans l’autre sens avec 'Y'.
 
 ### Layer words
 Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys without having to keep a layer-tap key held down. A layer word remains active until a word-breaking character is typed.
