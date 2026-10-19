@@ -40,7 +40,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) ([HRM](#Modifier-keys)) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
 - MacOS users can adapt the configuration by commenting out `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
-- To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be reserved for shortcuts. 
+- To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be used only for shortcuts. 
 - Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols, Functions and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
 
 <details>
@@ -276,6 +276,16 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 
 
 ### Combos
+
+Combos can be a game-changer on compact keyboards, but they're not for everyone. Krypton’s default configuration includes a few combos for `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`. These combos use keys outside the home row, making them a good starting point if you've never tried combos before.
+
+If you find combos intuitive to use, you can further optimize the configuration with them. My personal setup uses more combos, allowing me to have a navigation layer better suited to my needs.
+
+The `Alt-Tab` combo uses [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), allowing you to switch between open windows by releasing and pressing `H` or `Y` again. Pressing both keys simultaneously triggers the combo, which sends `Alt-Tab` to the operating system. You can then cycle through open windows by releasing `H` and pressing it again. You can do the same in the opposite direction using `Y`.
+
+To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos are inhibited if another key was tapped shortly beforehand. The time interval can be adjusted by changing `IDLE_TIME_BEFORE_COMBO` in `customization.c`.
+
+The entire combos configuration is located in `customization.c`.
 
 - Les combos peuvent être un game-changer sur les claviers compacts, mais tout le monde n’aime pas. 
 - La configuration embarque quelques combos (backspace, enter, tab, escape, alt-tab et PANIC), qui utilisent des touches hors de la rangée de repos.
