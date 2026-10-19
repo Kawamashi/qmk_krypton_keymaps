@@ -156,7 +156,7 @@ It’s activated with a [Shaka Gesture](https://github.com/Kawamashi/qmk_modules
 
 Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/). It’s the most thoughtfully designed configuration I've come across. This setup definitively resolved the issues that some users were experiencing with the HRMs. 
 
-Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply combine a mod-tap key with a key on the opposite half of the keyboard, and everything will work naturally. In case of same-hand rolls or during tap sequences, the hold behavior is inhibited.
+Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply combine a mod-tap key with a key on the opposite half of the keyboard, and everything will work naturally. In case of same-hand [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) or during tap sequences, the hold behavior is inhibited.
 
 Although HRMs are already configured in Krypton, I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work.
 
@@ -190,8 +190,64 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 
 ### Layer-tap keys
 
-- cas particulier du réglage du `E`, `IDLE_TIME_BEFORE_HOLD_PRIORITY`
+The general philosophy for Propergol Layer-tap keys configuration relies on [`PERMISSIVE_HOLD`](https://docs.qmk.fm/tap_hold#permissive-hold) and [`CHORDAL_HOLD`](https://docs.qmk.fm/tap_hold#chordal-hold). `PERMISSIVE_HOLD` makes it easier to trigger the hold behavior of thumb keys. `CHORDAL_HOLD` prevents false activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
 
+
+However, E needs special handling to allow hotkeys to be typed using only the left hand. Since `CHORDAL_HOLD` prevents same-hand activation, a different approach is needed: during tapping sequences, `PERMISSIVE_HOLD` is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrows) if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_PERMISSIVE_HOLD` duration can be tuned in `config_propergol.h`.
+
+Experienced Propergol users can go further by defining `HOLD_PRIORITY_FOR_HOTKEYS` in `config_propergol.h`. When this option is enabled, `HOLD_ON_OTHER_KEY_PRESS` is activated for `E`, `Magic` and `Repeat` if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_HOLD_PRIORITY` duration can be tuned in `config_propergol.h`.
+
+> [!WARNING]
+> Do not use `HOLD_PRIORITY_FOR_HOTKEYS` while learning Propergol. Depending on your typing style and familiarity with the layout, this setting can cause frequent unintended layer activations.
+
+&nbsp;</br>
+In summary:
+<table>
+  <thead>
+    <tr>
+      <th>Options</th>
+      <th>Space</th>
+      <th>E</th>
+      <th>Repeat</th>
+      <th>Magic</th>
+    </tr>
+  </thead>
+   <tr>
+    <th>Tapping Term</th>
+    <td>250 ms</td>
+    <td>300 ms</td>
+    <td>250 ms</td>
+    <td>250 ms</td>
+   </tr>
+   <tr>
+    <th>Permissive Hold</th>
+    <td>Yes</td>
+    <td>- if the next key is on the right half<br>
+    - after IDLE_TIME_BEFORE_PERMISSIVE_HOLD</td>
+    <td>Yes</td>
+    <td>Yes</td>
+   </tr>
+   <tr>
+    <th>Chordal Hold</th>
+    <td>Yes</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+   </tr>
+    <tr>
+    <th>Hold On Other Keypress</th>
+    <td>No</td>
+    <td>with HOLD_PRIORITY_FOR_HOTKEYS<br>
+    (exept for arrow keys)</td>
+    <td>with HOLD_PRIORITY_FOR_HOTKEYS</td>
+    <td>with HOLD_PRIORITY_FOR_HOTKEYS</td>
+   </tr>
+</table>
+&nbsp;</br>
+
+
+&nbsp;</br>
+## Features
 
 ### One shot on steroids keys
 
@@ -210,9 +266,6 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 Comme ça, vous pourrez vous faire votre opinion si vous n’avez jamais testé. 
 - Si l’utilisation des combos vous parait naturelle, la configuration peut être optimisée. Ma configuration personnelle en utilise plus, ce qui me permet d’avoir une couche de navigation mieux adaptée à mes besoins.
 - La combo alt-tab utilise le [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), ce qui permet de naviguer dans vos fenêtres en lâchant et en réappuyant sur `H` ou `Y` : en appuyant sur les deux touches en même temps on déclenche la combo, qui envoie Alt-tab au système. On peut ensuite se déplacer dans les fenêtres ouvertes en relâchant `H` et en réappuyant dessus. On peut faire la même chose dans l’autre sens avec 'Y'.
-
-
-## Features
 
 ### Layer words
 - numword, navword, funword
