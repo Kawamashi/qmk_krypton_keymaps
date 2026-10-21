@@ -59,11 +59,10 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
 bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
 
-  // Disable speculative hold during tapping sequences
-  if (get_idle_time() < FLOW_TAP_INTERVAL) { return false; }
   // Disable speculative hold when any mods are already active
   // not to mess with hotkeys
-  if (get_mods() | get_oneshot_mods()) { return false; }
+  //if (get_mods() | get_oneshot_mods()) { return false; }
+  if (get_oneshot_mods()) { return false; }
   
   // Enable speculative holding for these keys.
   if (keycode == I(PG_N)) { return true; }
@@ -71,20 +70,35 @@ bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
   return false;  // Disable otherwise.
 }
 
-bool is_tapping_sequence(uint16_t keycode) {
-  // To trigger Tap Flow, the last input must be a character,
-  // the time between the keypresses must be lower than FLOW_TAP_INTERVAL
-  // and the ongoing keypress must be on a layer used for characters with mod-tap keys on it
-  if (get_recent_keycode(-1) == KC_NO) { return false; }
-  if (get_idle_time() > FLOW_TAP_INTERVAL) { return false; }
-  
-  switch (get_highest_layer(layer_state)) {
-    case _BASE:
-    case _NUMBERS:
-        return true;
-    default:
-        return false;
-  }
+bool is_flow_tap_key(uint16_t keycode) {
+
+    if (IS_QK_MODS(keycode)) { keycode = QK_MODS_GET_BASIC_KEYCODE(keycode); }
+
+    switch (get_tap_keycode(keycode)) {
+        // These keys type letters, digits, symbols.
+        case KC_A ... KC_0:
+        case KC_SPACE ... KC_SLASH:
+        case KC_KP_1 ... KC_NUBS:
+            return true;
+    }
+    return false;
+}
+
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_keycode) {
+
+    // Disable Flow Tap on hotkeys.
+    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) { return 0; }
+
+    // Flow Tap does not apply to layer-tap keys
+    if (IS_QK_LAYER_TAP(keycode)) { return 0; }
+
+    // Flow Tap disables the mod-tap behavior of character keys pressed after another character.
+    if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
+        return FLOW_TAP_TERM;
+    }
+
+    // Disable Flow Tap otherwise.
+    return 0;
 }
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
@@ -155,7 +169,7 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return PG_AGRV;
 
     default:
-      return keycode &= 0xff;
+      return get_tap_keycode(keycode);
   }
 }
 
