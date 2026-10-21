@@ -36,16 +36,16 @@
 
 // Row 1
 #define PG_GRV  KC_GRV  // `
-#define FG_1    KC_1    // 1
-#define FG_2    KC_2    // 2
-#define FG_3    KC_3    // 3
-#define FG_4    KC_4    // 4
-#define FG_5    KC_5    // 5
-#define FG_6    KC_6    // 6
-#define FG_7    KC_7    // 7
-#define FG_8    KC_8    // 8
-#define FG_9    KC_9    // 9
-#define FG_0    KC_0    // 0
+#define PG_1    KC_1    // 1
+#define PG_2    KC_2    // 2
+#define PG_3    KC_3    // 3
+#define PG_4    KC_4    // 4
+#define PG_5    KC_5    // 5
+#define PG_6    KC_6    // 6
+#define PG_7    KC_7    // 7
+#define PG_8    KC_8    // 8
+#define PG_9    KC_9    // 9
+#define PG_0    KC_0    // 0
 #define PG_SLSH KC_MINS // /
 #define PG_EGAL KC_EQL  // =
 

@@ -128,7 +128,10 @@ uint16_t get_ongoing_keycode(uint16_t keycode, keyrecord_t* record) {
   uint16_t basic_keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
 
   switch (basic_keycode) {
-    case KC_A ... KC_SLASH:  // These keys type letters, digits, symbols.
+    // These keys type letters, digits, symbols.
+    case KC_A ... KC_0:
+    case KC_SPACE ... KC_SLASH:
+    case KC_KP_1 ... KC_NUBS:
 
       if (mods & MOD_BIT(KC_ALGR)) { 
         basic_keycode = ALGR(basic_keycode);
