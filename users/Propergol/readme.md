@@ -92,7 +92,7 @@ Krypton’s default configuration uses a a numpad-style Numbers layer:
 In addition to the number keys, the layer provides:
 - `★`, to type alternate symbols, like fractions and arithmetic operators (`½`, `⅓`, `×`, `÷`, `±`, etc.)
 - `Num Word`, to type sequences of numbers without having to keep the layer-tap key held down. This key triggers a [Layer Word](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) that remains active as long as you type numeric symbols.
-- `Previous`/`Next Window` keys (equivalent to `Alt+Tab` or `⌘+Tab`) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
+- `Previous`/`Next Window` keys (equivalent to `Alt`+`Tab` or `⌘`+`Tab`) on left hand, allowing you to switch between windows without pressing `Alt` or `⌘`. This functionality is implemented with [Cyclotab](https://getreuer.info/posts/keyboards/cyclotab/).
 - A one shot `Win Num` key, to type easily `GUI`+ numbers, using [Lobre’s Shaka Gesture](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys)
 - A `Toggle Num` key to switch between number-row and numpad keycodes (some applications require one or the other)
 
@@ -285,7 +285,7 @@ Combos can be a game-changer on compact keyboards, but they're not for everyone.
 
 If you find combos intuitive to use, you can further optimize the configuration with them. My personal setup uses more combos, allowing me to have a navigation layer better suited to my needs.
 
-The `Alt-Tab` combo uses [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), allowing you to switch between open windows by releasing and pressing `H` or `Y` again. Pressing both keys simultaneously triggers the combo, which sends `Alt-Tab` to the operating system. You can then cycle through open windows by releasing `H` and pressing it again. You can do the same in the opposite direction using `Y`.
+The `Alt-Tab` combo uses [*key repress*](https://docs.qmk.fm/features/combo#customizable-key-repress), allowing you to switch between open windows by releasing and pressing `H` or `Y` again. Pressing both keys simultaneously triggers the combo, which sends `Alt`+`Tab` (or `⌘`+`Tab`) to the operating system. You can then cycle through open windows by releasing `H` and pressing it again. You can do the same in the opposite direction using `Y`.
 
 To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos are inhibited if another key was tapped shortly beforehand. The time interval can be adjusted by changing `IDLE_TIME_BEFORE_COMBO` in `customization.c`.
 
