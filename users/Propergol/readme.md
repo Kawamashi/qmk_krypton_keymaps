@@ -23,7 +23,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
     * [Fonction keys layer](#Fonction-keys-layer)
     * [Windows Management layer](#Windows-Management-layer)
 * [Tap-Hold keys configuration](#Tap-Hold-keys-configuration)
-    * [Mod-tap keys](Mod-tap-keys)
+    * [Mod-tap keys](#Mod-tap-keys)
     * [Layer-tap keys](#Layer-tap-keys)
 * [Features](#Features)
     * [One shot on steroids keys](#One-shot-on-steroids-keys)
