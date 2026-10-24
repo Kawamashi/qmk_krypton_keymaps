@@ -411,7 +411,7 @@ bool should_oneshot_on_steroids_deactivate_layer(uint16_t keycode, uint8_t layer
   }
 }
 
-bool automatic_release_after_other_keypress(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
+bool should_automatically_release_oneshot_on_steroids(uint16_t keycode, uint16_t oneshot, keyrecord_t* record) {
   switch (oneshot) {
     case OS_1DK:
       if (keycode == PG_K) { return true; }

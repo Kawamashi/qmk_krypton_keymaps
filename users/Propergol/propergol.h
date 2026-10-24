@@ -109,9 +109,13 @@ enum custom_keycodes {
     #define M(k) LOPT_T(k)
     #define I(k) LCMD_T(k)
   #else
+    // Pinky HRM
     #define P(k) LSFT_T(k)
+    // Ring finger HRM
     #define R(k) LALT_T(k)
+    // Middle finger HRM
     #define M(k) LGUI_T(k)
+    // Index finger HRM
     #define I(k) LCTL_T(k)
   #endif
 #else
