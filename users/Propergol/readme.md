@@ -26,7 +26,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
     * [Mod-tap keys](#Mod-tap-keys)
     * [Layer-tap keys](#Layer-tap-keys)
 * [Features](#Features)
-    * [One shot on steroids keys](#One-shot-on-steroids-keys)
+    * [One Shot on Steroids keys](#One-Shot-on-Steroids-keys)
     * [Combos](#Combos)
     * [Layer words](#Layer-words)
 
@@ -269,7 +269,7 @@ In summary:
 &nbsp;</br>
 ## Features
 
-### One shot on steroids keys
+### One Shot on Steroids keys
 
 For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypton uses [One Shot on Steroids](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids) (OSoS) keys. Compared to standard QMK one shot keys, this implementation offers several advantages:
 - [**Instant activation**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#how-one-shots-on-steroids-work): modifiers and layers are activated as soon as you press an OSoS key, without waiting for the tapping term to expire.
