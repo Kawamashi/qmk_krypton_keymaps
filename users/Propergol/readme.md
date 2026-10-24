@@ -276,7 +276,7 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 - [**Easy cancellation**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#cancelling-one-shots-on-steroids): if you tapped an OSoS key by mistake, just tap it again to cancel it.
 - [**No layer-stack restrictions**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#one-shot-layers-freed-from-the-layer-stack): OSoS layer keys can bypass the usual layer-stack restrictions, allowing you to type symbols from the Numbers layer and numbers from the Symbols layer for example.
 - [**Shaka Gesture compatibility**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys): OSoS keys are compatible with the Shaka Gesture, which is a really nice way of changing the behavior of secondary layers.
-- **Customizable behavior**: you can further customize OSoS keys to [“absorb” modifiers](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#mod-absorbing-one-shot-layers) or to affect only the next keypress even if the OSoS key is still held down.
+- **Customizable behavior**: you can further customize OSoS keys to [“absorb” modifiers](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#mod-absorbing-one-shot-layers) or to affect [only the next keypress](https://github.com/Kawamashi/qmk_modules/blob/main/oneshots_on_steroids/readme.md#Automatic-One-Shot-Release) even if the OSoS key is still held down.
 
 
 ### Combos
