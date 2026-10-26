@@ -265,7 +265,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
           if (!host_keyboard_led_state().num_lock) { tap_code(KC_NUM_LOCK); }
           if (!host_keyboard_led_state().scroll_lock) { tap_code(KC_SCROLL_LOCK); }
           
-          if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
+          if (get_layerword_layer() != 0) { disable_layerword(); }
           layer_clear();
           set_use_numpad(false);
           set_shift_altgr(false);
@@ -578,16 +578,13 @@ uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
   }
 }
 
-uint16_t layerword_exit_timeout(uint8_t layer) {
+uint16_t get_layerword_timeout(uint8_t layer) {
 
   switch (layer) {
-    case _NUMBERS:
-    case _SHORTNAV:
-        return 3000;
     case _FUNCTIONS:
         return 30000;
     default:
-        return 0;
+        return LAYERWORD_TIMEOUT;
   }
 }
 
@@ -648,7 +645,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case KC_F1 ... KC_F12:
             return true;
         default:
-            disable_layerword(_FUNCTIONS);
+            disable_layerword();
             return false;
       }
   }

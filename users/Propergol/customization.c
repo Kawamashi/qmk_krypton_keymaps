@@ -343,16 +343,13 @@ uint8_t get_layerword_layer_from_trigger(uint16_t keycode) {
   }
 }
 
-uint16_t layerword_exit_timeout(uint8_t layer) {
+uint16_t get_layerword_timeout(uint8_t layer) {
 
   switch (layer) {
-    case _NUMBERS:
-    case _SHORTNAV:
-        return 3000;
     case _FUNCTIONS:
-        return 0;
+        return 30000;
     default:
-        return 0;
+        return LAYERWORD_TIMEOUT;
   }
 }
 
@@ -414,7 +411,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         case KC_F1 ... KC_F12:
             return true;
         default:
-            disable_layerword(_FUNCTIONS);
+            disable_layerword();
             return false;
       }
   }

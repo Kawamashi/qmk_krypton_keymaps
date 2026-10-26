@@ -261,7 +261,7 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
           if (!host_keyboard_led_state().num_lock) { tap_code(KC_NUM_LOCK); }
           if (!host_keyboard_led_state().scroll_lock) { tap_code(KC_SCROLL_LOCK); }
           
-          if (get_layerword_layer() != 0) { disable_layerword(get_layerword_layer()); }
+          if (get_layerword_layer() != 0) { disable_layerword(); }
           layer_clear();
           use_numpad = false;
           unregister_code(KC_LCTL);
