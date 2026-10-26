@@ -212,15 +212,15 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 
 ### Layer-tap keys
 
-The general philosophy for Propergol Layer-tap keys configuration relies on [`PERMISSIVE_HOLD`](https://docs.qmk.fm/tap_hold#permissive-hold) and [`CHORDAL_HOLD`](https://docs.qmk.fm/tap_hold#chordal-hold). `PERMISSIVE_HOLD` makes it easier to trigger the hold behavior of thumb keys. `CHORDAL_HOLD` prevents false activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
+The general philosophy for Propergol Layer-tap keys configuration relies on [Permissive Hold](https://docs.qmk.fm/tap_hold#permissive-hold) and [Chordal Hold](https://docs.qmk.fm/tap_hold#chordal-hold). Permissive Hold makes it easier to trigger the hold behavior of thumb keys. Chordal Hold prevents false activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
 
 
-However, E needs special handling to allow hotkeys to be typed using only the left hand. Since `CHORDAL_HOLD` prevents same-hand activation, a different approach is needed: during tapping sequences, `PERMISSIVE_HOLD` is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrow keys) if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_PERMISSIVE_HOLD` duration can be tuned in `config_propergol.h`.
+However, `E` needs special handling to allow hotkeys to be typed using only the left hand. Since Chordal Hold prevents same-hand activation, a different approach is needed: during tapping sequences, Permissive Hold is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrow keys) if no character has been typed for a certain amount of time. This `PERMISSIVE_HOLD_IDLE_TERM` duration can be tuned in `config_propergol.h`.
 
-Experienced Propergol users can go further by defining `HOLD_PRIORITY_FOR_HOTKEYS` in `config_propergol.h`. When this option is enabled, `HOLD_ON_OTHER_KEY_PRESS` is activated for `E`, `Magic` and `Repeat` if no character has been typed for a certain amount of time. This `IDLE_TIME_BEFORE_HOLD_PRIORITY` duration can be tuned in `config_propergol.h`.
+Experienced Propergol users can go further by defining `HOLD_PRIORITY_IDLE_TERM` in `config_propergol.h`. When this option is enabled, [Hold On Other Key Press](https://docs.qmk.fm/tap_hold#hold-on-other-key-press) is activated for `E`, `Magic` and `Repeat` if no character has been typed for a certain amount of time. 
 
 > [!WARNING]
-> Do not use `HOLD_PRIORITY_FOR_HOTKEYS` while learning Propergol. Depending on your typing style and familiarity with the layout, this setting can cause frequent unintended layer activations.
+> Do not use this option while learning Propergol. Depending on your typing style and familiarity with the layout, this setting can cause frequent unintended layer activations.
 
 &nbsp;</br>
 In summary:
@@ -245,7 +245,7 @@ In summary:
     <th>Permissive Hold</th>
     <td>Yes</td>
     <td>- if the next key is on the right half<br>
-    - after IDLE_TIME_BEFORE_PERMISSIVE_HOLD (exept for arrow keys)</td>
+    - after PERMISSIVE_HOLD_IDLE_TERM (exept for arrow keys)</td>
     <td>Yes</td>
     <td>Yes</td>
    </tr>
@@ -259,10 +259,10 @@ In summary:
     <tr>
     <th>Hold On Other Keypress</th>
     <td>No</td>
-    <td>with HOLD_PRIORITY_FOR_HOTKEYS<br>
+    <td>with HOLD_PRIORITY_IDLE_TERM<br>
     (exept for arrow keys)</td>
-    <td>with HOLD_PRIORITY_FOR_HOTKEYS</td>
-    <td>with HOLD_PRIORITY_FOR_HOTKEYS</td>
+    <td>with HOLD_PRIORITY_IDLE_TERM</td>
+    <td>with HOLD_PRIORITY_IDLE_TERM</td>
    </tr>
 </table>
 &nbsp;</br>
