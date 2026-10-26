@@ -683,6 +683,10 @@ bool list_separator(void) {
         if (word_check((uint16_t[]) {KC_SPC, PG_E, PG_T}, 3, 2)) { return true; }
 
         if (word_check((uint16_t[]) {KC_SPC, PG_O, PG_U}, 3, 2)) { return true; }
+
+        if (word_check((uint16_t[]) {KC_SPC, PG_O, PG_R}, 3, 2)) { return true; }
+
+        if (word_check((uint16_t[]) {KC_SPC, PG_A, PG_N, PG_D}, 4, 3)) { return true; }
     }
     return false;
 }
