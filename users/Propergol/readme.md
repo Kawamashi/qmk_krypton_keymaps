@@ -42,7 +42,9 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 - MacOS users can adapt the configuration by commenting out `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be used only for shortcuts. 
 - Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols, Functions and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
+- Easy access to `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`, with [combos](#Combos). Even though they are not pictured in the next illustrations, they can be triggered from all layers, providing an easy access to editing keys.
 
+  
 <details>
 <summary>One shot for Numbers layer</summary>
 <img src="../../png/Propergol/base alt.png" width="900">
@@ -281,7 +283,7 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 
 ### Combos
 
-Combos can be a game-changer on compact keyboards, but they're not for everyone. Krypton’s default configuration includes a few combos for `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`. These combos use keys outside the home row, making them a good starting point if you've never tried combos before.
+[Combos](https://docs.qmk.fm/features/combo) can be a game-changer on compact keyboards, but they're not for everyone. Krypton’s default configuration includes a few combos for `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`. These combos use keys outside the home row, making them a good starting point if you've never tried combos before.
 
 If you find combos intuitive to use, you can further optimize the configuration with them. My personal setup uses more combos, allowing me to have a navigation layer better suited to my needs.
 
