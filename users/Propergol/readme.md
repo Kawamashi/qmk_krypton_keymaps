@@ -172,11 +172,19 @@ It’s activated with a [Shaka Gesture](https://github.com/Kawamashi/qmk_modules
 
 ### Mod-tap keys
 
-Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/). It’s the most thoughtfully designed configuration I've come across. This setup definitively resolved the issues that some users were experiencing with the HRMs. 
+Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/). It’s the most thoughtfully designed configuration I've come across. This approach has effectively addressed the issues commonly associated with home-row modifiers. 
 
-Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply combine a mod-tap key with a key on the opposite half of the keyboard, and everything will work naturally. In case of same-hand [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) or during tap sequences, the hold behavior is inhibited.
+Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply hold a mod-tap key while pressing a key on the opposite half of the keyboard. In case of same-hand [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) or during fast typing, the hold behavior is inhibited.
 
-Although HRMs are already configured in Krypton, I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work.
+I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work:
+
+```c
+#define TAPPING_TERM 250
+#define PERMISSIVE_HOLD_PER_KEY  // For all keys except `E` (see the Layer-tap keys section))
+#define FLOW_TAP_TERM 210
+#define CHORDAL_HOLD
+#define SPECULATIVE_HOLD         // For `Ctrl` dual keys
+```
 
 Timeless is designed to prevent both false positives (a modifier activating when it shouldn't) and false negatives (a modifier failing to activate when it should). If you experience any of these issues, try adjusting the relevant timer:
 - false negatives (same-hand): reduce `TAPPING_TERM`
@@ -212,61 +220,29 @@ Finally, you can easily change the order of the HRMs across all layers by editin
 
 ### Layer-tap keys
 
-The general philosophy for Propergol Layer-tap keys configuration relies on [Permissive Hold](https://docs.qmk.fm/tap_hold#permissive-hold) and [Chordal Hold](https://docs.qmk.fm/tap_hold#chordal-hold). Permissive Hold makes it easier to trigger the hold behavior of thumb keys. Chordal Hold prevents false activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
+Propergol's Layer-tap configuration primarily relies on [Permissive Hold](https://docs.qmk.fm/tap_hold#permissive-hold) and [Chordal Hold](https://docs.qmk.fm/tap_hold#chordal-hold). Activating layers is easier with Permissive Hold, while Chordal Hold prevents accidental activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
 
 
-However, `E` needs special handling to allow hotkeys to be typed using only the left hand. Since Chordal Hold prevents same-hand activation, a different approach is needed: during tapping sequences, Permissive Hold is only activated if the key tapped after `E` is on the right half of the keyboard. It’s also activated for keys on the left half (except arrow keys) if no character has been typed for a certain amount of time. This `PERMISSIVE_HOLD_IDLE_TERM` duration can be tuned in `config_propergol.h`.
+However, `E` requires special handling to allow shortcuts to be pressed entirely with the left hand. Since Chordal Hold prevents same-hand activation, it is disabled for this key. Therefore, during tapping sequences, Permissive Hold applies only if the key pressed after `E` is on the right half of the keyboard. After a period of inactivity, it also applies to left-hand keys (except arrow keys). This `PERMISSIVE_HOLD_IDLE_TERM` duration can be tuned in `config_propergol.h`.
 
-Experienced Propergol users can go further by defining `HOLD_PRIORITY_IDLE_TERM` in `config_propergol.h`. When this option is enabled, [Hold On Other Key Press](https://docs.qmk.fm/tap_hold#hold-on-other-key-press) is activated for `E`, `Magic` and `Repeat` if no character has been typed for a certain amount of time. 
+Experienced Propergol users can go further by defining `HOLD_PRIORITY_IDLE_TERM` in `config_propergol.h`. This enables [Hold On Other Key Press](https://docs.qmk.fm/tap_hold#hold-on-other-key-press) for `E`, `Magic` and `Repeat` after a period of inactivity. 
 
 > [!WARNING]
-> Do not use this option while learning Propergol. Depending on your typing style and familiarity with the layout, this setting can cause frequent unintended layer activations.
+> This option is not recommended while learning Propergol. Depending on your typing style and familiarity with the layout, it may cause frequent unintended layer activations.
 
 &nbsp;</br>
 In summary:
-<table>
-  <thead>
-    <tr>
-      <th>Options</th>
-      <th>Space</th>
-      <th>E</th>
-      <th>Repeat</th>
-      <th>Magic</th>
-    </tr>
-  </thead>
-   <tr>
-    <th>Tapping Term</th>
-    <td>250 ms</td>
-    <td>300 ms</td>
-    <td>250 ms</td>
-    <td>250 ms</td>
-   </tr>
-   <tr>
-    <th>Permissive Hold</th>
-    <td>Yes</td>
-    <td>- if the next key is on the right half<br>
-    - after PERMISSIVE_HOLD_IDLE_TERM (exept for arrow keys)</td>
-    <td>Yes</td>
-    <td>Yes</td>
-   </tr>
-   <tr>
-    <th>Chordal Hold</th>
-    <td>Yes</td>
-    <td>No</td>
-    <td>No</td>
-    <td>No</td>
-   </tr>
-    <tr>
-    <th>Hold On Other Keypress</th>
-    <td>No</td>
-    <td>with HOLD_PRIORITY_IDLE_TERM<br>
-    (exept for arrow keys)</td>
-    <td>with HOLD_PRIORITY_IDLE_TERM</td>
-    <td>with HOLD_PRIORITY_IDLE_TERM</td>
-   </tr>
-</table>
-&nbsp;</br>
 
+| Setting                 | Space  | E            | Repeat    | Magic     |
+|-------------------------|--------|--------------|-----------|-----------|
+| Tapping Term            | 250 ms | 300 ms       | 250 ms    | 250 ms    |
+| Permissive Hold         | Yes    | Conditional¹ | Yes       | Yes       |
+| Chordal Hold            | Yes    | No           | No        | No        |
+| Hold On Other Key Press | No     | Optional²    | Optional² | Optional² |
+
+¹ For `E`, Permissive Hold applies to right-hand keys, and to left-hand keys (except arrow keys) after an idle period exceeding `PERMISSIVE_HOLD_IDLE_TERM`.
+
+² Enabled when `HOLD_PRIORITY_IDLE_TERM` is defined. Arrow keys are excluded for `E`.
 
 &nbsp;</br>
 ## Features
