@@ -30,6 +30,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
     * [Combos](#Combos)
     * [Layer Words](#Layer-Words)
     * [Caps Word, Caps List and Caps Lock](#Caps-Word-Caps-List-and-Caps-Lock)
+    * [Select Word and Select Line](#Select-Word-and-Select-Line)
 
 &nbsp;</br>
 ## Layers
@@ -283,7 +284,14 @@ The entire Layer Words configuration is located in `customization.c`.
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
 
 
-### Select Word, Select Line
+### Select Word and Select Line
+
+Krypton uses Select Word and Select Line to easily select the current word or line. Shift (and Control if needed) are automatically applied to subsequent navigation keystrokes to extend, shrink, or adjust the selection:
+- `Prev Word` and `Next Word` move the selection to the previous or next word.
+-  `←` and `→` extend or shrink the selection by one word, while `↑` and `↓` do the same by one line.
+-  `Home` and `End` extend the selection to the beginning or end of the line, while `Page Up` and `Page Down` extend it to the beginning or end of the page.
+
+You can change direction at any time, making these features intuitive to use.
 
 `KRYPTON_THUMB_SHORTCUTS` 
 
