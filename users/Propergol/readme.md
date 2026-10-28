@@ -28,7 +28,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 * [Features](#Features)
     * [One Shot on Steroids keys](#One-Shot-on-Steroids-keys)
     * [Combos](#Combos)
-    * [Layer words](#Layer-words)
+    * [Layer Words](#Layer-Words)
 
 &nbsp;</br>
 ## Layers
@@ -270,17 +270,25 @@ To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos
 The entire combos configuration is located in `customization.c`.
 
 
-### Layer words
-Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys without having to keep a layer-tap key held down. A layer word remains active until a word-breaking character is typed.
+### Layer Words
+
+Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys. For that, hold a layer-tap key to activate the corresponding layer, press the `Num Word`, `Nav Word` or `Func Word` key, then release the layer-tap key. The layer remains active until a word-breaking key is pressed.
 
 The entire Layer Words configuration is located in `customization.c`.
 
 
-### Caps word, caps list et caps lock
+### Caps Word, Caps List et Caps Lock
 
-### Select Word, select line
+Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
+
+
+### Select Word, Select Line
 
 `KRYPTON_THUMB_SHORTCUTS` 
 
 ### Clever Keys
-Sentence case
+Krypton uses Clever Keys to make the layout context-aware. By keeping track of recently typed characters, Clever Keys can adapt key behavior based on previous keystrokes, automatically inserting or replacing characters and providing smarter `Repeat` and `Magic` key behaviors.
+
+They also enable automatic capitalization at the beginning of sentences, context-sensitive handling of the `Repeat` key, and more precise control over combo activation.
+
+For a detailed explanation and more examples, see the [Clever Keys documentation](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#clever-keys).
