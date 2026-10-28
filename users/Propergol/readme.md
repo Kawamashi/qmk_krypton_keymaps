@@ -29,6 +29,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
     * [One Shot on Steroids keys](#One-Shot-on-Steroids-keys)
     * [Combos](#Combos)
     * [Layer Words](#Layer-Words)
+    * [Caps Word, Caps List and Caps Lock](#Caps-Word-Caps-List-and-Caps-Lock)
 
 &nbsp;</br>
 ## Layers
@@ -277,7 +278,7 @@ Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/la
 The entire Layer Words configuration is located in `customization.c`.
 
 
-### Caps Word, Caps List et Caps Lock
+### Caps Word, Caps List and Caps Lock
 
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
 
