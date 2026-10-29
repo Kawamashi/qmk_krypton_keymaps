@@ -63,7 +63,7 @@ Instead of relying solely on Propergol’s driver, the [dead key](https://github
 - Holding `★` allows you to chain several characters from the 1DK layer.
 - `Repeat` can repeat a character from the 1DK layer.
 - The 1DK layer can be made compatible with other QMK features such as [Caps Word](https://docs.qmk.fm/features/caps_word) and Clever Keys.
-- If desired, Shift can be applied to the character following the dead key. For example, `Shift` `★` `O` can be used to type `Ô`. To do so,  uncomment `#define ONE_DEAD_KEY_DEFFERED_SHIFT` in `config_propergol.h`.
+- If desired, Shift can be applied to the character following the dead key. For example, `Shift` `★` `o` can be used to type `Ô`. To do so,  uncomment `#define ONE_DEAD_KEY_DEFFERED_SHIFT` in `config_propergol.h`.
 
 &nbsp;</br>
 ### Navigation layer
