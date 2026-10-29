@@ -41,10 +41,10 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 - Secondary layers (for navigation, number and function keys) are activated with [Layer Tap](https://docs.qmk.fm/feature_layers) keys under the thumbs.
 - Krypton’s default configuration uses [Home-Row Modifiers](https://precondition.github.io/home-row-mods#what-are-home-row-mods) ([HRM](#Modifier-keys)) to make typing shortcuts more comfortable. Users of 6-column keyboards can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`.
-- MacOS users can adapt the configuration by commenting out `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
+- MacOS users can adapt the configuration by uncommenting `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
 - To improve typing experience, Krypton uses a [One Shot](https://docs.qmk.fm/one_shot_keys) Shift key. This key should be used to capitalize letters, while [Shift on the home-row](https://precondition.github.io/home-row-mods#shift-thumb-keys) should be used only for shortcuts. 
 - Similarly, the Symbols Layer is activated with a One Shot layer key. It’s possible to swap the Symbols, Functions and Numbers keys if you prefer to use a one shot key for numbers. To do so, uncomment `#define KRYPTON_NUMBER_ROW_WITH_ONESHOT` in `config_propergol.h`.
-- Easy access to `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`, with [combos](#Combos). Even though they are not pictured in the next illustrations, they can be triggered from all layers, providing an easy access to editing keys.
+- Krypton provides easy access to `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`, with [combos](#Combos). These combos work on all layers, even though they are not shown in the following illustrations. Combos can be disabled by commenting out `#define NO_COMBO` in `config_propergol.h`.
 
   
 <details>
@@ -178,11 +178,11 @@ Krypton uses [Timeless Home-Row Modifiers](https://www.reddit.com/r/ErgoMechKeyb
 
 Despite the name, Timeless HRM use several timers, but you don’t need to worry about them while typing. To activate a modifier, simply hold a mod-tap key while pressing a key on the opposite half of the keyboard. In case of same-hand [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) or during fast typing, the hold behavior is inhibited.
 
-I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work:
+I strongly encourage you to read the [original explanation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1q1jo3c/urobs_zmk_timeless_home_row_mods_ported_to_native/) to understand how the different options work. They are defined in `config_propergol.h`:
 
 ```c
 #define TAPPING_TERM 250
-#define PERMISSIVE_HOLD_PER_KEY  // For all keys except `E` (see the Layer-tap keys section))
+#define PERMISSIVE_HOLD_PER_KEY  // For all keys except `E` (see the Layer-tap keys section)
 #define FLOW_TAP_TERM 210
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD         // For `Ctrl` dual keys
@@ -192,15 +192,13 @@ Timeless is designed to prevent both false positives (a modifier activating when
 - false negatives (same-hand): reduce `TAPPING_TERM`
 - false negatives (cross-hand): reduce `FLOW_TAP_TERM`
 - false positives (same-hand): increase `TAPPING_TERM`
-- false positives (cross-hand): Increase `FLOW_TAP_TERM`
+- false positives (cross-hand): increase `FLOW_TAP_TERM`
 
 Change only one timer at a time, then test your typing before making further adjustments. This way, you can tell which change improved the behavior.
 
 MacOS users can enable the macOS modifier arrangement by uncommenting `#define KRYPTON_MAC_MODIFIERS` in `config_propergol.h`.
 
-If you prefer not to use HRMs, you can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`. The different timers can be tuned in the same file. 
-
-Finally, you can easily change the order of the HRMs across all layers by editing the following macros in `propergol.h`:
+You can easily change the order of the HRMs across all layers by editing the following macros in `propergol.h`:
 ```c
   #ifdef KRYPTON_MAC_MODIFIERS
     #define P(k) LSFT_T(k)
@@ -218,6 +216,8 @@ Finally, you can easily change the order of the HRMs across all layers by editin
     #define I(k) LCTL_T(k)
   #endif
 ```
+
+If you prefer not to use HRMs, you can disable them by commenting out `#define KRYPTON_ENABLE_HRM` in `config_propergol.h`. 
 
 
 ### Layer-tap keys
@@ -284,6 +284,10 @@ The entire Layer Words configuration is located in `customization.c`.
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) (for list of words like `QMK, ZMK and KRK`) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
 
 
+There are thumb shortcuts for `Nav Word` and `Func Word`. 
+`KRYPTON_THUMB_SHORTCUTS` 
+
+
 ### Select Word and Select Line
 
 Krypton uses Select Word and Select Line to easily select the current word or line. Shift (and Control if needed) are automatically applied to subsequent navigation keystrokes to extend, shrink, or adjust the selection:
@@ -293,7 +297,6 @@ Krypton uses Select Word and Select Line to easily select the current word or li
 
 You can change direction at any time, making these features intuitive to use.
 
-`KRYPTON_THUMB_SHORTCUTS` 
 
 ### Clever Keys
 Krypton uses Clever Keys to make the layout context-aware. By keeping track of recently typed characters, Clever Keys can adapt key behavior based on previous keystrokes, automatically inserting or replacing characters and providing smarter `Repeat` and `Magic` key behaviors.
