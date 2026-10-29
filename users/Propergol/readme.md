@@ -267,7 +267,7 @@ If you find combos intuitive to use, you can further optimize the configuration 
 
 The `Alt-Tab` combo uses [key repress](https://docs.qmk.fm/features/combo#customizable-key-repress), allowing you to switch between open windows by releasing and pressing `H` or `Y` again. Pressing both keys simultaneously triggers the combo, which sends `Alt`+`Tab` (or `⌘`+`Tab`) to the operating system. You can then cycle through open windows by releasing `H` and pressing it again. You can do the same in the opposite direction using `Y`.
 
-To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos are inhibited if another key was tapped shortly beforehand. The time interval can be adjusted by changing `IDLE_TIME_BEFORE_COMBO` in `customization.c`.
+To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos are inhibited if another key was tapped shortly beforehand. The time interval can be adjusted by changing `COMBO_IDLE_TERM` in `customization.c`.
 
 The entire combos configuration is located in `customization.c`.
 
