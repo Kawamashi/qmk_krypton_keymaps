@@ -232,6 +232,17 @@ combo_t key_combos[] = {
     };
 
 
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
+
+    switch (combo_index) {
+        case ESC:
+            return 40;
+        default:
+            return COMBO_TERM;
+    }
+}
+
+
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
 
     // Some combos should trigger regardless of the idle time.
@@ -286,6 +297,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         break;
   }
 }
+
 
 bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
   switch (combo_index) {

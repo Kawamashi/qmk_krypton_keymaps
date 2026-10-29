@@ -21,7 +21,7 @@
 
 // Combos
 
-  #ifndef NO_COMBO
+  //#ifndef NO_COMBO
 enum combos {
   BKSPC, 
   ENTER,
@@ -49,9 +49,22 @@ combo_t key_combos[] = {
     };
 
 
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
+
+    switch (combo_index) {
+        case END:
+            return 40;
+        default:
+            return COMBO_TERM;
+    }
+}
+
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
 
     // Some combos should trigger regardless of the idle time.
+#       ifdef NO_COMBO
+    return false;
+#       endif
     switch (combo_index) {
         case BKSPC:
         case ENTER:
@@ -64,7 +77,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     }
     return true;
 }
-
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
@@ -101,7 +113,7 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
   }
   return false;
 }
-  #endif
+  //#endif
 
 // Clever keys
 
