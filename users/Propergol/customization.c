@@ -60,7 +60,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
           return true;
 
         default:
-          if (get_idle_time() < IDLE_TIME_BEFORE_COMBO) { return false; }
+          if (get_idle_time() < COMBO_IDLE_TERM) { return false; }
     }
     return true;
 }

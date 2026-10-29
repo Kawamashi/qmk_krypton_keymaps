@@ -35,11 +35,11 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-      #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+      #ifdef HOLD_PRIORITY_IDLE_TERM
     // Hold priority for hotkeys 
     case LT_MGC:
     case LT_REPT:
-      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) {
+      if (get_idle_time() > HOLD_PRIORITY_IDLE_TERM) {
         return !approved_chord(keycode, record, next_keycode, &next_record);
       }
       return false;
@@ -277,6 +277,11 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
   }
 }
 
+uint16_t set_magic_keycode(uint16_t keycode) {
+  set_last_keycode(keycode);
+  return keycode;
+}
+
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
   if (get_last_keycode() == KC_NO) { return MAGIC; }
@@ -306,6 +311,9 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     case KC_HOME:
     case KC_END:
       return KC_TRNS;
+    case PG_C:
+      return set_magic_keycode(PG_S);
+      //return PG_S;
   }
   return MAGIC;
 }

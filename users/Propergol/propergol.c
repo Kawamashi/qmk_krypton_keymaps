@@ -125,13 +125,13 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-  #ifdef IDLE_TIME_BEFORE_HOLD_PRIORITY
+  #ifdef HOLD_PRIORITY_IDLE_TERM
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
     case LT_MGC:
     case LT_REPT:
-      if (get_idle_time() > IDLE_TIME_BEFORE_HOLD_PRIORITY) { return true; }
+      if (get_idle_time() > HOLD_PRIORITY_IDLE_TERM) { return true; }
       break;
 
     default:

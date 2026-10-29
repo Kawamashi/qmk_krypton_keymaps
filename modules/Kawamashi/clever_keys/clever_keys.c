@@ -130,7 +130,7 @@ uint16_t get_ongoing_keycode(uint16_t keycode, keyrecord_t* record) {
   switch (basic_keycode) {
     // These keys type letters, digits, symbols.
     case KC_A ... KC_0:
-    case KC_SPACE ... KC_SLASH:
+    case KC_SPC ... KC_SLASH:
     case KC_KP_1 ... KC_NUBS:
 
       if (mods & MOD_BIT(KC_ALGR)) { 

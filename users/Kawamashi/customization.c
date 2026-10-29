@@ -113,6 +113,10 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
         if (IS_LAYER_ON(_SYMBOLS)) {
           alt_repeat_key_invoke(&record->event);
         } else {
+          uint8_t tap_keycode = get_tap_keycode(get_last_keycode());
+          if(is_followed_by_apos(tap_keycode, get_recent_keycode(-2))) {
+            set_last_keycode(PG_APOS);
+          }
           repeat_key_invoke(&record->event);
         }
         return false;
@@ -241,7 +245,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
           return true;
 
         default:
-          if (get_idle_time() < IDLE_TIME_BEFORE_COMBO) { return false; }
+          if (get_idle_time() < COMBO_IDLE_TERM) { return false; }
     }
     return true;
 }
@@ -308,9 +312,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
   uint16_t prev_keycode = get_recent_keycode(-1);
 
     // Apostrophe
-    if (is_followed_by_apos(*ongoing_keycode, prev_keycode)) {
+    /*if (is_followed_by_apos(*ongoing_keycode, prev_keycode)) {
       set_last_keycode(PG_APOS);
-    }
+    }*/
   
   switch (prev_keycode) {
 
@@ -440,9 +444,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "sc" SFB
           return replace_ongoing_key(PG_C, ongoing_keycode, record);
 
-        case PG_C:
+        /*case PG_C:
           // "cs" SFB
-          return replace_ongoing_key(PG_S, ongoing_keycode, record);
+          return replace_ongoing_key(PG_S, ongoing_keycode, record);*/
 
         case PG_N:
           // "n." SFB

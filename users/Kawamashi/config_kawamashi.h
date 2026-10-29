@@ -39,7 +39,7 @@
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
 #define COMBO_PROCESS_KEY_REPRESS
-#define IDLE_TIME_BEFORE_COMBO 210
+#define COMBO_IDLE_TERM 210
 
 // mod tap
 #define TAPPING_TERM 250
@@ -49,7 +49,8 @@
 #define FLOW_TAP_TERM 210
 #define SPECULATIVE_HOLD
 #define SPECULATIVE_HOLD_ONE_KEY
-#define IDLE_TIME_BEFORE_HOLD_PRIORITY 300
+// Minimum idle time required to enable Hold on other key press for the Repeat and Magic keys.
+#define HOLD_PRIORITY_IDLE_TERM 300
 #define QUICK_TAP_TERM_PER_KEY
 
 // EC11K encoders have a different resolution than other EC11 encodeisrs.
