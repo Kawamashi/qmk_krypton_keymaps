@@ -183,7 +183,7 @@ I strongly encourage you to read the [original explanation](https://www.reddit.c
 ```c
 #define TAPPING_TERM 250
 #define PERMISSIVE_HOLD_PER_KEY  // For all keys except `E` (see the Layer-tap keys section)
-#define FLOW_TAP_TERM 210
+#define FLOW_TAP_TERM 150
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD         // For `Ctrl` dual keys
 ```
