@@ -57,7 +57,7 @@ I don’t pretend Krypton is perfect, only you can imagine the layout that suits
 
 <img src="../../png/Propergol/1dk.png" width="820">
 
-Instead of relying solely on Propergol’s driver, the [dead key](https://github.com/Kawamashi/Propergol/blob/main/README.md#la-touche-morte-de-propergol) is implemented as a layer, activated with a [One Shot on Steroids](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids) key. This makes the 1DK system much more flexible:
+Instead of relying solely on Propergol’s driver, the [dead key](https://github.com/Kawamashi/Propergol/blob/main/README.md#la-touche-morte-de-propergol) is implemented as a layer, activated with a [One Shot on Steroids](#One-Shot-on-Steroids-keys) key. This makes the 1DK system much more flexible:
 - You can customize the 1DK layer without having to modify the driver itself.
 - If you tapped `★` by mistake, just tap it again to cancel it.
 - Holding `★` allows you to chain several characters from the 1DK layer.
