@@ -61,7 +61,7 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_
     // Flow Tap does not apply to layer-tap keys
     if (IS_QK_LAYER_TAP(keycode)) { return 0; }
 
-    // Flow Tap disables the mod-tap behavior of character keys pressed after another character.
+    // Flow Tap disables the mod-tap behavior of mod-tap character keys pressed after another character.
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
         return FLOW_TAP_TERM;
     }
@@ -110,33 +110,89 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                 return true;
             }
             break;
+        case LT_MGC:
+            switch (other_keycode) {
+                case OS_WNUM:
+                case ALT_TAB:
+                case REV_TAB:
+                    return true;
+                default:
+                    break;
+            }
     }
     // Otherwise defer to the opposite hands rule.
     return get_chordal_hold_default(tap_hold_record, other_record);
 }
 
+static bool is_e_roll_key(uint16_t keycode) {
+
+    switch (get_tap_keycode(keycode)) {
+        case PG_A:
+        case PG_N:
+        case PG_I:
+        case PG_U:
+            return true;
+
+        default:
+            return false;
+    }
+}
+
+static uint16_t get_permissive_hold_idle_term(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                                       uint16_t other_keycode, keyrecord_t* other_record) {
+
+    if (tap_hold_keycode == LT_E && !is_e_roll_key(other_keycode)) {
+        return PERMISSIVE_HOLD_IDLE_TERM;
+    }
+    return 0;
+}
+
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT_E:
-            // Disabling Permissive Hold for `E` when the other key is on the same side
-            return approved_chord(keycode, record, next_keycode, &next_record);
+        case LT_E: {
+            // Enabling Permissive Hold for `E` when the other key is on the opposite side
+            if (approved_chord(keycode, record, next_keycode, &next_record)) { return true; }
+            
+            // Otherwise, it requires a period of inactivity
+            const uint16_t idle_term = get_permissive_hold_idle_term(keycode, record, next_keycode, &next_record);
+            return idle_term > 0 && get_idle_time() > idle_term;
+        }
         default:
             return true;
     }
 }
 
   #ifdef HOLD_PRIORITY_IDLE_TERM
+static uint16_t get_hold_priority_idle_term(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                                     uint16_t other_keycode, keyrecord_t* other_record) {
+
+    switch (tap_hold_keycode) {
+      case LT_E:
+        // No hold priority for letters frequently rolled with `E`
+        if (is_e_roll_key(other_keycode)) { return 0; }
+        
+      default:
+        return HOLD_PRIORITY_IDLE_TERM;
+    }
+
+}
+
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
 
-    case LT_MGC:
-    case LT_REPT:
-      if (get_idle_time() > HOLD_PRIORITY_IDLE_TERM) { return true; }
-      break;
+    switch (keycode) {
+        case LT_E:
+        case LT_MGC:
+        case LT_REPT: {
+            // No hold priority for opposite-hand keys
+            if (approved_chord(keycode, record, next_keycode, &next_record)) { return false; }
 
-    default:
-      return false;
-  }
+            // Otherwise, it requires a period of inactivity
+            const uint16_t idle_term = get_hold_priority_idle_term(keycode, record, next_keycode, &next_record);
+            return idle_term > 0 && get_idle_time() > idle_term;
+        }
+        default:
+            return false;
+    }
 }
   #endif
 

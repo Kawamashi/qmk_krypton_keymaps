@@ -47,10 +47,11 @@
 #define TAPPING_TERM_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY    // For all keys except `E`
 #define CHORDAL_HOLD
-#define FLOW_TAP_TERM 210
+#define FLOW_TAP_TERM 150
 #define SPECULATIVE_HOLD           // For `Ctrl` dual keys
 #define SPECULATIVE_HOLD_ONE_KEY
 #define QUICK_TAP_TERM_PER_KEY
+#define PERMISSIVE_HOLD_IDLE_TERM 300
 //#define HOLD_PRIORITY_IDLE_TERM 350
 #ifdef HOLD_PRIORITY_IDLE_TERM
     #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
