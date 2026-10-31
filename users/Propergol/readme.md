@@ -284,8 +284,11 @@ The entire Layer Words configuration is located in `customization.c`.
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) (for list of words like `QMK, ZMK and KRK`) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
 
 
-There are thumb shortcuts for `Nav Word` and `Func Word`. 
-`KRYPTON_THUMB_SHORTCUTS` 
+There are thumb shortcuts for `Nav Word` and `Func Word`. The optional `KRYPTON_THUMB_SHORTCUTS` setting extends this mechanism to `Caps Word` and `Num Word`:
+- `Caps Word`: press `One Shot Shift` then `Repeat`.
+- `Num Word`: press `Backspace` as the first key after entering the Numbers layer. 
+
+To enable these additional shortcuts, uncomment `KRYPTON_THUMB_SHORTCUTS` in `config_propergol.h`.
 
 
 ### Select Word and Select Line
