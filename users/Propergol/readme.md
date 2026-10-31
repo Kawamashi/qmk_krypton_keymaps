@@ -183,7 +183,7 @@ I strongly encourage you to read the [original explanation](https://www.reddit.c
 ```c
 #define TAPPING_TERM 250
 #define PERMISSIVE_HOLD_PER_KEY  // For all keys except `E` (see the Layer-tap keys section)
-#define FLOW_TAP_TERM 210
+#define FLOW_TAP_TERM 150
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD         // For `Ctrl` dual keys
 ```
@@ -222,12 +222,12 @@ If you prefer not to use HRMs, you can disable them by commenting out `#define K
 
 ### Layer-tap keys
 
-Propergol's Layer-tap configuration primarily relies on [Permissive Hold](https://docs.qmk.fm/tap_hold#permissive-hold) and [Chordal Hold](https://docs.qmk.fm/tap_hold#chordal-hold). Activating layers is easier with Permissive Hold, while Chordal Hold prevents accidental activations in [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
+Propergol's Layer-tap configuration primarily relies on [Permissive Hold](https://docs.qmk.fm/tap_hold#permissive-hold) and [Chordal Hold](https://docs.qmk.fm/tap_hold#chordal-hold). Permissive Hold makes layer activation more natural, while Chordal Hold prevents accidental layer activations in case of [rolls](https://getreuer.info/posts/keyboards/glossary/index.html#roll) involving thumb home-position keys. 
 
 
-However, `E` requires special handling to allow shortcuts to be pressed entirely with the left hand. Since Chordal Hold prevents same-hand activation, it is disabled for this key. Therefore, during tapping sequences, Permissive Hold applies only if the key pressed after `E` is on the right half of the keyboard. After a period of inactivity, it also applies to left-hand keys (except arrow keys). This `PERMISSIVE_HOLD_IDLE_TERM` duration can be tuned in `config_propergol.h`.
+However, `E` requires special handling to allow shortcuts to be pressed entirely with the left hand. Since Chordal Hold prevents same-hand activation, it is disabled for this key. Therefore, during tapping sequences, Permissive Hold applies only if the key pressed after `E` is on the right half of the keyboard. However, after a period of inactivity, it also applies to left-hand keys, except letters frequently rolled with `E`. This `PERMISSIVE_HOLD_IDLE_TERM` can be tuned in `config_propergol.h`. For more granular control, you can modify `get_permissive_hold_idle_term` in `propergol.c`.
 
-Experienced Propergol users can go further by defining `HOLD_PRIORITY_IDLE_TERM` in `config_propergol.h`. This enables [Hold On Other Key Press](https://docs.qmk.fm/tap_hold#hold-on-other-key-press) for `E`, `Magic` and `Repeat` after a period of inactivity. 
+Experienced Propergol users can go further by defining `HOLD_PRIORITY_IDLE_TERM` in `config_propergol.h`. This enables [Hold On Other Key Press](https://docs.qmk.fm/tap_hold#hold-on-other-key-press) for `E`, `Magic` and `Repeat` when they are followed by a same-hand key after a period of inactivity. For more granular control, you can modify `get_hold_priority_idle_term` in `propergol.c`. 
 
 > [!WARNING]
 > This option is not recommended while learning Propergol. Depending on your typing style and familiarity with the layout, it may cause frequent unintended layer activations.
@@ -242,9 +242,9 @@ In summary:
 | Chordal Hold            | Yes    | No           | No        | No        |
 | Hold On Other Key Press | No     | Optional²    | Optional² | Optional² |
 
-¹ For `E`, Permissive Hold applies to right-hand keys, and to left-hand keys (except arrow keys) after an idle period exceeding `PERMISSIVE_HOLD_IDLE_TERM`.
+¹ For `E`, Permissive Hold applies to right-hand keys, and to left-hand keys (except `A`, `I`, `U` and `N`) after an inactivity period longer than `PERMISSIVE_HOLD_IDLE_TERM`.
 
-² Enabled when `HOLD_PRIORITY_IDLE_TERM` is defined. Arrow keys are excluded for `E`.
+² Enabled when `HOLD_PRIORITY_IDLE_TERM` is defined, for same-hand keys. `A`, `I`, `U` and `N` are excluded for `E`.
 
 &nbsp;</br>
 ## Features
@@ -258,7 +258,7 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 - [**Shaka Gesture compatibility**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys): OSoS keys are compatible with the Shaka Gesture, which is a really nice way of changing the behavior of secondary layers.
 - **Customizable behavior**: you can further customize OSoS keys to [“absorb” modifiers](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#mod-absorbing-one-shot-layers) or to affect [only the next keypress](https://github.com/Kawamashi/qmk_modules/blob/main/oneshots_on_steroids/readme.md#Automatic-One-Shot-Release) even if the OSoS key is still held down.
 
-
+&nbsp;</br>
 ### Combos
 
 [Combos](https://docs.qmk.fm/features/combo) can be a game-changer on compact keyboards, but they're not for everyone. Krypton’s default configuration includes a few combos for `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`. These combos use keys outside the home row, making them a good starting point if you've never tried combos before.
@@ -271,23 +271,26 @@ To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos
 
 The entire combos configuration is located in `customization.c`.
 
-
+&nbsp;</br>
 ### Layer Words
 
 Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys. For that, hold a layer-tap key to activate the corresponding layer, press the `Num Word`, `Nav Word` or `Func Word` key, then release the layer-tap key. The layer remains active until a word-breaking key is pressed.
 
 The entire Layer Words configuration is located in `customization.c`.
 
-
+&nbsp;</br>
 ### Caps Word, Caps List and Caps Lock
 
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) (for list of words like `QMK, ZMK and KRK`) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
 
 
-There are thumb shortcuts for `Nav Word` and `Func Word`. 
-`KRYPTON_THUMB_SHORTCUTS` 
+There are thumb shortcuts for `Nav Word` and `Func Word`. The optional `KRYPTON_THUMB_SHORTCUTS` setting extends this mechanism to `Caps Word` and `Num Word`:
+- `Caps Word`: press `One Shot Shift` then `Repeat`.
+- `Num Word`: press `Backspace` as the first key after entering the Numbers layer. 
 
+To enable these additional shortcuts, uncomment `KRYPTON_THUMB_SHORTCUTS` in `config_propergol.h`.
 
+&nbsp;</br>
 ### Select Word and Select Line
 
 Krypton uses Select Word and Select Line to easily select the current word or line. Shift (and Control if needed) are automatically applied to subsequent navigation keystrokes to extend, shrink, or adjust the selection:
@@ -297,7 +300,7 @@ Krypton uses Select Word and Select Line to easily select the current word or li
 
 You can change direction at any time, making these features intuitive to use.
 
-
+&nbsp;</br>
 ### Clever Keys
 Krypton uses Clever Keys to make the layout context-aware. By keeping track of recently typed characters, Clever Keys can adapt key behavior based on previous keystrokes, automatically inserting or replacing characters and providing smarter `Repeat` and `Magic` key behaviors.
 
