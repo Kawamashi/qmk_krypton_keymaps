@@ -258,7 +258,7 @@ For its one shot keys (`Shift`, `★`, Symbols or Numbers layer key, etc.) Krypt
 - [**Shaka Gesture compatibility**](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#split-trigger-and-hold-keys): OSoS keys are compatible with the Shaka Gesture, which is a really nice way of changing the behavior of secondary layers.
 - **Customizable behavior**: you can further customize OSoS keys to [“absorb” modifiers](https://github.com/Kawamashi/qmk_modules/tree/main/oneshots_on_steroids#mod-absorbing-one-shot-layers) or to affect [only the next keypress](https://github.com/Kawamashi/qmk_modules/blob/main/oneshots_on_steroids/readme.md#Automatic-One-Shot-Release) even if the OSoS key is still held down.
 
-
+&nbsp;</br>
 ### Combos
 
 [Combos](https://docs.qmk.fm/features/combo) can be a game-changer on compact keyboards, but they're not for everyone. Krypton’s default configuration includes a few combos for `Backspace`, `Enter`, `Tab`, `Escape`, `Alt-Tab` and `PANIC`. These combos use keys outside the home row, making them a good starting point if you've never tried combos before.
@@ -271,14 +271,14 @@ To prevent accidental `Esc` and `Alt-Tab` activations while typing, these combos
 
 The entire combos configuration is located in `customization.c`.
 
-
+&nbsp;</br>
 ### Layer Words
 
 Krypton uses [Layer Words](https://github.com/Kawamashi/qmk_modules/tree/main/layer_word) to type sequences of numbers, navigation keys and function keys. For that, hold a layer-tap key to activate the corresponding layer, press the `Num Word`, `Nav Word` or `Func Word` key, then release the layer-tap key. The layer remains active until a word-breaking key is pressed.
 
 The entire Layer Words configuration is located in `customization.c`.
 
-
+&nbsp;</br>
 ### Caps Word, Caps List and Caps Lock
 
 Krypton offers several ways to type words in uppercase: [Caps Word](https://docs.qmk.fm/features/caps_word), [Caps List](https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/README.md#caps-list) (for list of words like `QMK, ZMK and KRK`) and Caps Lock. To prevent these features from interfering with one another, Krypton ensures that only one of them is active at a time and automatically deactivates the active feature after a period of keyboard inactivity.
@@ -290,7 +290,7 @@ There are thumb shortcuts for `Nav Word` and `Func Word`. The optional `KRYPTON_
 
 To enable these additional shortcuts, uncomment `KRYPTON_THUMB_SHORTCUTS` in `config_propergol.h`.
 
-
+&nbsp;</br>
 ### Select Word and Select Line
 
 Krypton uses Select Word and Select Line to easily select the current word or line. Shift (and Control if needed) are automatically applied to subsequent navigation keystrokes to extend, shrink, or adjust the selection:
@@ -300,7 +300,7 @@ Krypton uses Select Word and Select Line to easily select the current word or li
 
 You can change direction at any time, making these features intuitive to use.
 
-
+&nbsp;</br>
 ### Clever Keys
 Krypton uses Clever Keys to make the layout context-aware. By keeping track of recently typed characters, Clever Keys can adapt key behavior based on previous keystrokes, automatically inserting or replacing characters and providing smarter `Repeat` and `Magic` key behaviors.
 
