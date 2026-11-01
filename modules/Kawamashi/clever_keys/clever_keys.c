@@ -189,22 +189,6 @@ void invoke_key(uint16_t keycode, keyrecord_t* record) {
   // Send the `keycode` key up event
   mod_record.event.pressed = false;
   process_record(&mod_record);
-
-  /*static keyrecord_t registered_record = {0};
-  registered_record = (keyrecord_t){
-#    ifndef NO_ACTION_TAPPING
-    .tap.interrupted = false,
-    .tap.count       = 0,
-#    endif
-    .keycode = keycode,
-  };
-
-    // Generate a keyrecord and plumb it into the event pipeline.
-    registered_record.event = record->event;
-    process_record(&registered_record);
-
-    registered_record.event.pressed = false;
-    process_record(&registered_record);*/
 }
 
 void replace_ongoing_key(uint16_t clever_keycode, uint16_t* ongoing_keycode, keyrecord_t* record) {

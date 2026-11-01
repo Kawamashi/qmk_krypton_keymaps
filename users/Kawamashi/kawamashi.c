@@ -282,22 +282,9 @@ uint16_t set_magic_keycode(uint16_t keycode) {
   return keycode;
 }
 
-keyrecord_t* get_magic_record(void) {
-  return &next_record;
-}
-
-uint16_t magic_word(uint16_t keycodes[], uint8_t num_keycodes, keyrecord_t* record) {
-  process_word(keycodes, num_keycodes - 1, record);
-  return set_magic_keycode(keycodes[num_keycodes - 1]);
-}
-
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
-  if (get_last_keycode() == KC_NO) {
-    if (IS_LAYER_ON(_SYMBOLS)) { return keycode; }
-    // "à"
-    return set_magic_keycode(PG_AGRV);
-  }
+  if (get_last_keycode() == KC_NO) { return MAGIC; }
 
   switch (keycode) {
     case C(PG_Z):
@@ -312,7 +299,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     return KC_TRNS;
   }
 
-  //keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
+  keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
   switch (keycode) {
     // regular behaviour of the alt-repeat key for these keycodes
     case KC_LEFT:
@@ -324,92 +311,11 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     case KC_HOME:
     case KC_END:
       return KC_TRNS;
-
-    case PG_O:
-      // "oui"
-      invoke_key(PG_U, get_magic_record());
-    case PG_U:
-      // "ui" SFB
-      return set_magic_keycode(PG_I);
-
-    case PG_EACU:
-      // "éa" SFB
-      return set_magic_keycode(PG_A);
-
-    case PG_S:
-      // "sc" SFB
-      return set_magic_keycode(PG_C);
-
     case PG_C:
-      // "cs" SFB
       return set_magic_keycode(PG_S);
-
-    case PG_N:
-      // "n." SFB
-      return set_magic_keycode(PG_POIN);
-
-    case PG_P:
-      // "ph" SFB
-      return set_magic_keycode(PG_H);
-
-    case PG_G:
-      // "gt" SFB
-      return set_magic_keycode(PG_T);
-
-    case PG_Q:
-      // "qué" scissor
-      invoke_key(PG_U, get_magic_record());
-      return set_magic_keycode(PG_EACU);
-
-    case PG_Y:
-      // "you" bad redirection
-      invoke_key(PG_O, get_magic_record());
-      return set_magic_keycode(PG_U);
-
-    case PG_T:
-      // "tion"
-      invoke_key(PG_I, get_magic_record());
-    case PG_I:
-      // "ion"
-      invoke_key(PG_O, get_magic_record());
-      return set_magic_keycode(PG_N);
-
-    case PG_M:
-      if (is_letter(get_recent_keycode(-2))) {
-        // "ment"
-        return magic_word((uint16_t[]) {PG_E, PG_N, PG_T}, 3, get_magic_record());
-      } else {
-        // "même"
-        return magic_word((uint16_t[]) {PG_1DK, PG_E, PG_M, PG_E}, 4, get_magic_record());
-      }
-
-    case PG_B:
-      // "beaucoup"
-      return magic_word((uint16_t[]) {PG_E, PG_A, PG_U, PG_C, PG_O, PG_U, PG_P}, 7, get_magic_record());
-
-    case PG_A:
-      // "aujourd'hui"
-      layer_off(_1DK);
-      return magic_word((uint16_t[]) {PG_U, PG_J, PG_O, PG_U, PG_R, PG_D, PG_APOS, PG_H, PG_U, PG_I}, 10, get_magic_record());
-
-    case PG_LPRN:
-      // "();"
-      invoke_key(PG_RPRN, get_magic_record());
-      return set_magic_keycode(PG_PVIR);
-
-    case PG_RPRN:
-      // ") {"
-      invoke_key(KC_SPC, get_magic_record());
-      return set_magic_keycode(PG_LCBR);
-
-    case PG_2PTS:
-      // ":="
-      return set_magic_keycode(PG_EGAL);
-
+      //return PG_S;
   }
-  if (IS_LAYER_ON(_SYMBOLS)) { return keycode; }
-  // "à"
-  return set_magic_keycode(PG_AGRV);
+  return MAGIC;
 }
 
 
@@ -569,6 +475,7 @@ bool is_letter(uint16_t keycode) {
 bool is_send_string_macro(uint16_t keycode) {
   switch (keycode) {
     case N_TILD:
+    case MAGIC:
     //case PG_AROB:   // because of Clever Keys
       return true;
     
