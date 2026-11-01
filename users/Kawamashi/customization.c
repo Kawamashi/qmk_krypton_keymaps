@@ -355,6 +355,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           if (is_letter(*ongoing_keycode) || is_send_string_macro(*ongoing_keycode)) {
             set_oneshot_mods(MOD_BIT(KC_LSFT));     // Don't use weak mods !
           }
+          update_bkspc_countdown(1);
           break;
       }
       break;
@@ -387,11 +388,11 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       }
       break;
 
-    case PG_P:
+    /*case PG_P:
       switch (*ongoing_keycode) {
-/*         case PG_C:
+         case PG_C:
           // "pas"
-          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record); */
+          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record);
         
         case PG_J:
           // "pour"
@@ -401,19 +402,22 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "plus"
           return finish_word((uint16_t[]) {PG_L, PG_U, PG_S}, 3, ongoing_keycode, record);
       }
-      break;
+      break;*/
     
     case PG_C:
-      switch (*ongoing_keycode) {
-        case PG_M:
-          // "cm" -> "ch"
-          update_bkspc_countdown(0);
-          return replace_ongoing_key(PG_H, ongoing_keycode, record);
+      if (get_idle_time() < 200) {
+        switch (*ongoing_keycode) {
+          case PG_M:
+            
+              // "cm" -> "ch"
+              update_bkspc_countdown(0);
+              return replace_ongoing_key(PG_H, ongoing_keycode, record);
 
-        case PG_J:
-          // "cj" -> "ck"
-          update_bkspc_countdown(0);
-          return replace_ongoing_key(PG_K, ongoing_keycode, record);
+          case PG_J:
+            // "cj" -> "ck"
+            update_bkspc_countdown(0);
+            return replace_ongoing_key(PG_K, ongoing_keycode, record);
+        }
       }
       break;
     
@@ -440,7 +444,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
   switch (*ongoing_keycode) {
 
     case MAGIC:
-      switch (prev_keycode) {
+      switch (get_tap_keycode(get_last_keycode())) {
         case PG_O:
           // "oui"
           invoke_key(PG_U, record);
@@ -456,9 +460,9 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "sc" SFB
           return replace_ongoing_key(PG_C, ongoing_keycode, record);
 
-        /*case PG_C:
+        case PG_C:
           // "cs" SFB
-          return replace_ongoing_key(PG_S, ongoing_keycode, record);*/
+          return replace_ongoing_key(PG_S, ongoing_keycode, record);
 
         case PG_N:
           // "n." SFB

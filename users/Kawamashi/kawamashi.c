@@ -277,10 +277,10 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
   }
 }
 
-uint16_t set_magic_keycode(uint16_t keycode) {
+/*uint16_t set_magic_keycode(uint16_t keycode) {
   set_last_keycode(keycode);
   return keycode;
-}
+}*/
 
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
@@ -311,9 +311,8 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     case KC_HOME:
     case KC_END:
       return KC_TRNS;
-    case PG_C:
-      return set_magic_keycode(PG_S);
-      //return PG_S;
+    /*case PG_C:
+      return set_magic_keycode(PG_S);*/
   }
   return MAGIC;
 }
