@@ -56,7 +56,6 @@ enum custom_keycodes {
   A_CIRC,
   U_CIRC,
   N_TILD,
-  MAGIC,
   LETTER_1DK,
   SYMBOL_1DK,
   PG_DEG,

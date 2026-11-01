@@ -355,6 +355,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           if (is_letter(*ongoing_keycode) || is_send_string_macro(*ongoing_keycode)) {
             set_oneshot_mods(MOD_BIT(KC_LSFT));     // Don't use weak mods !
           }
+          update_bkspc_countdown(1);
           break;
       }
       break;
@@ -387,11 +388,11 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
       }
       break;
 
-    case PG_P:
+    /*case PG_P:
       switch (*ongoing_keycode) {
-/*         case PG_C:
+        case PG_C:
           // "pas"
-          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record); */
+          return finish_word((uint16_t[]) {PG_A, PG_S}, 2, ongoing_keycode, record);
         
         case PG_J:
           // "pour"
@@ -401,7 +402,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           // "plus"
           return finish_word((uint16_t[]) {PG_L, PG_U, PG_S}, 3, ongoing_keycode, record);
       }
-      break;
+      break;*/
     
     case PG_C:
       switch (*ongoing_keycode) {
@@ -438,96 +439,6 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
 
   switch (*ongoing_keycode) {
-
-    case MAGIC:
-      switch (prev_keycode) {
-        case PG_O:
-          // "oui"
-          invoke_key(PG_U, record);
-        case PG_U:
-          // "ui" SFB
-          return replace_ongoing_key(PG_I, ongoing_keycode, record);
-
-        case PG_EACU:
-          // "éa" SFB
-          return replace_ongoing_key(PG_A, ongoing_keycode, record);
-
-        case PG_S:
-          // "sc" SFB
-          return replace_ongoing_key(PG_C, ongoing_keycode, record);
-
-        /*case PG_C:
-          // "cs" SFB
-          return replace_ongoing_key(PG_S, ongoing_keycode, record);*/
-
-        case PG_N:
-          // "n." SFB
-          return replace_ongoing_key(PG_POIN, ongoing_keycode, record);
-
-        case PG_P:
-          // "ph" SFB
-          return replace_ongoing_key(PG_H, ongoing_keycode, record);
-
-        case PG_G:
-          // "gt" SFB
-          return replace_ongoing_key(PG_T, ongoing_keycode, record);
-
-        case PG_Q:
-          // "qué" scissor
-          invoke_key(PG_U, record);
-          return replace_ongoing_key(PG_EACU, ongoing_keycode, record);
-
-        case PG_Y:
-          // "you" bad redirection
-          invoke_key(PG_O, record);
-          return replace_ongoing_key(PG_U, ongoing_keycode, record);
-
-        case PG_T:
-          // "tion"
-          invoke_key(PG_I, record);
-
-        case PG_I:
-          // "ion"
-          invoke_key(PG_O, record);
-          return replace_ongoing_key(PG_N, ongoing_keycode, record);
-
-        case PG_M:
-          if (is_letter(get_recent_keycode(-2))) {
-            // "ment"
-            return finish_word((uint16_t[]) {PG_E, PG_N, PG_T}, 3, ongoing_keycode, record);
-          } else {
-            // "même"
-            return finish_word((uint16_t[]) {PG_1DK, PG_E, PG_M, PG_E}, 4, ongoing_keycode, record);
-          }
-
-        case PG_B:
-          // "beaucoup"
-          return finish_word((uint16_t[]) {PG_E, PG_A, PG_U, PG_C, PG_O, PG_U, PG_P}, 7, ongoing_keycode, record);
-
-        case PG_A:
-          // "aujourd'hui"
-          layer_off(_1DK);
-          return finish_word((uint16_t[]) {PG_U, PG_J, PG_O, PG_U, PG_R, PG_D, PG_APOS, PG_H, PG_U, PG_I}, 10, ongoing_keycode, record);
-
-        case PG_LPRN:
-          // "();"
-          invoke_key(PG_RPRN, record);
-          return replace_ongoing_key(PG_PVIR, ongoing_keycode, record);
-
-        case PG_RPRN:
-          // ") {"
-          invoke_key(KC_SPC, record);
-          return replace_ongoing_key(PG_LCBR, ongoing_keycode, record);
-
-        case PG_2PTS:
-          // ":="
-          return replace_ongoing_key(PG_EGAL, ongoing_keycode, record);
-        
-        default:
-          if (IS_LAYER_ON(_SYMBOLS)) { return replace_ongoing_key(prev_keycode, ongoing_keycode, record); }
-          // "à"
-          return replace_ongoing_key(PG_AGRV, ongoing_keycode, record);
-      }
 
     case PG_EACU:
       if (prev_keycode == PG_E) {
