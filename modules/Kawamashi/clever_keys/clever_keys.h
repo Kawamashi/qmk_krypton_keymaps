@@ -27,10 +27,19 @@ extern "C" {
 #   define CK_BUFFER_SIZE 8
 #endif  // CK_BUFFER_SIZE
 
-// Default to a timeout of 5 seconds.
+/* Idle timeout:
+ *
+ * The Clever Keys buffer can be configured to be emptied if the keyboard is idle
+ * for some time. This is useful to prevent unexpected behaviors.
+*/
 #ifndef CLEVER_KEYS_TIMEOUT
 #  define CLEVER_KEYS_TIMEOUT 5000
-#endif  // SENTENCE_CASE_TIMEOUT
+#endif  // CLEVER_KEYS_TIMEOUT
+
+#   if CLEVER_KEYS_TIMEOUT > 0
+// Callback to customise the timeout for each key
+uint16_t get_clever_keys_timeout(uint16_t keycode);
+#   endif  // CLEVER_KEYS_TIMEOUT > 0
 
 // Returns the n-th key of the buffer
 // ex: get_recent_keycode(-1) returns the latest key,

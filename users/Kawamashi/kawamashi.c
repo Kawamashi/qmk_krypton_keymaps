@@ -191,6 +191,12 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
     return KC_NO;
   }
 
+  // Handles combos
+  if (!IS_KEYEVENT(record->event)) {
+    clear_recent_keys();
+    return KC_NO;
+  }
+
   switch (get_highest_layer(layer_state)) {
 
     case _1DK:
@@ -236,17 +242,6 @@ uint16_t get_ongoing_keycode_user(uint16_t keycode, keyrecord_t* record) {
       return keycode;
   }
 
-  // Handles combos
-  if (!IS_KEYEVENT(record->event)) {
-    switch (keycode) {
-      case KC_BSPC:
-        return KC_TRNS;
-
-      default:
-        clear_recent_keys();
-        return KC_NO;
-    }
-  }
   return KC_TRNS;
 }
 

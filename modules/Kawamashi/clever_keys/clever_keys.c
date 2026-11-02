@@ -25,6 +25,26 @@ static bool processingCK = false;
 
 static uint16_t last_keypress_time = 0;
 
+#   if CLEVER_KEYS_TIMEOUT > 0
+static uint16_t idle_timer = 0;
+
+void housekeeping_task_clever_keys(void) {
+  if (idle_timer && timer_expired(timer_read(), idle_timer)) {
+    clear_recent_keys();  // Timed out; clear the buffer.
+  }
+}
+
+// Update the Clever Keys timeout
+static void set_clever_keys_idle_timer(uint16_t keycode, keyrecord_t* record) {
+    uint16_t timeout = get_clever_keys_timeout(keycode);
+    if (timeout) {
+      idle_timer = (record->event.time + timeout) | 1;
+    } else {
+      idle_timer = 0;
+    }
+}
+#endif  // CLEVER_KEYS_TIMEOUT > 0
+
 uint16_t get_idle_time(void) {
   return timer_elapsed(last_keypress_time);
 }
@@ -44,18 +64,8 @@ void update_bkspc_countdown(uint8_t i) {
 void clear_recent_keys(void) {
   memset(recent, 0, sizeof(recent));  // Set all zeros (KC_NO).
   bkspc_countdown = CK_BUFFER_SIZE + 1;
+  idle_timer = 0;
 }
-
-
-#ifdef CLEVER_KEYS_TIMEOUT
-  void housekeeping_task_clever_keys(void) {
-    if (recent[CK_BUFFER_SIZE - 1] != KC_NO) {
-      if (get_idle_time() > CLEVER_KEYS_TIMEOUT) {
-        clear_recent_keys();  // Timed out; clear the buffer.
-      }
-    }
-  }  
-#endif  // CLEVER_KEYS_TIMEOUT
 
 
 uint16_t get_ongoing_keycode(uint16_t keycode, keyrecord_t* record) {
@@ -224,10 +234,12 @@ void process_clever_keys(uint16_t keycode, keyrecord_t* record) {
     if (ongoing_keycode != KC_NO) {
       get_clever_keycode(&ongoing_keycode, record);
       store_keycode(ongoing_keycode, record);
+      set_clever_keys_idle_timer(ongoing_keycode, record);
+      last_keypress_time = record->event.time;
 
-      // Global quick tap implementation for combos and flow_tap.
+      // Global quick tap implementation for combos.
       // IS_KEYEVENT prevents combos from updating last_keypress_time, to allow combos to be chained.
-      if (IS_KEYEVENT(record->event)) { last_keypress_time = record->event.time; }
+      // if (IS_KEYEVENT(record->event)) { last_keypress_time = record->event.time; }
     }
 
   } else if (processingCK) {    // On keyrelease
@@ -253,3 +265,13 @@ __attribute__((weak)) bool is_letter(uint16_t keycode) {
       return false;
   }
 }
+
+#   if CLEVER_KEYS_TIMEOUT > 0
+__attribute__((weak)) uint16_t get_clever_keys_timeout(uint16_t keycode) {
+    switch (keycode) {
+
+        default:
+            return CLEVER_KEYS_TIMEOUT;
+    }
+}
+#   endif  // CLEVER_KEYS_TIMEOUT > 0
