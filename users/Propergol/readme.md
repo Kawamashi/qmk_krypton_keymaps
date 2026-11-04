@@ -1,18 +1,16 @@
 # QMK Krypton keymap for Propergol
 
 &nbsp;</br>
+
 <p align="center">
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
-      srcset="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20dark.png">
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20light.png">
+      srcset="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/krypton-logo-dark.png">
     <img
       alt="Krypton logo"
       width="200"
-      src="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20light.png">
+      src="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/krypton-logo-light.png">
   </picture>
 </p>
 
