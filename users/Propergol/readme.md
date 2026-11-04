@@ -2,7 +2,11 @@
 
 &nbsp;</br>
 <p align="center">
-<img src="../../png/Common/logo Krypton.png" width="200">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../../png/Common/logo Krypton dark.png" width="200">
+  <source media="(prefers-color-scheme: light)" srcset="../../png/Common/logo Krypton light.png" width="200">
+  <img alt="Fallback image description" src="../../png/Common/logo Krypton light.png" width="200"">
+</picture>
 </p>
 
 &nbsp;</br>
