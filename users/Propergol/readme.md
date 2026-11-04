@@ -2,12 +2,20 @@
 
 &nbsp;</br>
 <p align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../../png/Common/logo Krypton dark.png" width="200">
-  <source media="(prefers-color-scheme: light)" srcset="../../png/Common/logo Krypton light.png" width="200">
-  <img alt="Fallback image description" src="../../png/Common/logo Krypton light.png" width="200"">
-</picture>
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20dark.png">
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20light.png">
+    <img
+      alt="Krypton logo"
+      width="200"
+      src="https://github.com/Kawamashi/qmk_krypton_keymaps/blob/main/png/Common/logo%20Krypton%20light.png">
+  </picture>
 </p>
+
 
 &nbsp;</br>
 ## Philosophy
