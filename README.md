@@ -208,7 +208,7 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
 Pour faire `ê` avec l’approche Lafayette, il faut faire `★` `e`. Pour faire `Ê`, il faut faire `★` `Shift`+`e`. Je trouve ça plus logique de faire `Shift`+`ê`, donc `Shift`+`★` `e`. Dans ce même module, j’ai modifié le comportement de la touche 1DK avec `Shift`, pour que ce soit le caractère suivant `★` qui soit shifté :
 ```c
 bool insert_1dk(uint16_t keycode) {
-    // Special behaviour of PG_1DK when shifted
+    // Special behavior of PG_1DK when shifted
     // Shift must apply to the keycode following PG_1DK.
     const bool shift_mods = get_mods() & MOD_MASK_SHIFT;
     const bool shift_weak_mods = get_weak_mods() & MOD_MASK_SHIFT;
@@ -425,7 +425,7 @@ bool should_continue_layerword(uint8_t layer, uint16_t keycode, keyrecord_t *rec
         // Numpad keycodes
         case KC_1 ... KC_0:
         case KC_PDOT:
-        case PG_MOIN:
+        case PG_MINS:
         case PG_ASTX: 
         case PG_PLUS:
         case PG_SLSH:
@@ -497,5 +497,5 @@ Parfois, une Clever Key se déclenche, mais ce n’est pas le comportement souha
 
 &nbsp;</br>
 
-## Sur les épaules des géants
+## Standing on the shoulders of giants
 Il n’y a pas si longtemps, je n’aurais jamais imaginé qu’on puisse implémenter autant de choses dans un firmware de clavier. Rien de tout cela n’aurait été possible sans les exemples de [Pascal Getreuer](https://getreuer.info/posts/keyboards/index.html), [Filterpaper](https://github.com/filterpaper/qmk_userspace/tree/main), [Rafael Romao](https://github.com/rafaelromao/keyboards), [Jonas Hietala](https://github.com/treeman/qmk_firmware/tree/master/keyboards/ferris/keymaps/treeman), [Callum Oakley](https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum), [Dalius Dobravolskas](https://blog.ffff.lt/posts/callum-layers/), [Joshua T](https://github.com/qmk/qmk_firmware/tree/906108fb486797ab2f3eb7c3a6f70e099c1199e6/users/replicaJunction#capsword-and-numword), [Cem Aksoylar](https://github.com/caksoylar/qmk_userspace/tree/main), [Precondition](https://precondition.github.io/), etc. J’ai appris tellement grâce à vous ! :pray:
