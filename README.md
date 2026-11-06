@@ -30,13 +30,13 @@ This repo works as an [External QMK Userspace](https://docs.qmk.fm/newbs_externa
 
 1) [Set up QMK](https://docs.qmk.fm/newbs)
 2) Clone this repository locally, including its submodules   
-   ```
+   ```sh
    git clone --recurse-submodules https://github.com/Kawamashi/qmk_krypton_keymaps.git
    ```   
    The submodules contain additional QMK modules used by the keymaps.
    
 4) Navigate to the cloned repository and set it as your External Userspace
-```
+```sh
 cd qmk_krypton_keymaps
 qmk config user.overlay_dir="$(realpath .)"
 ```
@@ -45,11 +45,11 @@ This tells QMK where to find the external keymaps and userspace files. The setti
 4) Compile your firmware
    
    You can now compile a keymap just as you would with a regular QMK installation:
-   ```   
+   ```sh   
    qmk compile -kb <keyboard> -km <keymap>
    ```   
    For example, to compile the Krypton Propergol keymap for the Dasbob keyboard:
-   ```
+   ```sh
    qmk compile -kb dasbob -km propergol
    ```
    The resulting firmware file will be placed in the root of this repository.
