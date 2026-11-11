@@ -165,8 +165,6 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return C(PG_C);
     case I(C(PG_V)):
       return C(PG_V);
-    case LT_AGRV:
-      return PG_AGRV;
 
     default:
       return get_tap_keycode(keycode);
@@ -272,11 +270,6 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
   }
 }
 
-/*uint16_t set_magic_keycode(uint16_t keycode) {
-  set_last_keycode(keycode);
-  return keycode;
-}*/
-
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
   if (get_last_keycode() == KC_NO) { return MAGIC; }
@@ -294,21 +287,6 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     return KC_TRNS;
   }
 
-  keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-  switch (keycode) {
-    // regular behaviour of the alt-repeat key for these keycodes
-    case KC_LEFT:
-    case KC_RIGHT:
-    case KC_DOWN:
-    case KC_UP:
-    case KC_PGUP:
-    case KC_PGDN:
-    case KC_HOME:
-    case KC_END:
-      return KC_TRNS;
-    /*case PG_C:
-      return set_magic_keycode(PG_S);*/
-  }
   return MAGIC;
 }
 
@@ -380,6 +358,8 @@ bool should_oneshot_on_steroids_ignore_key(uint16_t keycode, uint16_t oneshot, k
     // OS_1DK and OS_NUM shouldn’t deactivate each other
     if (oneshot == OS_1DK && keycode == OS_NUM) { return true; }
     if (oneshot == OS_NUM && keycode == OS_1DK) { return true; }
+    // OS_1DK shouldn’t deactivate LT_AGRV to type ← ↔ →
+    if (oneshot == OS_1DK && keycode == LT_AGRV) { return true; }
     // If a layer-change key is pressed after a OSL, the OSL must be reset.
     if (is_layer_key) { return false; }
     // keycode is not a layer key, it’s a mod key.
@@ -646,9 +626,7 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case PG_1DK:
             return insert_1dk(keycode);
-    }
 
-    switch (keycode) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX:
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
             if (record->tap.count == 0) { return true; }

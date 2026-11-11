@@ -263,8 +263,8 @@ uint16_t tap_hold_extractor(uint16_t keycode) {
       return PG_ASTX;
     case P(PG_PLUS):
       return PG_PLUS;
-    case LT_AGRV:
-      return PG_AGRV;
+    //case LT_AGRV:
+      //return PG_AGRV;
 
     default:
       return get_tap_keycode(keycode);
@@ -305,6 +305,10 @@ bool process_macros_I(uint16_t keycode, keyrecord_t *record) {
     // Special tap-hold keys (on tap).
     switch (keycode) {
       case LT_REPT:
+        uint8_t tap_keycode = get_tap_keycode(get_last_keycode());
+        if (is_followed_by_apos(tap_keycode, get_recent_keycode(-2))) {
+          set_last_keycode(PG_APOS);
+        }
         repeat_key_invoke(&record->event);
         return false;
 
@@ -378,8 +382,8 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(PG_ASTX, record);
       case P(PG_PLUS):
         return process_custom_tap_hold(PG_PLUS, record);
-      case LT_AGRV:
-        return process_custom_tap_hold(PG_AGRV, record);
+      //case LT_AGRV:
+        //return process_custom_tap_hold(PG_AGRV, record);
     }
   }
 
@@ -521,19 +525,6 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     return KC_TRNS;
   }
 
-  keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
-  switch (keycode) {
-    // regular behaviour of the alt-repeat key for these keycodes
-    case KC_LEFT:
-    case KC_RIGHT:
-    case KC_DOWN:
-    case KC_UP:
-    case KC_PGUP:
-    case KC_PGDN:
-    case KC_HOME:
-    case KC_END:
-      return KC_TRNS;
-  }
   return MAGIC;
 }
 
@@ -809,14 +800,17 @@ bool process_prefixing_layers(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case PG_1DK:
           return insert_1dk(keycode);
+
+        // because of HRM on _NUM layer, to tap symbols like ⅔, ¾ etc.
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        // to access _NUMBERS from _1DK
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+          if (record->tap.count == 0) { return true; }
+          keycode &= 0xff;
+          break;
     }
 
     if (IS_LAYER_ON(_1DK)) {
-        // because of HRM on _NUM layer, to tap symbols like ⅔, ¾ etc.
-        if (IS_QK_MOD_TAP(keycode) && !record->tap.count) { return true; }
-        // to access _NUMBERS from _1DK
-        if (IS_QK_LAYER_TAP(keycode) && !record->tap.count) { return true; }
-
         switch (keycode) {
             case PG_Z:
             case PG_Q:

@@ -19,3 +19,4 @@
 
 #include "layout.h"
 #include "kawamashi.c"
+#include "customization.c"

@@ -120,11 +120,6 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
 void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
   uint16_t prev_keycode = get_recent_keycode(-1);
-
-    // Apostrophe
-    if (is_followed_by_apos(*ongoing_keycode, prev_keycode)) {
-      set_last_keycode(PG_APOS);
-    }
   
   switch (prev_keycode) {
 
@@ -152,6 +147,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
           if (is_letter(*ongoing_keycode) || is_send_string_macro(*ongoing_keycode)) {
             set_oneshot_mods(MOD_BIT(KC_LSFT));     // Don't use weak mods !
           }
+          update_bkspc_countdown(1);
           break;
       }
       break;
@@ -219,7 +215,7 @@ void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
   switch (*ongoing_keycode) {
 
     case MAGIC:
-      switch (prev_keycode) {
+      switch (get_tap_keycode(get_last_keycode())) {
         case PG_O:
           // "oui"
           invoke_key(PG_U, record);

@@ -164,8 +164,6 @@ bool process_macros_II(uint16_t keycode, keyrecord_t *record) {
         return process_custom_tap_hold(C(PG_C), record);
       case I(C(PG_V)):
         return process_custom_tap_hold(C(PG_V), record);
-      case LT_AGRV:
-        return process_custom_tap_hold(PG_AGRV, record);
     }
   }
 
@@ -322,11 +320,6 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
 void get_clever_keycode(uint16_t* ongoing_keycode, keyrecord_t* record) {
 
   uint16_t prev_keycode = get_recent_keycode(-1);
-
-    // Apostrophe
-    /*if (is_followed_by_apos(*ongoing_keycode, prev_keycode)) {
-      set_last_keycode(PG_APOS);
-    }*/
   
   switch (prev_keycode) {
 
